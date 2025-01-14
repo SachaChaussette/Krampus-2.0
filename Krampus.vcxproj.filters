@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Script">
+      <UniqueIdentifier>{3d278e4f-06d3-46a1-b021-37c5f193367b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Objects">
+      <UniqueIdentifier>{154799ed-1dc1-4925-9c62-d8d4f73adb46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Objects\ShapeObject">
+      <UniqueIdentifier>{fd85c417-5c8f-48c6-a6fa-6daa1589ad58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Objects\TextObject">
+      <UniqueIdentifier>{74998d10-4b64-4033-b33e-d3c806c6780a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Singleton">
+      <UniqueIdentifier>{0ffadebc-f0b1-44f5-9218-7b9ba4036331}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Core">
+      <UniqueIdentifier>{bf85df38-00c4-439f-8b50-62e70460a591}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Managers">
+      <UniqueIdentifier>{8f376892-92fd-4e8c-a2d0-bb921662a87c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Managers\TextureManager">
+      <UniqueIdentifier>{aeecfe95-8f56-4e61-970e-0fe5e2cde6b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Main">
+      <UniqueIdentifier>{665f6e7c-538b-4110-82d8-32b51e358ed1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Game">
+      <UniqueIdentifier>{fdedf359-d247-4a47-927f-e4c42715ec24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\CoreMinimal">
+      <UniqueIdentifier>{97850696-4b85-477d-b313-ef0c742a39cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Core\Actors">
+      <UniqueIdentifier>{aa1de379-d573-4d84-902b-b6e2faa1a1e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Core\Components">
+      <UniqueIdentifier>{ad0643d4-c7e4-4146-aa4a-25846d316ba4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Managers\ActorManager">
+      <UniqueIdentifier>{5947e621-10a1-4d82-ab8e-649bbdf35bdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Managers\TimeManager">
+      <UniqueIdentifier>{2cdd8b17-0a55-4146-85cb-1f8756fe080b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CoreMinimal.h">
+      <Filter>Script\CoreMinimal</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Script\Managers\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TextObject.h">
+      <Filter>Script\Objects\TextObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Script\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeObject.h">
+      <Filter>Script\Objects\ShapeObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Script\Singleton</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Script\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Script\Core\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="Core.h">
+      <Filter>Script\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Script\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorManager.h">
+      <Filter>Script\Managers\ActorManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>Script\Managers\TimeManager</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp">
+      <Filter>Script\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Script\Managers\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Script\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="TextObject.cpp">
+      <Filter>Script\Objects\TextObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeObject.cpp">
+      <Filter>Script\Objects\ShapeObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Script\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Script\Core\Actors</Filter>
+    </ClCompile>
+    <ClCompile Include="Core.cpp">
+      <Filter>Script\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Script\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ActorManager.cpp">
+      <Filter>Script\Managers\ActorManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>Script\Managers\TimeManager</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
