@@ -13,10 +13,10 @@ public:
 private:
 	void Start();
 	void Update();
-	void UpdateWindow();
 	void Stop();
 
 public:
+	void UpdateWindow();
 	void Launch();
 };
 

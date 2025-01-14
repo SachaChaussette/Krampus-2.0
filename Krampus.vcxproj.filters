@@ -55,7 +55,7 @@
     <Filter Include="Script\Managers\ActorManager">
       <UniqueIdentifier>{5947e621-10a1-4d82-ab8e-649bbdf35bdd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Script\Managers\TimeManager">
+    <Filter Include="Script\Managers\TimerManager">
       <UniqueIdentifier>{2cdd8b17-0a55-4146-85cb-1f8756fe080b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -93,8 +93,8 @@
     <ClInclude Include="ActorManager.h">
       <Filter>Script\Managers\ActorManager</Filter>
     </ClInclude>
-    <ClInclude Include="TimeManager.h">
-      <Filter>Script\Managers\TimeManager</Filter>
+    <ClInclude Include="TimerManager.h">
+      <Filter>Script\Managers\TimerManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -128,8 +128,8 @@
     <ClCompile Include="ActorManager.cpp">
       <Filter>Script\Managers\ActorManager</Filter>
     </ClCompile>
-    <ClCompile Include="TimeManager.cpp">
-      <Filter>Script\Managers\TimeManager</Filter>
+    <ClCompile Include="TimerManager.cpp">
+      <Filter>Script\Managers\TimerManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

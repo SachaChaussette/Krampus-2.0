@@ -7,6 +7,8 @@
 #include <string>
 #include <fstream>
 #include <functional>
+#include <typeindex>
+#include <typeinfo>
 
 // OLD
 #include <math.h>
@@ -26,11 +28,6 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 
-using namespace std;
-using namespace sf;
-
-typedef unsigned int u_int;
-
 #define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
 
 #define INLINE __inline
@@ -43,3 +40,10 @@ typedef unsigned int u_int;
 
 #define DISPLAY_ERROR(_text, _endl) if(_endl) cerr << endl; \
 										cerr << _text;
+
+using namespace std;
+using namespace sf;
+
+typedef unsigned short u_short;
+typedef unsigned int u_int;
+typedef long long l_long;
