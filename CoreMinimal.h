@@ -9,6 +9,7 @@
 #include <functional>
 #include <typeindex>
 #include <typeinfo>
+#include <cassert>
 
 // OLD
 #include <math.h>
@@ -28,6 +29,9 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 
+// Fichier Ext
+#include "Logger.h"
+
 #define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
 
 #define INLINE __inline
@@ -37,9 +41,6 @@
 
 #define DISPLAY(_text, _endl) if(_endl) cout << endl; \
 										cout << _text;
-
-#define DISPLAY_ERROR(_text, _endl) if(_endl) cerr << endl; \
-										cerr << _text;
 
 using namespace std;
 using namespace sf;

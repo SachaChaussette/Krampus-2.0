@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "ActorManager.h"
 #include "TimerManager.h"
+#include "SoundManager.h"
 
 // TODO REMOVE
 bool TEST(const int _index)
@@ -27,25 +28,28 @@ void Game::Launch()
     Start();
     Update();
 }
-
 void Game::Start()
 {
     window.create(VideoMode({ 800, 600 }), "SFML works!");
+
     new Timer([]() 
     { 
         static int _index = 0;
         if (TEST(++_index))
         {
-            cout << "coucou" << endl;
+            LOG(Display, "coucou");
         }
-    }, Time(seconds(1.0f)), true, true);
+    }, Time(seconds(1.0f)), true, false);
+
+    SoundSample* _sample = SoundManager::GetInstance().PlaySound("yipeeee", WAV);
 }
 
 void Game::Update()
 {
+ 
     while (window.isOpen())
     {
-        TM_Milli& _timer = TM_Milli::GetInstance();
+        TM_Seconds& _timer = TM_Seconds::GetInstance();
         _timer.Update();
         while (const std::optional _event = window.pollEvent())
         {
@@ -53,8 +57,10 @@ void Game::Update()
             {
                 Stop();
             }
-        }
+        }   
         const float _deltaTime = _timer.GetDeltaTime().asSeconds();
+        //LOG(Warning, "DeltaTime => " + to_string(_deltaTime));
+        
         ActorManager::GetInstance().Tick(_deltaTime);
 
         UpdateWindow();

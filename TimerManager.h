@@ -27,7 +27,7 @@ class TimerManager : public Singleton<TimerManager<DurationType>>
 	// Temps en millisecondes depuis la dernière image rendue
 	DurationType elapsedTime;
 	// Vitesse à laquelle le temps s'écoule
-	DurationType timeScale;
+	float timeScale;
 	// Temps depuis la dernière image rendue avec le 'timeScale'
 	DurationType deltaTime;
 	// Nombre d'images qui ont été rendu depuis le début du programme
@@ -50,6 +50,11 @@ public:
 	FORCEINLINE void AddTimer(T* _timer)
 	{
 		allTimers.insert(_timer);
+	}
+	FORCEINLINE void RemoveTimer(T* _timer)
+	{
+		allTimers.erase(_timer);
+		delete _timer;
 	}
 	FORCEINLINE void SetTimerScale(const DurationType& _timeScale)
 	{
@@ -84,7 +89,7 @@ public:
 		lastTime = DurationType();
 		lastFrameTime = DurationType();
 		elapsedTime = DurationType();
-		timeScale = DurationType();
+		timeScale = 1.0f;
 		deltaTime = DurationType();
 		framesCount = 0;
 		maxFrameRate = 60;
@@ -122,10 +127,19 @@ public:
 			framesCount = 0;
 			Game::GetInstance().UpdateWindow();
 		}
-
-		for (T* _timer : allTimers)
+		using Iterator = set<T*>::iterator;
+		for (Iterator _iterator = allTimers.begin(); _iterator != allTimers.end();)
 		{
+			T* _timer = *_iterator;
 			_timer->Update(deltaTime);
+
+			if (_timer->IsToDelete())
+			{
+				--_iterator;
+				RemoveTimer(_timer);
+				continue;
+			}
+			++_iterator;
 		}
 	}
 	void Pause()
@@ -135,17 +149,25 @@ public:
 			_timer->Pause();
 		}
 	}
+	void Stop()
+	{
+		for (T* _timer : allTimers)
+		{
+			delete _timer;
+		}
+	}
 };
 
 using TM_Seconds = TimerManager<Seconds>;
 using TM_Milli = TimerManager<MilliSec>;
 using TM_Micro = TimerManager<MicroSec>;
 
-template<class DurationType = MilliSec>
+template<class DurationType = Seconds>
 class Timer
 {
 	bool isRunning;
 	bool isLoop;
+	bool isToDelete;
 	double currentTime;
 	double duration;
 	function<void()> callback;
@@ -159,6 +181,11 @@ public:
 	{
 		return isLoop;
 	}
+	FORCEINLINE bool IsToDelete() const
+	{
+		return isToDelete;
+	}
+	
 	FORCEINLINE double GetCurrentTime() const
 	{
 		return currentTime;
@@ -170,6 +197,7 @@ public:
 	{
 		TM_Seconds& _manager = TM_Seconds::GetInstance();
 
+		isToDelete = false;
 		isRunning = _startRunning;
 		isLoop = _isLoop;
 		currentTime = 0.0;
@@ -206,9 +234,7 @@ public:
 	}
 	void Stop()
 	{
-		//delete this;
-
-		// TODO REMOVE DANS LE SET
+		isToDelete = true;
 	}
 	void Resume()
 	{
