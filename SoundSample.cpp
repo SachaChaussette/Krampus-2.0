@@ -4,15 +4,15 @@
 SoundSample::SoundSample(const string& _path)
 {
 	path = _path;
-
 	if (!buffer.loadFromFile(_path))
 	{
 		LOG(Error, "Invalid path : " + _path);
 		sound = nullptr;
 		return;
 	}
+	volume = 0.1f;
 	sound = new Sound(buffer);
-
+	sound->setVolume(volume);
 	SoundManager::GetInstance().RegisterSample(this, path);
 }
 

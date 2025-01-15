@@ -58,12 +58,6 @@
     <Filter Include="Script\Managers\TimerManager">
       <UniqueIdentifier>{2cdd8b17-0a55-4146-85cb-1f8756fe080b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Color">
-      <UniqueIdentifier>{650314b7-ef45-4c35-bcb8-ca15aed38d70}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Logger">
-      <UniqueIdentifier>{3591916d-3021-4bf2-ae4e-3ed4cc6d83ba}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Script\Managers\MusicManager">
       <UniqueIdentifier>{440c810c-0e87-43b7-8068-974ca64662d7}</UniqueIdentifier>
     </Filter>
@@ -72,6 +66,12 @@
     </Filter>
     <Filter Include="Script\Logger">
       <UniqueIdentifier>{5af19ceb-9da6-46e6-aef5-cb1fe55beca0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Color">
+      <UniqueIdentifier>{650314b7-ef45-4c35-bcb8-ca15aed38d70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\SoundSample">
+      <UniqueIdentifier>{6ffefafe-4734-4e30-9a8d-08fd0bafd127}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -112,7 +112,7 @@
       <Filter>Script\Managers\TimerManager</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
-      <Filter>Color</Filter>
+      <Filter>Script\Color</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h">
       <Filter>Script\Logger</Filter>
@@ -124,7 +124,10 @@
       <Filter>Script\Managers\MusicManager</Filter>
     </ClInclude>
     <ClInclude Include="SoundSample.h">
-      <Filter>Header Files</Filter>
+      <Filter>Script\SoundSample</Filter>
+    </ClInclude>
+    <ClInclude Include="SingletonCaller.h">
+      <Filter>Script</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +171,7 @@
       <Filter>Script\Managers\SoundManager</Filter>
     </ClCompile>
     <ClCompile Include="SoundSample.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Script\SoundSample</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

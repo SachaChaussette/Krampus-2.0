@@ -46,7 +46,6 @@ void Game::Start()
 
 void Game::Update()
 {
- 
     while (window.isOpen())
     {
         TM_Seconds& _timer = TM_Seconds::GetInstance();
@@ -59,7 +58,7 @@ void Game::Update()
             }
         }   
         const float _deltaTime = _timer.GetDeltaTime().asSeconds();
-        //LOG(Warning, "DeltaTime => " + to_string(_deltaTime));
+        LOG(Warning, "DeltaTime => " + to_string(_deltaTime));
         
         ActorManager::GetInstance().Tick(_deltaTime);
 

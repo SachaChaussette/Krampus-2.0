@@ -167,6 +167,7 @@ xcopy /y /d "..\SFML-3.0.0\bin\sfml-window-d-3.dll" "$(OutDir)"
     <ClInclude Include="Object.h" />
     <ClInclude Include="ShapeObject.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="SingletonCaller.h" />
     <ClInclude Include="SoundSample.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="TextObject.h" />

@@ -1,9 +1,7 @@
 #pragma once
 
-#include <iostream>
-#include <vector>
-#include <set>
 #include "Color.h"
+#include "CoreMinimal.h"
 
 #define LOG(_verbosity, _msg) Logger::PrintLog(_verbosity, _msg, DEBUG_INFO);
 #define DEBUG_INFO " (" + string(PATH) + " : " + to_string(__LINE__) + ")"
@@ -72,17 +70,22 @@ private:
 public:
     __forceinline string GetFullText(const bool _useColor = true) const
     {
+        SYSTEMTIME _st;
+        GetSystemTime(&_st);
+
         const string& _color = _useColor ? color : "";
-        string _fullText = _color + GetPrefix(_useColor) + " " + text;
+        string _fullText = _color + GetPrefix(_useColor) + " " + RESET;
+
+        if (USE_TIME || useTime)
+        {
+            _fullText += "<" + to_string(_st.wHour + 1) + ":" + to_string(_st.wMinute) + ":" + to_string(_st.wSecond) + "> ";
+        }
+
+        _fullText += _color + text;
 
         if (USE_DEBUG || useDebug)
         {
             _fullText += debug;
-        }
-        _fullText += RESET;
-        if (USE_TIME || useTime)
-        {
-            _fullText += " <" + string(__TIME__) + ">";
         }
 
         return _fullText;
@@ -125,7 +128,7 @@ private:
     {
         if (_type == VT_COUNT)
         {
-            throw exception("Exception => invalid VerbosityType !");
+            throw exception("Exception => Invalid VerbosityType !");
         }
 
         const vector<string>& _verbosityColors =
@@ -133,7 +136,7 @@ private:
             WHITE,
             WHITE,
             LIGHT_GRAY,
-            GRAY,
+            PINK,
             YELLOW,
             RED,
             DARK_RED,
@@ -153,9 +156,10 @@ private:
 
 class Logger
 {
+    string prefixLogsPath;
     string logsPath;
-
-
+    string logsExtension;
+    
 public:
     Logger();
 
@@ -164,6 +168,5 @@ private:
     static void WriteInLogs(const string& _text);
 
 public:
-    static void PrintLog(const VerbosityType& _type, const string& _text, const string _debug);
+    static void PrintLog(const VerbosityType& _type, const string& _text, const string& _debug);
 };
-
