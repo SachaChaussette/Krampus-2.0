@@ -20,10 +20,6 @@ void Logger::WriteInLogs(const string& _text)
 
 void Logger::PrintLog(const VerbosityType& _type, const string& _text, const string& _debug)
 {
-	if (_type == Fatal)
-	{
-		assert(false, _text);
-	}
 	if (WRITE_IN_LOG(_type))
 	{
 		const VerbosityData& _verbosity = VerbosityData(_type, _text, _debug);
@@ -33,5 +29,9 @@ void Logger::PrintLog(const VerbosityType& _type, const string& _text, const str
 		{
 			WriteInConsole(_verbosity.GetFullText(true));
 		}
+	}
+	if (_type == Fatal)
+	{
+		assert(false, _text);
 	}
 }

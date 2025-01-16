@@ -30,7 +30,7 @@ int main()
 * 
 * Avoir le code à jour ✔
 * Custom exception ❌
-* Trouver une solution pourque Logger est tous ce qui à été déclaré dans le CoreMinimal ❌
+* Trouver une solution pourque Logger est tous ce qui à été déclaré dans le CoreMinimal ✔
 * Faire le WriteInLogs
 * Faire un panel un présentation des Logs ✔
 * SoundManager::GetInstance() en SoundManager. ❌

@@ -70,14 +70,14 @@ private:
 public:
     __forceinline string GetFullText(const bool _useColor = true) const
     {
-        SYSTEMTIME _st;
-        GetSystemTime(&_st);
-
         const string& _color = _useColor ? color : "";
-        string _fullText = _color + GetPrefix(_useColor) + " " + RESET;
+        const string& _reset = _useColor ? RESET : "";
+        string _fullText = _color + GetPrefix(_useColor) + " " + _reset;
 
         if (USE_TIME || useTime)
         {
+            SYSTEMTIME _st;
+            GetSystemTime(&_st);
             _fullText += "<" + to_string(_st.wHour + 1) + ":" + to_string(_st.wMinute) + ":" + to_string(_st.wSecond) + "> ";
         }
 
@@ -87,6 +87,8 @@ public:
         {
             _fullText += debug;
         }
+
+        _fullText += _reset;
 
         return _fullText;
     }
@@ -136,7 +138,7 @@ private:
             WHITE,
             WHITE,
             LIGHT_GRAY,
-            PINK,
+            GRAY,
             YELLOW,
             RED,
             DARK_RED,
@@ -146,11 +148,11 @@ private:
     }
     void ComputeUseDebug(const VerbosityType& _type)
     {
-        useDebug = set<VerbosityType>({ Warning, Error }).contains(_type);
+        useDebug = set<VerbosityType>({ Warning, Error, Fatal }).contains(_type);
     }
     void ComputeUseTime(const VerbosityType& _type)
     {
-        useTime = set<VerbosityType>({ Warning, Error, Log }).contains(_type);
+        useTime = set<VerbosityType>({ Warning, Error, Log, Fatal }).contains(_type);
     }
 };
 
