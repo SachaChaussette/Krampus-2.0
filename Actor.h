@@ -1,29 +1,17 @@
 #pragma once
 
-#include "ShapeObject.h"
 #include "Component.h"
 #include "Core.h"
 
 class Actor : public Core
 {
-	ShapeObject* shape;
+protected:
 	set<Component*> components;
+
 public:
-	FORCEINLINE ShapeObject* GetShape() const
-	{
-		return shape;
-	}
-	FORCEINLINE void SetShape(ShapeObject* _shape)
-	{
-		shape = _shape;
-	}
-public:
-	Actor() = default;
-	Actor(const float _radius, const string& _path, const IntRect& _rect = IntRect(),
-		const size_t& _pointCount = 30);
-	Actor(const Vector2f _size, const string& _path, const IntRect& _rect = IntRect());
+	Actor();
 	~Actor();
-private:
+protected:
 	void Register();
 
 public:

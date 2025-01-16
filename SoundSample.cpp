@@ -13,7 +13,7 @@ SoundSample::SoundSample(const string& _path)
 	volume = 0.1f;
 	sound = new Sound(buffer);
 	sound->setVolume(volume);
-	SoundManager::GetInstance().RegisterSample(this, path);
+	M_SOUND.RegisterSample(this, path);
 }
 
 SoundSample::~SoundSample()

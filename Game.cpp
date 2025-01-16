@@ -2,6 +2,7 @@
 #include "ActorManager.h"
 #include "TimerManager.h"
 #include "SoundManager.h"
+#include "MeshActor.h"
 
 // TODO REMOVE
 bool TEST(const int _index)
@@ -13,9 +14,6 @@ bool TEST(const int _index)
 Game::Game()
 {
     window = RenderWindow();
-    new Actor(20.0f, "images.jpg");
-    Actor* _actor = new Actor(50.0f, "images.jpg");
-    _actor->GetShape()->Move({ 0.0f, 50.0f });
 }
 
 Game::~Game()
@@ -41,14 +39,27 @@ void Game::Start()
         }
     }, Time(seconds(1.0f)), true, false);
 
-    SoundSample* _sample = SoundManager::GetInstance().PlaySound("yipeeee", WAV);
+    MeshActor * _mesh1 = new MeshActor(50.0f, 30, "images.jpg");
+    MeshActor * _mesh2 = new MeshActor(20.0f, 30, "images.jpg");
+    _mesh2->GetMesh()->GetShape()->Move({ 50.0f, 0.0f });
+
+    FloatRect _boundingBox1 = _mesh1->GetMesh()->GetShape()->GetDrawable()->getGlobalBounds();
+    FloatRect _boundingBox2 = _mesh2->GetMesh()->GetShape()->GetDrawable()->getGlobalBounds();
+
+    if (const optional<FloatRect>& _intersection = _boundingBox1.findIntersection(_boundingBox2))
+    {
+        LOG(Display, to_string(_intersection.value().getCenter().x) + " / " + to_string(_intersection.value().getCenter().y));
+    }
+
+
+    SoundSample* _sample = M_SOUND.PlaySound("yipeeee", WAV);
 }
 
 void Game::Update()
 {
     while (window.isOpen())
     {
-        TM_Seconds& _timer = TM_Seconds::GetInstance();
+        TM_Seconds& _timer = M_TIMER;
         _timer.Update();
         while (const std::optional _event = window.pollEvent())
         {
@@ -58,9 +69,9 @@ void Game::Update()
             }
         }   
         const float _deltaTime = _timer.GetDeltaTime().asSeconds();
-        LOG(Warning, "DeltaTime => " + to_string(_deltaTime));
+        //LOG(Warning, "DeltaTime => " + to_string(_deltaTime));
         
-        ActorManager::GetInstance().Tick(_deltaTime);
+        M_ACTOR.Tick(_deltaTime);
 
         UpdateWindow();
     }
@@ -69,9 +80,9 @@ void Game::Update()
 void Game::UpdateWindow()
 {
     window.clear();
-    for (Actor* _actor : ActorManager::GetInstance().GetAllActors())
+    for (const pair<u_int, OnRenderWindow>& _renderPair : onRenderWindow)
     {
-        window.draw(*_actor->GetShape()->GetDrawable());
+        _renderPair.second(window);
     }
     window.display();
 }
@@ -81,14 +92,3 @@ void Game::Stop()
     window.close();
 }
 
-// Apparition sur une carte de manière aléatoire
-/*
-position aléatoire
-forme aléatoire
-
-Taille Différente
-Couleur Différente
-
-Retrecissement en continu jusqu'à disparition
-
-*/

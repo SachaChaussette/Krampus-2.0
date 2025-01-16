@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Script">
       <UniqueIdentifier>{3d278e4f-06d3-46a1-b021-37c5f193367b}</UniqueIdentifier>
     </Filter>
@@ -64,14 +60,21 @@
     <Filter Include="Script\Managers\SoundManager">
       <UniqueIdentifier>{65de0f62-8f21-43c2-857b-a127cec99557}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Script\Logger">
-      <UniqueIdentifier>{5af19ceb-9da6-46e6-aef5-cb1fe55beca0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Script\Color">
-      <UniqueIdentifier>{650314b7-ef45-4c35-bcb8-ca15aed38d70}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Script\SoundSample">
       <UniqueIdentifier>{6ffefafe-4734-4e30-9a8d-08fd0bafd127}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Script\Resource Files\Logger">
+      <UniqueIdentifier>{5af19ceb-9da6-46e6-aef5-cb1fe55beca0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Resource Files\Exception">
+      <UniqueIdentifier>{34cc4a72-e60a-4302-b834-82c41130cf26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Core\Components\Collision">
+      <UniqueIdentifier>{7c0c56a8-e82b-4e67-8f2f-6a626d75ddd4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -111,11 +114,8 @@
     <ClInclude Include="TimerManager.h">
       <Filter>Script\Managers\TimerManager</Filter>
     </ClInclude>
-    <ClInclude Include="Color.h">
-      <Filter>Script\Color</Filter>
-    </ClInclude>
     <ClInclude Include="Logger.h">
-      <Filter>Script\Logger</Filter>
+      <Filter>Script\Resource Files\Logger</Filter>
     </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>Script\Managers\SoundManager</Filter>
@@ -126,8 +126,35 @@
     <ClInclude Include="SoundSample.h">
       <Filter>Script\SoundSample</Filter>
     </ClInclude>
-    <ClInclude Include="SingletonCaller.h">
-      <Filter>Script</Filter>
+    <ClInclude Include="Macro.h">
+      <Filter>Script\Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Script\Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshActor.h">
+      <Filter>Script\Core\Actors</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TriangleActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RectangleActor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Script\Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -162,7 +189,7 @@
       <Filter>Script\Managers\ActorManager</Filter>
     </ClCompile>
     <ClCompile Include="Logger.cpp">
-      <Filter>Script\Logger</Filter>
+      <Filter>Script\Resource Files\Logger</Filter>
     </ClCompile>
     <ClCompile Include="MusicManager.cpp">
       <Filter>Script\Managers\MusicManager</Filter>
@@ -172,6 +199,36 @@
     </ClCompile>
     <ClCompile Include="SoundSample.cpp">
       <Filter>Script\SoundSample</Filter>
+    </ClCompile>
+    <ClCompile Include="TimerManager.cpp">
+      <Filter>Script\Managers\TimerManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomException.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Script\Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TriangleActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RectangleActor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

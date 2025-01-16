@@ -1,51 +1,11 @@
 #pragma once
 
-#pragma warning (disable : 4275)
-
-// STL
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <functional>
-#include <typeindex>
-#include <typeinfo>
-#include <cassert>
-#include <Windows.h>
-
-// OLD
-#include <math.h>
-#include <conio.h>
-
-// Collections
-#include <vector>
-#include <queue>
-#include <list>
-#include <set>
-#include <map>
-
-// SFML
-#include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Window.hpp>
-
-#define new new(_NORMAL_BLOCK, __FILE__, __LINE__)
-
-#define INLINE __inline
-#define FORCEINLINE __forceinline
-#define Super __super
-#define SLEEP(_duration) sf::sleep(_duration)
-
-#define DISPLAY(_text, _endl) if(_endl) cout << endl; \
-										cout << _text;
-
-// Fichier Ext
 #include "Logger.h"
+#include "CustomException.h"
+#include "Utilities.h"
 
-using namespace std;
-using namespace sf;
-
-typedef unsigned short u_short;
-typedef unsigned int u_int;
-typedef long long l_long;
+#define M_ACTOR ActorManager::GetInstance()
+#define M_TIMER TM_Seconds::GetInstance()
+#define M_SOUND SoundManager::GetInstance()
+#define M_TEXTURE TextureManager::GetInstance()
+#define M_GAME Game::GetInstance()

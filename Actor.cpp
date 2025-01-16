@@ -1,18 +1,10 @@
 #include "Actor.h"
 #include "ActorManager.h"
 
-Actor::Actor(const float _radius, const string& _path, const IntRect& _rect, const size_t& _pointCount)
+Actor::Actor()
 {
-	shape = new ShapeObject(_radius, _path, _rect, _pointCount);
 	Register();
 }
-
-Actor::Actor(const Vector2f _size, const string& _path, const IntRect& _rect)
-{
-	shape = new ShapeObject(_size, _path, _rect);
-	Register();
-}
-
 
 Actor::~Actor()
 {
@@ -20,12 +12,11 @@ Actor::~Actor()
 	{
 		delete _component;
 	}
-	delete shape;
 }
 
 void Actor::Register()
 {
-	ActorManager::GetInstance().AddActor(this);
+	M_ACTOR.AddActor(this);
 }
 
 void Actor::BeginPlay()

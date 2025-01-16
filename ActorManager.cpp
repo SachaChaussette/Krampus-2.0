@@ -31,3 +31,4 @@ void ActorManager::BeginDestoy()
 		_actor->BeginDestoy();
 	}
 }
+

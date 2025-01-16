@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Singleton.h"
 #include "Game.h"
 
 using Seconds = float;
@@ -47,6 +46,14 @@ private:
 		return durations.at(typeid(DurationType));
 	}
 public:
+	FORCEINLINE string GetCurrentRealTime() const
+	{
+		SYSTEMTIME _st;
+		GetSystemTime(&_st);
+		string _fullTime = "[" + to_string(_st.wDay + 1) + "/" + to_string(_st.wMonth) + "/" + to_string(_st.wYear) + "-";
+		_fullTime += to_string(_st.wHour + 1) + ":" + to_string(_st.wMinute) + ":" + to_string(_st.wSecond) + "] ";
+		return _fullTime;
+	}
 	FORCEINLINE void AddTimer(T* _timer)
 	{
 		allTimers.insert(_timer);
@@ -125,7 +132,7 @@ public:
 		{
 			lastFrameTime = time;
 			framesCount = 0;
-			Game::GetInstance().UpdateWindow();
+			M_GAME.UpdateWindow();
 		}
 		using Iterator = set<T*>::iterator;
 		for (Iterator _iterator = allTimers.begin(); _iterator != allTimers.end();)
@@ -195,7 +202,7 @@ public:
 	Timer(const function<void()>& _callback, const Time& _time, const bool _startRunning = false,
 		const bool _isLoop = false)
 	{
-		TM_Seconds& _manager = TM_Seconds::GetInstance();
+		TM_Seconds& _manager = M_TIMER;
 
 		isToDelete = false;
 		isRunning = _startRunning;
@@ -249,3 +256,4 @@ public:
 		isRunning = false;
 	}
 };
+

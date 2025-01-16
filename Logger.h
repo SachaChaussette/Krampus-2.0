@@ -1,13 +1,8 @@
 #pragma once
 
+#include "Macro.h"
+#include "CustomException.h"
 #include "Color.h"
-#include "CoreMinimal.h"
-
-#define LOG(_verbosity, _msg) Logger::PrintLog(_verbosity, _msg, DEBUG_INFO);
-#define DEBUG_INFO " (" + string(PATH) + " : " + to_string(__LINE__) + ")"
-
-#define WRITE_IN_LOG(_verbosity)        _verbosity >= Log
-#define WRITE_IN_CONSOLE(_verbosity)    _verbosity > Log
 
 #ifdef DEBUG
 #define USE_DEBUG 1
@@ -15,20 +10,10 @@
 #define USE_DEBUG 0
 #endif // DEBUG
 
-//#define DEBUG_PATH
+#define LOG(_verbosity, _msg) Logger::PrintLog(_verbosity, _msg, DEBUG_INFO);
 
-#ifdef DEBUG_PATH
-#define PATH __FUNCTION__
-#else
-#define PATH __FILE__
-#endif // DEBUG
-
-#ifdef TIME
-#define USE_TIME 1
-#else
-#define USE_TIME 0
-#endif // TIME
-using namespace std;
+#define WRITE_IN_LOG(_verbosity)        _verbosity >= Log
+#define WRITE_IN_CONSOLE(_verbosity)    _verbosity > Log
 
 enum VerbosityType
 {
@@ -43,55 +28,33 @@ enum VerbosityType
     VT_COUNT,
 };
 
-
-
 class VerbosityData
 {
+    Gradient color;
     string prefix;
-    string color;
     string text;
     string debug;
     bool useDebug;
     bool useTime;
 
 private:
-    __forceinline string GetPrefix(const bool _useColor) const
+    FORCEINLINE string GetPrefix(const bool _useColor) const
     {
         string _prefix = prefix;
         if (_useColor)
         {
-            _prefix = RESET + string("[") + color 
-                    + prefix 
-                    + RESET + "]" + color;
-
+            _prefix = "[" + string(RESET) + color.GradientString(prefix) + string(RESET) + "]";
+        }
+        else
+        {
+            _prefix += " :";
         }
         return _prefix;
     }
 public:
-    __forceinline string GetFullText(const bool _useColor = true) const
-    {
-        const string& _color = _useColor ? color : "";
-        const string& _reset = _useColor ? RESET : "";
-        string _fullText = _color + GetPrefix(_useColor) + " " + _reset;
-
-        if (USE_TIME || useTime)
-        {
-            SYSTEMTIME _st;
-            GetSystemTime(&_st);
-            _fullText += "<" + to_string(_st.wHour + 1) + ":" + to_string(_st.wMinute) + ":" + to_string(_st.wSecond) + "> ";
-        }
-
-        _fullText += _color + text;
-
-        if (USE_DEBUG || useDebug)
-        {
-            _fullText += debug;
-        }
-
-        _fullText += _reset;
-
-        return _fullText;
-    }
+    FORCEINLINE string GetFullText(const bool _useColor = true) const;
+   
+    
 
 public:
     VerbosityData(const VerbosityType& _type, const string& _text, const string _debug,
@@ -110,7 +73,7 @@ private:
     {
         if (_type == VT_COUNT)
         {
-            throw exception("Exception => invalid VerbosityType !");
+            throw CustomException("Exception => invalid VerbosityType !");
         }
 
         const vector<string>& _verbosityTexts =
@@ -130,18 +93,18 @@ private:
     {
         if (_type == VT_COUNT)
         {
-            throw exception("Exception => Invalid VerbosityType !");
+            throw CustomException("Exception => Invalid VerbosityType !");
         }
 
-        const vector<string>& _verbosityColors =
+        const vector<Gradient>& _verbosityColors =
         {
-            WHITE,
-            WHITE,
-            LIGHT_GRAY,
-            GRAY,
-            YELLOW,
-            RED,
-            DARK_RED,
+            Gradient(ColorData(27, 27, 33), ColorData(37, 37, 51)),            //VERY VERBOSE
+            Gradient(ColorData(55, 55, 61), ColorData(69, 69, 93)),            //VERBOSE
+            Gradient(ColorData(100, 100, 119), ColorData(143, 143, 194)),    //LOG
+            Gradient(ColorData(221, 221, 246), ColorData(122, 122, 236)),    //DISPLAY
+            Gradient(ColorData(255, 231, 0), ColorData(255, 76, 17)),        //WARNING
+            Gradient(ColorData(193, 6, 11), ColorData(249, 56, 67)),        //ERROR
+            Gradient(ColorData(255, 0, 95), ColorData(118, 37, 184)),        //FATAL
         };
 
         color = _verbosityColors[_type];
@@ -158,9 +121,7 @@ private:
 
 class Logger
 {
-    string prefixLogsPath;
-    string logsPath;
-    string logsExtension;
+    static string logsPath;
     
 public:
     Logger();
@@ -170,5 +131,6 @@ private:
     static void WriteInLogs(const string& _text);
 
 public:
+    static void Reset();
     static void PrintLog(const VerbosityType& _type, const string& _text, const string& _debug);
 };
