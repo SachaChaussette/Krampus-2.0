@@ -36,12 +36,12 @@ void Game::Start()
         }
     }, Time(seconds(1.0f)), true, false);*/
 
-    MeshActor * _mesh1 = new MeshActor(50.0f, 30, "images.jpg");
     //MeshActor * _mesh2 = new MeshActor(20.0f, 30, "images.jpg");
 
     //new Label("Aled", "Starjedi", TTF);
+    Spawner* _spawner = new Spawner();
+    _spawner->Spawn(SubclassOf<MeshActor>(50.0f, 30, "images.jpg"));
 
-    new Spawner(_mesh1, 1.0f, 200.0f);
 
     /*_mesh2->GetMesh()->GetShape()->Move({ 50.0f, 0.0f });
 
@@ -69,7 +69,7 @@ void Game::Update()
         {
             if (_event->is<Event::Closed>())
             {
-                Stop();
+                window.close();
             }
         }   
         const float _deltaTime = _timer.GetDeltaTime().asSeconds();
@@ -94,7 +94,5 @@ void Game::UpdateWindow()
 void Game::Stop()
 {
     M_ACTOR.BeginDestoy();
-
-    window.close();
 }
 

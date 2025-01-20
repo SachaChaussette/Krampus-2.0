@@ -3,6 +3,7 @@
 #include "Logger.h"
 #include "CustomException.h"
 #include "Utilities.h"
+#include "SubclassOf.h"
 
 #define M_ACTOR ActorManager::GetInstance()
 #define M_TIMER TM_Seconds::GetInstance()

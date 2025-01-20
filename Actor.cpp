@@ -4,7 +4,11 @@
 Actor::Actor()
 {
 	root = CreateComponent<RootComponent>();
+}
 
+Actor::Actor(const Actor& _actor)
+{
+	root = CreateComponent<RootComponent>();
 	Register();
 }
 
@@ -25,7 +29,7 @@ void Actor::BeginPlay()
 {
 	for (Component* _component : components)
 	{
-		_component->BeginPlay();
+		//_component->BeginPlay();
 	}
 }
 
@@ -43,6 +47,11 @@ void Actor::BeginDestoy()
 	{
 		_component->BeginDestoy();
 	}
+}
+
+void Actor::Deconstruct()
+{
+	M_ACTOR.RemoveActor(this);
 }
 
 void Actor::AddComponent(Component* _component)

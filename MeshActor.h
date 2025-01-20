@@ -61,7 +61,8 @@ public:
 public:
 	MeshActor(const float _radius, const size_t& _pointCount = 30, const string& _path = "", const IntRect& _rect = IntRect());
 	MeshActor(const Vector2f _size, const string& _path = "", const IntRect& _rect = IntRect());
-
+public:
+	virtual void Deconstruct() override;
 private:
 	void RenderMesh(RenderWindow& _window);
 };

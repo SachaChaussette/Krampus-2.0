@@ -47,7 +47,7 @@ private:
         }
         else
         {
-            _prefix += " :";
+            _prefix += " : ";
         }
         return _prefix;
     }

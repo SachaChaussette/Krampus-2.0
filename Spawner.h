@@ -1,19 +1,19 @@
 #pragma once
 
-#include "Actor.h"
+#include "MeshActor.h"
 
 class Spawner : public Actor
 {
 	float spawnRate;
 	float spawnRange;
-	Actor* actorRef;
+	SubclassOf<MeshActor>* actorRef;
 public:
 	Spawner();
-	Spawner(Actor* _actorRef, const float _spawnRate, const float _spawnRange);
-	~Spawner();
+	Spawner(SubclassOf<MeshActor>* _actorRef);
 private:
 	virtual void BeginPlay() override;
+	void Spawn_Internal();
 public:
-	void Spawn();
+	void Spawn(SubclassOf<MeshActor>& _actorRef);
 };
 
