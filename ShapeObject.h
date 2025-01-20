@@ -16,55 +16,47 @@ public:
 	FORCEINLINE virtual Shape* GetDrawable() const override
 	{
 		return shape;
-	}
-	FORCEINLINE virtual void SetOrigin(const Vector2f& _origin)
+	} 
+	FORCEINLINE virtual void SetOrigin(const Vector2f& _origin) override
 	{
-		Super::SetOrigin(_origin);
 		shape->setOrigin(_origin);
 	}
-	FORCEINLINE virtual void SetPosition(const Vector2f& _position)
+	FORCEINLINE virtual void SetPosition(const Vector2f& _position) override
 	{
-		Super::SetPosition(_position);
 		shape->setPosition(_position);
 	}
-	FORCEINLINE virtual void SetRotation(const Angle& _rotation)
+	FORCEINLINE virtual void SetRotation(const Angle& _rotation) override
 	{
-		Super::SetRotation(_rotation);
 		shape->setRotation(_rotation);
 	}
-	FORCEINLINE virtual void SetScale(const Vector2f& _scale)
+	FORCEINLINE virtual void SetScale(const Vector2f& _scale) override
 	{
-		Super::SetScale(_scale);
 		shape->setScale(_scale);
 	}
-	FORCEINLINE virtual void SetTransform(const TransformData& _transformData)
+	FORCEINLINE virtual void SetTransform(const TransformData& _transformData) override
 	{
-		Super::SetTransform(_transformData);
 		shape->setOrigin(_transformData.origin);
 		shape->setPosition(_transformData.position);
 		shape->setRotation(_transformData.rotation);
 		shape->setScale(_transformData.scale);
 	}
-	FORCEINLINE virtual void Move(const Vector2f& _offset)
+	FORCEINLINE virtual void Move(const Vector2f& _offset) override
 	{
-		Super::Move(_offset);
 		shape->move(_offset);
 	}
-	FORCEINLINE virtual void Rotate(const Angle& _angle)
+	FORCEINLINE virtual void Rotate(const Angle& _angle) override
 	{
-		Super::Rotate(_angle);
 		shape->rotate(_angle);
 	}
-	FORCEINLINE virtual void Scale(const Vector2f& _factor)
+	FORCEINLINE virtual void Scale(const Vector2f& _factor) override
 	{
-		Super::Scale(_factor);
 		shape->scale(_factor);
 	}
 public:
 	ShapeObject(const float _radius, const string& _path, const IntRect& _rect = IntRect(), 
 				const size_t& _pointCount = 30);	// Circle
 	ShapeObject(const Vector2f _size, const string& _path, const IntRect& _rect = IntRect());			// Rectangle
-	~ShapeObject();
+	virtual ~ShapeObject() override;
 public:
 
 };

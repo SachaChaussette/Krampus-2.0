@@ -8,3 +8,7 @@ Component::Component(Actor* _owner)
 Component::~Component()
 {
 }
+
+void Component::Tick(const float _deltaTime)
+{
+}

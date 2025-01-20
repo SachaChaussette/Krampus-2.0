@@ -21,9 +21,6 @@
     <Filter Include="Script\Objects\TextObject">
       <UniqueIdentifier>{74998d10-4b64-4033-b33e-d3c806c6780a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Script\Singleton">
-      <UniqueIdentifier>{0ffadebc-f0b1-44f5-9218-7b9ba4036331}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Script\Core">
       <UniqueIdentifier>{bf85df38-00c4-439f-8b50-62e70460a591}</UniqueIdentifier>
     </Filter>
@@ -38,9 +35,6 @@
     </Filter>
     <Filter Include="Script\Game">
       <UniqueIdentifier>{fdedf359-d247-4a47-927f-e4c42715ec24}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Script\CoreMinimal">
-      <UniqueIdentifier>{97850696-4b85-477d-b313-ef0c742a39cd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Script\Core\Actors">
       <UniqueIdentifier>{aa1de379-d573-4d84-902b-b6e2faa1a1e5}</UniqueIdentifier>
@@ -76,11 +70,32 @@
     <Filter Include="Script\Core\Components\Collision">
       <UniqueIdentifier>{7c0c56a8-e82b-4e67-8f2f-6a626d75ddd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Script\Core\Actors\Mesh">
+      <UniqueIdentifier>{b90b351b-0cca-417a-89cb-3acf2e6e1a6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Core\Actors\Circle">
+      <UniqueIdentifier>{40d6316b-8494-4d52-a71f-d382fdf52844}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Core\Actors\Triangle">
+      <UniqueIdentifier>{f3f56c3e-4c67-4320-9d3e-89ed866aca07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Core\Actors\Rectangle">
+      <UniqueIdentifier>{371728ed-ee19-44fa-a929-65a1d331284c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Core\Components\Mesh">
+      <UniqueIdentifier>{00447d62-d5e4-463f-9c11-7c73d2bb3280}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Resource Files\Color">
+      <UniqueIdentifier>{f1e2fad6-1574-46d9-8a1a-35cd8911ab3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Resource Files\Utilities">
+      <UniqueIdentifier>{9553212a-0e40-4b67-8116-acd253730d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Core\Components\Root">
+      <UniqueIdentifier>{1ed5d02b-1635-4d66-ac5b-2c136730e4e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CoreMinimal.h">
-      <Filter>Script\CoreMinimal</Filter>
-    </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>Script\Managers\TextureManager</Filter>
     </ClInclude>
@@ -92,9 +107,6 @@
     </ClInclude>
     <ClInclude Include="ShapeObject.h">
       <Filter>Script\Objects\ShapeObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>Script\Singleton</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Script\Game</Filter>
@@ -129,32 +141,47 @@
     <ClInclude Include="Macro.h">
       <Filter>Script\Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="Color.h">
-      <Filter>Script\Resource Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CustomException.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MeshComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MeshActor.h">
-      <Filter>Script\Core\Actors</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleActor.h">
-      <Filter>Header Files</Filter>
+      <Filter>Script\Core\Actors\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="TriangleActor.h">
-      <Filter>Header Files</Filter>
+      <Filter>Script\Core\Actors\Triangle</Filter>
     </ClInclude>
     <ClInclude Include="RectangleActor.h">
-      <Filter>Header Files</Filter>
+      <Filter>Script\Core\Actors\Rectangle</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleActor.h">
+      <Filter>Script\Core\Actors\Circle</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshComponent.h">
+      <Filter>Script\Core\Components\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionComponent.h">
+      <Filter>Script\Core\Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomException.h">
+      <Filter>Script\Resource Files\Exception</Filter>
     </ClInclude>
     <ClInclude Include="Utilities.h">
+      <Filter>Script\Resource Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Script\Resource Files\Color</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
       <Filter>Script\Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreMinimal.h">
+      <Filter>Script\Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RootComponent.h">
+      <Filter>Script\Core\Components\Root</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformData.h">
+      <Filter>Script\Core\Components\Root</Filter>
+    </ClInclude>
+    <ClInclude Include="ITransformableModifier.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -203,31 +230,37 @@
     <ClCompile Include="TimerManager.cpp">
       <Filter>Script\Managers\TimerManager</Filter>
     </ClCompile>
-    <ClCompile Include="CustomException.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Color.cpp">
-      <Filter>Script\Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshComponent.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="CircleActor.cpp">
+      <Filter>Script\Core\Actors\Circle</Filter>
     </ClCompile>
     <ClCompile Include="MeshActor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CircleActor.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Script\Core\Actors\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="TriangleActor.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Script\Core\Actors\Triangle</Filter>
     </ClCompile>
     <ClCompile Include="RectangleActor.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Script\Core\Actors\Rectangle</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshComponent.cpp">
+      <Filter>Script\Core\Components\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionComponent.cpp">
+      <Filter>Script\Core\Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomException.cpp">
+      <Filter>Script\Resource Files\Exception</Filter>
     </ClCompile>
     <ClCompile Include="Utilities.cpp">
+      <Filter>Script\Resource Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Script\Resource Files\Color</Filter>
+    </ClCompile>
+    <ClCompile Include="RootComponent.cpp">
+      <Filter>Script\Core\Components\Root</Filter>
+    </ClCompile>
+    <ClCompile Include="ITransformableViewer.h">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

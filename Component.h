@@ -8,16 +8,21 @@ protected:
 	class Actor* owner;
 
 public:
+	FORCEINLINE virtual bool IsValid(Core* _core) const override
+	{
+		// TODO
+		return true;
+	}
 	FORCEINLINE Actor* GetActor() const
 	{
 		return owner;
 	}
 public:
 	Component(Actor* _owner);
-	~Component();
+	virtual ~Component();
 public:
 	virtual void BeginPlay() override {};
-	virtual void Tick(const float _deltaTime) override {};
+	virtual void Tick(const float _deltaTime) override;
 	virtual void BeginDestoy() override {};
 };
 

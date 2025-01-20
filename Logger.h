@@ -133,4 +133,5 @@ private:
 public:
     static void Reset();
     static void PrintLog(const VerbosityType& _type, const string& _text, const string& _debug);
+    static void PrintLog(const VerbosityType& _type, const Vector2f& _vector, const string& _debug);
 };

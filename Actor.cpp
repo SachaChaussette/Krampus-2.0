@@ -3,6 +3,8 @@
 
 Actor::Actor()
 {
+	root = CreateComponent<RootComponent>();
+
 	Register();
 }
 
