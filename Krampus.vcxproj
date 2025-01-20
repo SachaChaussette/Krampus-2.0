@@ -147,8 +147,10 @@ xcopy /y /d "..\SFML-3.0.0\bin\sfml-window-d-3.dll" "$(OutDir)"
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="CustomException.cpp" />
+    <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="ITransformableViewer.h" />
+    <ClCompile Include="Label.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MeshActor.cpp" />
@@ -160,6 +162,7 @@ xcopy /y /d "..\SFML-3.0.0\bin\sfml-window-d-3.dll" "$(OutDir)"
     <ClCompile Include="ShapeObject.cpp" />
     <ClCompile Include="SoundSample.cpp" />
     <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="TextObject.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TimerManager.cpp" />
@@ -176,8 +179,10 @@ xcopy /y /d "..\SFML-3.0.0\bin\sfml-window-d-3.dll" "$(OutDir)"
     <ClInclude Include="Core.h" />
     <ClInclude Include="CoreMinimal.h" />
     <ClInclude Include="CustomException.h" />
+    <ClInclude Include="FontManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="ITransformableModifier.h" />
+    <ClInclude Include="Label.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Macro.h" />
     <ClInclude Include="MeshActor.h" />
@@ -190,6 +195,7 @@ xcopy /y /d "..\SFML-3.0.0\bin\sfml-window-d-3.dll" "$(OutDir)"
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SoundSample.h" />
     <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="Spawner.h" />
     <ClInclude Include="TextObject.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TimerManager.h" />

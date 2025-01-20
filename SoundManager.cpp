@@ -16,7 +16,7 @@ SoundManager::~SoundManager()
 	}
 }
 
-SoundSample* SoundManager::PlaySound(const string& _path, const ExtensionType& _type)
+SoundSample* SoundManager::PlaySound(const string& _path, const SoundExtensionType& _type)
 {
 	const string _finalPath = prefixPath + _path + GetExtension(_type);
 

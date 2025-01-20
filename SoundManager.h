@@ -3,7 +3,7 @@
 #include "Singleton.h"
 #include "SoundSample.h"
 
-enum ExtensionType
+enum SoundExtensionType
 {
 	MP3,
 	WAV,
@@ -21,7 +21,7 @@ public:
 	{
 		allSamples.insert(make_pair(_sample->GetPath(), _sample));
 	}
-	FORCEINLINE string GetExtension(const ExtensionType& _type)
+	FORCEINLINE string GetExtension(const SoundExtensionType& _type)
 	{
 		return vector<string>({ ".mp3", ".wav", })[_type];
 	}
@@ -31,7 +31,7 @@ public:
 	~SoundManager();
 
 public:
-	SoundSample* PlaySound(const string& _path, const ExtensionType& _type = MP3);
+	SoundSample* PlaySound(const string& _path, const SoundExtensionType& _type = MP3);
 	void PauseSound(const string& _path);
 	void StopSound(const string& _path);
 	void ToggleMute();

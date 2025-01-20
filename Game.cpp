@@ -3,13 +3,10 @@
 #include "TimerManager.h"
 #include "SoundManager.h"
 #include "MeshActor.h"
+#include "Label.h"
+#include "Spawner.h"
 
-// TODO REMOVE
-bool TEST(const int _index)
-{
-    cout << "Index" << _index << endl;
-    return _index % 2 == 0;
-}
+
 
 Game::Game()
 {
@@ -30,18 +27,23 @@ void Game::Start()
 {
     window.create(VideoMode({ 800, 600 }), "SFML works!");
 
-    new Timer([]() 
+  /*  new Timer([]() 
     { 
         static int _index = 0;
         if (TEST(++_index))
         {
             LOG(Display, "coucou");
         }
-    }, Time(seconds(1.0f)), true, false);
+    }, Time(seconds(1.0f)), true, false);*/
 
     MeshActor * _mesh1 = new MeshActor(50.0f, 30, "images.jpg");
-    MeshActor * _mesh2 = new MeshActor(20.0f, 30, "images.jpg");
-    _mesh2->GetMesh()->GetShape()->Move({ 50.0f, 0.0f });
+    //MeshActor * _mesh2 = new MeshActor(20.0f, 30, "images.jpg");
+
+    //new Label("Aled", "Starjedi", TTF);
+
+    new Spawner(_mesh1, 1.0f, 200.0f);
+
+    /*_mesh2->GetMesh()->GetShape()->Move({ 50.0f, 0.0f });
 
     FloatRect _boundingBox1 = _mesh1->GetMesh()->GetShape()->GetDrawable()->getGlobalBounds();
     FloatRect _boundingBox2 = _mesh2->GetMesh()->GetShape()->GetDrawable()->getGlobalBounds();
@@ -49,10 +51,12 @@ void Game::Start()
     if (const optional<FloatRect>& _intersection = _boundingBox1.findIntersection(_boundingBox2))
     {
         LOG(Display, to_string(_intersection.value().getCenter().x) + " / " + to_string(_intersection.value().getCenter().y));
-    }
+    }*/
 
 
     SoundSample* _sample = M_SOUND.PlaySound("yipeeee", WAV);
+
+    M_ACTOR.BeginPlay();
 }
 
 void Game::Update()
@@ -89,6 +93,8 @@ void Game::UpdateWindow()
 
 void Game::Stop()
 {
+    M_ACTOR.BeginDestoy();
+
     window.close();
 }
 

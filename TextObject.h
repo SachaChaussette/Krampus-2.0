@@ -2,10 +2,21 @@
 
 #include "Object.h"
 
+
+enum FontExtensionType
+{
+	OTF,
+	TTF,
+};
 class TextObject : public Object
 {
 	Text* text;
+	Font font;
 public:
+	FORCEINLINE virtual Font& GetFont()
+	{
+		return font;
+	}
 	FORCEINLINE virtual Text* GetDrawable() const override
 	{
 		return text;
@@ -47,6 +58,7 @@ public:
 	}
 
 public:
-	TextObject();
+	TextObject(const string& _text, const string& _path = "", const FontExtensionType& _fontType = OTF);
+	~TextObject();
 };
 

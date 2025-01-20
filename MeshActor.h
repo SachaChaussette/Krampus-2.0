@@ -23,37 +23,37 @@ public:
 	FORCEINLINE virtual void SetOrigin(const Vector2f& _origin) override
 	{
 		Super::SetOrigin(_origin);
-		root->SetOrigin(_origin);
+		mesh->SetOrigin(_origin);
 	}
 	FORCEINLINE virtual void SetPosition(const Vector2f& _position) override
 	{
 		Super::SetPosition(_position);
-		root->SetPosition(_position);
+		mesh->SetPosition(_position);
 	}
 	FORCEINLINE virtual void SetRotation(const Angle& _rotation) override
 	{
 		Super::SetRotation(_rotation);
-		root->SetRotation(_rotation);
+		mesh->SetRotation(_rotation);
 	}
 	FORCEINLINE virtual void SetScale(const Vector2f& _scale) override
 	{
 		Super::SetScale(_scale);
-		root->SetScale(_scale);
+		mesh->SetScale(_scale);
 	}
 	FORCEINLINE virtual void Move(const Vector2f& _offset) override
 	{
 		Super::Move(_offset);
-		root->Move(_offset);
+		mesh->Move(_offset);
 	}
 	FORCEINLINE virtual void Scale(const Vector2f& _factor) override
 	{
 		Super::Scale(_factor);
-		root->Scale(_factor);
+		mesh->Scale(_factor);
 	}
 	FORCEINLINE virtual void Rotate(const Angle& _angle) override
 	{
 		Super::Rotate(_angle);
-		root->Rotate(_angle);
+		mesh->Rotate(_angle);
 	}
 
 	#pragma endregion	
