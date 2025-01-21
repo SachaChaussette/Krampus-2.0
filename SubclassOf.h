@@ -5,24 +5,22 @@
 template<class T>
 class SubclassOf
 {
-	T* objectRef;
+	T objectRef;
 
 public:
-	FORCEINLINE T GetSubclassObject()
+	FORCEINLINE T GetSubclassObject() const
 	{
-		return *objectRef;
+		return objectRef;
 	}
 public:
-	template<class ...Args>
-	SubclassOf(Args... _args)
+	SubclassOf()
 	{
-		objectRef = new T(_args...);
+		objectRef = T();
 	}
-	~SubclassOf()
+	SubclassOf(const T& _objectRef)
 	{
-		delete objectRef;
+		objectRef = _objectRef;
 	}
-
 };
 
 

@@ -2,11 +2,107 @@
 
 #include "Object.h"
 
+// TODO IMPLEMENTER
+enum TextureExtensionType
+{
+	PNG,
+	JPG,
+	GIF,
+};
+
+enum ShapeObjectType
+{
+	SOT_CIRCLE,
+	SOT_RECTANGLE,
+};
+
+struct CircleShapeObjectData
+{
+	float radius;
+	string path;
+	IntRect rect;
+	size_t pointCount;
+	CircleShapeObjectData(const float _radius, const string& _path, const IntRect& _rect, const size_t& _pointCount)
+	{
+		radius = _radius;
+		path = _path;
+		rect = _rect;
+		pointCount = _pointCount;
+	}
+	CircleShapeObjectData& operator = (const CircleShapeObjectData& _other)
+	{
+		radius = _other.radius;
+		path = string(_other.path);
+		rect = _other.rect;
+		pointCount = _other.pointCount;
+		return *this;
+	}
+};
+
+struct RectangleShapeObjectData
+{
+	Vector2f size;
+	string path;
+	IntRect rect;
+	RectangleShapeObjectData(const Vector2f _size, const string& _path, const IntRect& _rect)
+	{
+		size = _size;
+		path = _path;
+		rect = _rect;
+	}
+
+	
+};
+
+union ObjectData
+{
+	CircleShapeObjectData circleData;
+	RectangleShapeObjectData rectangleData;
+
+	ObjectData() {};
+	~ObjectData() {};
+};
+
+struct ShapeObjectData
+{
+	ShapeObjectType type;
+	ObjectData data;
+
+	ShapeObjectData()
+	{
+		type = SOT_CIRCLE;
+	}
+	ShapeObjectData(const ShapeObjectType& _type, const CircleShapeObjectData& _circleData)
+	{
+		type = _type;
+		data.circleData = _circleData;
+	}
+	ShapeObjectData(const ShapeObjectType& _type, const RectangleShapeObjectData& _rectangleData)
+	{
+		type = _type;
+		data.rectangleData = _rectangleData;
+	}
+
+	ShapeObjectData& operator = (const ShapeObjectData& _other)
+	{
+		type = _other.type;
+		if (type == SOT_CIRCLE)
+		{
+			data.circleData = _other.data.circleData;
+		}
+		else if (type == SOT_RECTANGLE)
+		{
+			data.rectangleData = _other.data.rectangleData;
+		}
+		return *this;
+	}
+};
+
 class ShapeObject : public Object
 {
 	Shape* shape;
 	Texture texture;
-
+	ShapeObjectData objectData;
 
 public:
 	FORCEINLINE Texture& GetTexture()
@@ -56,8 +152,10 @@ public:
 	ShapeObject(const float _radius, const string& _path, const IntRect& _rect = IntRect(), 
 				const size_t& _pointCount = 30);	// Circle
 	ShapeObject(const Vector2f _size, const string& _path, const IntRect& _rect = IntRect());			// Rectangle
+	ShapeObject(const ShapeObject& _other);			
 	virtual ~ShapeObject() override;
-public:
-
+private:
+	void InitCircle(const CircleShapeObjectData& _data);
+	void InitRectangle(const RectangleShapeObjectData& _data);
 };
 

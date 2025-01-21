@@ -4,7 +4,9 @@
 #include "SoundManager.h"
 #include "MeshActor.h"
 #include "Label.h"
+#include "Level.h"
 #include "Spawner.h"
+#include "SubclassOf.h"
 
 
 
@@ -35,11 +37,16 @@ void Game::Start()
             LOG(Display, "coucou");
         }
     }, Time(seconds(1.0f)), true, false);*/
-
-    //MeshActor* _mesh = new MeshActor(20.0f, 30, "images.jpg");
-
     //new Label("Aled", "Starjedi", TTF);
-    new Spawner();
+    //MeshActor _mesh = MeshActor(20.0f, 30, "images.jpg");
+
+    //Spawner* _spawner = new Spawner();
+
+    MeshActor _meshActorObject = MeshActor(20.0f, 30, "images.jpg");
+    SubclassOf<MeshActor> _meshActorRef = SubclassOf<MeshActor>(_meshActorObject);
+    MeshActor* _meshActor = Level::SpawnActor<MeshActor>(_meshActorRef);
+
+    //_spawner->Spawn(&SubclassOf<MeshActor>(20.0f, 30, "images.jpg"));
 
 
     /*_mesh2->GetMesh()->GetShape()->Move({ 50.0f, 0.0f });

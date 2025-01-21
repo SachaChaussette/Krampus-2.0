@@ -97,14 +97,12 @@ public:
 	Actor();
 	Actor(const Actor& _actor);
 	~Actor();
-protected:
-	void Register();
-
 public:
 	virtual void BeginPlay() override;
 	virtual void Tick(const float _deltaTime) override;
 	virtual void BeginDestoy() override;
 	virtual void Deconstruct();
+	virtual void Construct();
 
 	void AddComponent(Component* _component);
 	void RemoveComponent(Component* _component);

@@ -4,13 +4,13 @@
 Actor::Actor()
 {
 	root = CreateComponent<RootComponent>();
-	Register();
+	Construct();
 }
 
 Actor::Actor(const Actor& _actor)
 {
 	root = CreateComponent<RootComponent>();
-	Register();
+	Construct();
 }
 
 Actor::~Actor()
@@ -21,17 +21,12 @@ Actor::~Actor()
 	}
 }
 
-void Actor::Register()
-{
-	M_ACTOR.AddActor(this);
-}
-
 void Actor::BeginPlay()
 {
-	/*for (Component* _component : components)
+	for (Component* _component : components)
 	{
 		_component->BeginPlay();
-	}*/
+	}
 }
 
 void Actor::Tick(const float _deltaTime)
@@ -53,6 +48,11 @@ void Actor::BeginDestoy()
 void Actor::Deconstruct()
 {
 	M_ACTOR.RemoveActor(this);
+}
+
+void Actor::Construct()
+{
+	M_ACTOR.AddActor(this);
 }
 
 void Actor::AddComponent(Component* _component)
