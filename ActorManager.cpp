@@ -18,9 +18,13 @@ void ActorManager::BeginPlay()
 
 void ActorManager::Tick(const float _deltaTime)
 {
-	for (Actor* _actor : allActors)
+	using Iterator = set<Actor*>::iterator;
+	for (Iterator _iterator = allActors.begin(); _iterator != allActors.end(); )
 	{
+		Actor* _actor = *_iterator;
+
 		_actor->Tick(_deltaTime);
+		++_iterator;
 	}
 }
 

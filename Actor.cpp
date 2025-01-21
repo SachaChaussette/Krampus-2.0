@@ -4,6 +4,7 @@
 Actor::Actor()
 {
 	root = CreateComponent<RootComponent>();
+	Register();
 }
 
 Actor::Actor(const Actor& _actor)
@@ -27,10 +28,10 @@ void Actor::Register()
 
 void Actor::BeginPlay()
 {
-	for (Component* _component : components)
+	/*for (Component* _component : components)
 	{
-		//_component->BeginPlay();
-	}
+		_component->BeginPlay();
+	}*/
 }
 
 void Actor::Tick(const float _deltaTime)

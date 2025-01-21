@@ -1,11 +1,17 @@
 #include "Spawner.h"
 #include "TimerManager.h"
 
-Spawner::Spawner()
+Spawner::Spawner(MeshActor _actor)
 {
 	spawnRate = 1.0f;
 	spawnRange = 200.0f;
-	actorRef = new SubclassOf<MeshActor>();
+	// TODO REMOVE
+	actor = _actor;
+	radius = 50.0f;
+	pointCount = 30;
+	path = "images.jpg";
+	//actorRef = new SubclassOf<MeshActor>(50.0f, 30, );
+	//Register();
 }
 
 Spawner::Spawner(SubclassOf<MeshActor>* _actorRef)
@@ -15,6 +21,15 @@ Spawner::Spawner(SubclassOf<MeshActor>* _actorRef)
 	actorRef = _actorRef;
 }
 
+Spawner::Spawner()
+{
+	spawnRate = 1.0f;
+	spawnRange = 200.0f;
+	radius = 50.0f;
+	pointCount = 30;
+	path = "images.jpg";
+
+}
 /*
 *
 *		TSoftObjectPtr	=> prefab déjà initialiser
@@ -28,7 +43,7 @@ Spawner::Spawner(SubclassOf<MeshActor>* _actorRef)
 void Spawner::BeginPlay()
 {
 	Super::BeginPlay();
-	new Timer<Seconds>(bind(&Spawner::Spawn, this), Time(seconds(spawnRate)),true,true);
+	new Timer([&]() { Spawn(); }, Time(seconds(spawnRate)), true, true);
 }
 
 void Spawner::Spawn_Internal()
@@ -39,11 +54,35 @@ void Spawner::Spawn_Internal()
 void Spawner::Spawn(SubclassOf<MeshActor>& _actorRef)
 {
 	LOG(Display, "aled");
-	Actor* _actor = new Actor(actorRef->GetSubclassObject());
+	MeshActor* _actor = new MeshActor(actorRef->GetSubclassObject());
 	const Vector2f& _spawnPosition =
 	{
 		GetRandomNumberInRange(0.0f, spawnRange),
 		GetRandomNumberInRange(0.0f, spawnRange),
 	};
 	_actor->SetPosition(_spawnPosition);
+}
+
+void Spawner::Spawn(MeshActor _actor)
+{
+	LOG(Display, "aled");
+	MeshActor* _actorPtr = new MeshActor(_actor);
+	const Vector2f& _spawnPosition =
+	{
+		GetRandomNumberInRange(0.0f, spawnRange),
+		GetRandomNumberInRange(0.0f, spawnRange),
+	};
+	_actorPtr->SetPosition(_spawnPosition);
+}
+
+void Spawner::Spawn()
+{
+	LOG(Display, "aled");
+	MeshActor* _actorPtr = new MeshActor(radius, pointCount, path);
+	const Vector2f& _spawnPosition =
+	{
+		GetRandomNumberInRange(0.0f, spawnRange),
+		GetRandomNumberInRange(0.0f, spawnRange),
+	};
+	_actorPtr->SetPosition(_spawnPosition);
 }

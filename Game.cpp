@@ -36,11 +36,10 @@ void Game::Start()
         }
     }, Time(seconds(1.0f)), true, false);*/
 
-    //MeshActor * _mesh2 = new MeshActor(20.0f, 30, "images.jpg");
+    //MeshActor* _mesh = new MeshActor(20.0f, 30, "images.jpg");
 
     //new Label("Aled", "Starjedi", TTF);
-    Spawner* _spawner = new Spawner();
-    _spawner->Spawn(SubclassOf<MeshActor>(50.0f, 30, "images.jpg"));
+    new Spawner();
 
 
     /*_mesh2->GetMesh()->GetShape()->Move({ 50.0f, 0.0f });

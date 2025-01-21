@@ -16,7 +16,7 @@ public:
 	template<class ...Args>
 	SubclassOf(Args... _args)
 	{
-		objectRef = new T(false, _args...);
+		objectRef = new T(_args...);
 	}
 	~SubclassOf()
 	{
