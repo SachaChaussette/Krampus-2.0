@@ -1,6 +1,5 @@
-﻿#include "CoreMinimal.h"
-#include "Game.h"
-#include "TimerManager.h"
+﻿#include "Game.h"
+#include "DuckHuntGame.h"
 
 void InitConfig()
 {
@@ -30,9 +29,7 @@ int main()
 *       TODO LIST:
 * 
 *  - ColliderManager
-*  - MusicManager
-*  - MovementComponent
-*  - AnimationManager
+*  - 
 *  - 
 * 
 * 

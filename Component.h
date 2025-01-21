@@ -23,6 +23,6 @@ public:
 public:
 	virtual void BeginPlay() override {};
 	virtual void Tick(const float _deltaTime) override;
-	virtual void BeginDestoy() override {};
+	virtual void BeginDestroy() override {};
 };
 

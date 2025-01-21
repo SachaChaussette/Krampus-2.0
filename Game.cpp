@@ -29,6 +29,16 @@ void Game::Start()
 {
     window.create(VideoMode({ 800, 600 }), "SFML works!");
 
+    Level::SpawnActor(MeshActor(Vector2f(800.0f, 600.0f), "background.jpg"));
+
+    new Timer([]()
+    {
+        Level::SpawnActor(MeshActor(Vector2f(50.0f, 50.0f), "duckSpriteSheet.png", IntRect(Vector2i(), Vector2i(110, 110))));
+    }, seconds(1.0f), true, true);
+    
+        
+
+
   /*  new Timer([]() 
     { 
         static int _index = 0;
@@ -41,13 +51,13 @@ void Game::Start()
     //MeshActor _mesh = MeshActor(20.0f, 30, "images.jpg");
 
     //Spawner* _spawner = new Spawner();
+    //Spawner* _spawner = Level::SpawnActor<Spawner>();
 
-    MeshActor _meshActorObject = MeshActor(20.0f, 30, "images.jpg");
-    SubclassOf<MeshActor> _meshActorRef = SubclassOf<MeshActor>(_meshActorObject);
+    /*
+    MeshActor _meshActorObject = MeshActor(20.0f, 30, "Charm");
+    SubclassOf<MeshActor> _meshActorRef = SubclassOf<MeshActor>(&_meshActorObject);
     MeshActor* _meshActor = Level::SpawnActor<MeshActor>(_meshActorRef);
-
-    //_spawner->Spawn(&SubclassOf<MeshActor>(20.0f, 30, "images.jpg"));
-
+    */
 
     /*_mesh2->GetMesh()->GetShape()->Move({ 50.0f, 0.0f });
 
@@ -79,11 +89,8 @@ void Game::Update()
             }
         }   
         const float _deltaTime = _timer.GetDeltaTime().asSeconds();
-        //LOG(Warning, "DeltaTime => " + to_string(_deltaTime));
         
         M_ACTOR.Tick(_deltaTime);
-
-        UpdateWindow();
     }
 }
 
@@ -99,6 +106,6 @@ void Game::UpdateWindow()
 
 void Game::Stop()
 {
-    M_ACTOR.BeginDestoy();
+    M_ACTOR.BeginDestroy();
 }
 

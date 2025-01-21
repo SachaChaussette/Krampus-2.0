@@ -1,8 +1,6 @@
 #pragma once
-
 #include "Object.h"
 
-// TODO IMPLEMENTER
 enum TextureExtensionType
 {
 	PNG,
@@ -14,53 +12,58 @@ enum ShapeObjectType
 {
 	SOT_CIRCLE,
 	SOT_RECTANGLE,
+
+	SOT_COUNT,
 };
 
-struct CircleShapeObjectData
+struct CircleShapeData
 {
 	float radius;
 	string path;
 	IntRect rect;
 	size_t pointCount;
-	CircleShapeObjectData(const float _radius, const string& _path, const IntRect& _rect, const size_t& _pointCount)
+
+	CircleShapeData(const float _radius, const string& _path, const IntRect& _rect,
+		const size_t& _pointCount)
 	{
 		radius = _radius;
 		path = _path;
 		rect = _rect;
 		pointCount = _pointCount;
 	}
-	CircleShapeObjectData& operator = (const CircleShapeObjectData& _other)
+
+	CircleShapeData& operator = (CircleShapeData _other)
 	{
 		radius = _other.radius;
-		path = string(_other.path);
+		path = _other.path;
 		rect = _other.rect;
 		pointCount = _other.pointCount;
+
 		return *this;
 	}
 };
 
-struct RectangleShapeObjectData
+struct RectangleShapeData
 {
 	Vector2f size;
 	string path;
 	IntRect rect;
-	RectangleShapeObjectData(const Vector2f _size, const string& _path, const IntRect& _rect)
+
+	RectangleShapeData(const Vector2f& _size, const string& _path, const IntRect& _rect)
 	{
 		size = _size;
 		path = _path;
 		rect = _rect;
 	}
-
-	
 };
 
 union ObjectData
 {
-	CircleShapeObjectData circleData;
-	RectangleShapeObjectData rectangleData;
+	CircleShapeData* circleData;
+	RectangleShapeData* rectangleData;
 
-	ObjectData() {};
-	~ObjectData() {};
+	ObjectData() {}
+	~ObjectData() {}
 };
 
 struct ShapeObjectData
@@ -70,38 +73,42 @@ struct ShapeObjectData
 
 	ShapeObjectData()
 	{
-		type = SOT_CIRCLE;
+		type = SOT_COUNT;
 	}
-	ShapeObjectData(const ShapeObjectType& _type, const CircleShapeObjectData& _circleData)
+	ShapeObjectData(const ShapeObjectType& _type, const CircleShapeData& _circleData)
 	{
 		type = _type;
-		data.circleData = _circleData;
+		data.circleData = new CircleShapeData(_circleData);
 	}
-	ShapeObjectData(const ShapeObjectType& _type, const RectangleShapeObjectData& _rectangleData)
+	ShapeObjectData(const ShapeObjectType& _type, const RectangleShapeData& _rectangleData)
 	{
 		type = _type;
-		data.rectangleData = _rectangleData;
+		data.rectangleData = new RectangleShapeData(_rectangleData);
 	}
+	~ShapeObjectData();
 
 	ShapeObjectData& operator = (const ShapeObjectData& _other)
 	{
 		type = _other.type;
+
 		if (type == SOT_CIRCLE)
 		{
-			data.circleData = _other.data.circleData;
+			data.circleData = new CircleShapeData(*_other.data.circleData);
 		}
+
 		else if (type == SOT_RECTANGLE)
 		{
-			data.rectangleData = _other.data.rectangleData;
+			data.rectangleData = new RectangleShapeData(*_other.data.rectangleData);
 		}
+
 		return *this;
 	}
 };
 
 class ShapeObject : public Object
 {
-	Shape* shape;
 	Texture texture;
+	Shape* shape;
 	ShapeObjectData objectData;
 
 public:
@@ -112,7 +119,7 @@ public:
 	FORCEINLINE virtual Shape* GetDrawable() const override
 	{
 		return shape;
-	} 
+	}
 	FORCEINLINE virtual void SetOrigin(const Vector2f& _origin) override
 	{
 		shape->setOrigin(_origin);
@@ -148,14 +155,15 @@ public:
 	{
 		shape->scale(_factor);
 	}
-public:
-	ShapeObject(const float _radius, const string& _path, const IntRect& _rect = IntRect(), 
-				const size_t& _pointCount = 30);	// Circle
-	ShapeObject(const Vector2f _size, const string& _path, const IntRect& _rect = IntRect());			// Rectangle
-	ShapeObject(const ShapeObject& _other);			
-	virtual ~ShapeObject() override;
-private:
-	void InitCircle(const CircleShapeObjectData& _data);
-	void InitRectangle(const RectangleShapeObjectData& _data);
-};
 
+public:
+	ShapeObject(const float _radius, const string& _path = "", const IntRect& _rect = IntRect(),
+		const size_t& _pointCount = 30); // Circle
+	ShapeObject(const Vector2f& _size, const string& _path = "", const IntRect& _rect = IntRect()); // Rectangle
+	ShapeObject(const ShapeObject& _other);
+	~ShapeObject();
+
+private:
+	void InitCircle(const CircleShapeData& _data);
+	void InitRectangle(const RectangleShapeData& _data);
+};

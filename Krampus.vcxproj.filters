@@ -15,20 +15,11 @@
     <Filter Include="Script\Objects">
       <UniqueIdentifier>{154799ed-1dc1-4925-9c62-d8d4f73adb46}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Script\Objects\ShapeObject">
-      <UniqueIdentifier>{fd85c417-5c8f-48c6-a6fa-6daa1589ad58}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Script\Objects\TextObject">
-      <UniqueIdentifier>{74998d10-4b64-4033-b33e-d3c806c6780a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Script\Core">
       <UniqueIdentifier>{bf85df38-00c4-439f-8b50-62e70460a591}</UniqueIdentifier>
     </Filter>
     <Filter Include="Script\Managers">
       <UniqueIdentifier>{8f376892-92fd-4e8c-a2d0-bb921662a87c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Script\Managers\TextureManager">
-      <UniqueIdentifier>{aeecfe95-8f56-4e61-970e-0fe5e2cde6b9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Script\Main">
       <UniqueIdentifier>{665f6e7c-538b-4110-82d8-32b51e358ed1}</UniqueIdentifier>
@@ -41,18 +32,6 @@
     </Filter>
     <Filter Include="Script\Core\Components">
       <UniqueIdentifier>{ad0643d4-c7e4-4146-aa4a-25846d316ba4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Script\Managers\ActorManager">
-      <UniqueIdentifier>{5947e621-10a1-4d82-ab8e-649bbdf35bdd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Script\Managers\TimerManager">
-      <UniqueIdentifier>{2cdd8b17-0a55-4146-85cb-1f8756fe080b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Script\Managers\MusicManager">
-      <UniqueIdentifier>{440c810c-0e87-43b7-8068-974ca64662d7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Script\Managers\SoundManager">
-      <UniqueIdentifier>{65de0f62-8f21-43c2-857b-a127cec99557}</UniqueIdentifier>
     </Filter>
     <Filter Include="Script\SoundSample">
       <UniqueIdentifier>{6ffefafe-4734-4e30-9a8d-08fd0bafd127}</UniqueIdentifier>
@@ -94,19 +73,55 @@
     <Filter Include="Script\Core\Components\Root">
       <UniqueIdentifier>{1ed5d02b-1635-4d66-ac5b-2c136730e4e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Script\Managers\Font">
+      <UniqueIdentifier>{556f5c82-259e-4717-8ca9-bdeb6f660f22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Managers\Music">
+      <UniqueIdentifier>{440c810c-0e87-43b7-8068-974ca64662d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Managers\Actor">
+      <UniqueIdentifier>{5947e621-10a1-4d82-ab8e-649bbdf35bdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Managers\Sound">
+      <UniqueIdentifier>{65de0f62-8f21-43c2-857b-a127cec99557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Managers\Texture">
+      <UniqueIdentifier>{aeecfe95-8f56-4e61-970e-0fe5e2cde6b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Managers\Timer">
+      <UniqueIdentifier>{2cdd8b17-0a55-4146-85cb-1f8756fe080b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\ShootingStars">
+      <UniqueIdentifier>{bc0757ca-7314-4c17-8678-12a915dea274}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Core\Actors\Label">
+      <UniqueIdentifier>{cd3cd924-d9c1-4b18-b24c-e51d15b6c90e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Core\Components\Animation">
+      <UniqueIdentifier>{d9ab9194-4323-4eee-85c6-6d96ba8038d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Objects\Shape">
+      <UniqueIdentifier>{fd85c417-5c8f-48c6-a6fa-6daa1589ad58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Objects\Text">
+      <UniqueIdentifier>{74998d10-4b64-4033-b33e-d3c806c6780a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DuckHunt">
+      <UniqueIdentifier>{c8bdefc1-5cc1-4eed-954e-f0d04872c192}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextureManager.h">
-      <Filter>Script\Managers\TextureManager</Filter>
+      <Filter>Script\Managers\Texture</Filter>
     </ClInclude>
     <ClInclude Include="TextObject.h">
-      <Filter>Script\Objects\TextObject</Filter>
+      <Filter>Script\Objects\Text</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>Script\Objects</Filter>
     </ClInclude>
     <ClInclude Include="ShapeObject.h">
-      <Filter>Script\Objects\ShapeObject</Filter>
+      <Filter>Script\Objects\Shape</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Script\Game</Filter>
@@ -121,19 +136,19 @@
       <Filter>Script\Core\Components</Filter>
     </ClInclude>
     <ClInclude Include="ActorManager.h">
-      <Filter>Script\Managers\ActorManager</Filter>
+      <Filter>Script\Managers\Actor</Filter>
     </ClInclude>
     <ClInclude Include="TimerManager.h">
-      <Filter>Script\Managers\TimerManager</Filter>
+      <Filter>Script\Managers\Timer</Filter>
     </ClInclude>
     <ClInclude Include="Logger.h">
       <Filter>Script\Resource Files\Logger</Filter>
     </ClInclude>
     <ClInclude Include="SoundManager.h">
-      <Filter>Script\Managers\SoundManager</Filter>
+      <Filter>Script\Managers\Sound</Filter>
     </ClInclude>
     <ClInclude Include="MusicManager.h">
-      <Filter>Script\Managers\MusicManager</Filter>
+      <Filter>Script\Managers\Music</Filter>
     </ClInclude>
     <ClInclude Include="SoundSample.h">
       <Filter>Script\SoundSample</Filter>
@@ -180,22 +195,34 @@
     <ClInclude Include="TransformData.h">
       <Filter>Script\Core\Components\Root</Filter>
     </ClInclude>
-    <ClInclude Include="ITransformableModifier.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FontManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Label.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Spawner.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SubclassOf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Spawner.h">
+      <Filter>Script\ShootingStars</Filter>
+    </ClInclude>
+    <ClInclude Include="FontManager.h">
+      <Filter>Script\Managers\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="ITransformableModifier.h">
+      <Filter>Script\Core\Components\Root</Filter>
+    </ClInclude>
+    <ClInclude Include="Label.h">
+      <Filter>Script\Core\Actors\Label</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DuckHuntGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Duck.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -204,16 +231,16 @@
       <Filter>Script\Main</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
-      <Filter>Script\Managers\TextureManager</Filter>
+      <Filter>Script\Managers\Texture</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>Script\Objects</Filter>
     </ClCompile>
     <ClCompile Include="TextObject.cpp">
-      <Filter>Script\Objects\TextObject</Filter>
+      <Filter>Script\Objects\Text</Filter>
     </ClCompile>
     <ClCompile Include="ShapeObject.cpp">
-      <Filter>Script\Objects\ShapeObject</Filter>
+      <Filter>Script\Objects\Shape</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Script\Game</Filter>
@@ -228,22 +255,22 @@
       <Filter>Script\Core\Components</Filter>
     </ClCompile>
     <ClCompile Include="ActorManager.cpp">
-      <Filter>Script\Managers\ActorManager</Filter>
+      <Filter>Script\Managers\Actor</Filter>
     </ClCompile>
     <ClCompile Include="Logger.cpp">
       <Filter>Script\Resource Files\Logger</Filter>
     </ClCompile>
     <ClCompile Include="MusicManager.cpp">
-      <Filter>Script\Managers\MusicManager</Filter>
+      <Filter>Script\Managers\Music</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
-      <Filter>Script\Managers\SoundManager</Filter>
+      <Filter>Script\Managers\Sound</Filter>
     </ClCompile>
     <ClCompile Include="SoundSample.cpp">
       <Filter>Script\SoundSample</Filter>
     </ClCompile>
     <ClCompile Include="TimerManager.cpp">
-      <Filter>Script\Managers\TimerManager</Filter>
+      <Filter>Script\Managers\Timer</Filter>
     </ClCompile>
     <ClCompile Include="CircleActor.cpp">
       <Filter>Script\Core\Actors\Circle</Filter>
@@ -275,22 +302,34 @@
     <ClCompile Include="RootComponent.cpp">
       <Filter>Script\Core\Components\Root</Filter>
     </ClCompile>
-    <ClCompile Include="ITransformableViewer.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FontManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Label.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Spawner.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SubclassOf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Spawner.cpp">
+      <Filter>Script\ShootingStars</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>Script\Managers\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="ITransformableViewer.h">
+      <Filter>Script\Core\Components\Root</Filter>
+    </ClCompile>
+    <ClCompile Include="Label.cpp">
+      <Filter>Script\Core\Actors\Label</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DuckHuntGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Duck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -60,6 +60,7 @@ public:
 	}
 	FORCEINLINE void RemoveTimer(T* _timer)
 	{
+		if (!allTimers.contains(_timer)) return;
 		allTimers.erase(_timer);
 		delete _timer;
 	}
@@ -128,7 +129,7 @@ public:
 		deltaTime = elapsedTime * timeScale;
 		framesCount++;
 		
-		if (lastFrameTime == 0 || time - lastFrameTime >= maxFrameRate)
+		if (lastFrameTime == 0 || time - lastFrameTime <= maxFrameRate)
 		{
 			lastFrameTime = time;
 			framesCount = 0;

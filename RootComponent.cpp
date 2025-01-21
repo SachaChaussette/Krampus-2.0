@@ -2,16 +2,10 @@
 
 RootComponent::RootComponent(Actor* _owner) : Component(_owner)
 {
+
 }
 
-void RootComponent::BeginPlay()
+RootComponent::RootComponent(Actor* _owner, const RootComponent& _other) : Component(_owner)
 {
-}
-
-void RootComponent::Tick(const float _deltaTime)
-{
-}
-
-void RootComponent::BeginDestoy()
-{
+	transform = _other.transform;
 }

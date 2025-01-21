@@ -49,6 +49,7 @@ public:
 	}
 
 #pragma endregion	
+
 public:
 	Label(const string& _text, const string& _path = "", const FontExtensionType& _fontType = OTF);
 	~Label();

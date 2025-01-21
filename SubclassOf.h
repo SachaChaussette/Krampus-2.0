@@ -1,26 +1,33 @@
 #pragma once
-
 #include "Macro.h"
+#include "Logger.h"
 
-template<class T>
+template <typename T>
 class SubclassOf
 {
-	T objectRef;
+	T* objectRef;
 
 public:
-	FORCEINLINE T GetSubclassObject() const
+	FORCEINLINE T GetObject() const
 	{
-		return objectRef;
+		return *objectRef;
 	}
+
 public:
-	SubclassOf()
-	{
-		objectRef = T();
-	}
 	SubclassOf(const T& _objectRef)
 	{
-		objectRef = _objectRef;
+		objectRef = new T(_objectRef);
+	}
+	SubclassOf(const T* _objectRef)
+	{
+		objectRef = new T(*_objectRef);
+	}
+	SubclassOf(const SubclassOf<T>& _other)
+	{
+		objectRef = new T(*_other.objectRef);
+	}
+	~SubclassOf()
+	{
+		delete objectRef;
 	}
 };
-
-

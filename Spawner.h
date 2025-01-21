@@ -1,40 +1,21 @@
 #pragma once
-
+#include "Actor.h"
 #include "MeshActor.h"
-#include "TimerManager.h"
+#include "Label.h"
 
 class Spawner : public Actor
 {
 	float spawnRate;
 	float spawnRange;
-	SubclassOf<MeshActor>* ref;
-public:
+	SubclassOf<Actor>* ref;
 
+public:
 	Spawner();
-	
+	Spawner(const Spawner& _other);
 	~Spawner();
-	
+
 private:
 	virtual void BeginPlay() override;
-
-	void Spawn_Internal();
-
-public:
-
-	template<typename T>
-	void Spawn(SubclassOf<T>& _ref)
-	{
-		LOG(Display, "aled");
-
-		T* _actor = new T(_ref.GetSubclassObject());
-		_actor->Construct();
-
-		const Vector2f& _spawnPosition =
-		{
-			GetRandomNumberInRange(0.0f, spawnRange),
-			GetRandomNumberInRange(0.0f, spawnRange),
-		};
-		_actor->SetPosition(_spawnPosition);
-	}
+	void Spawn();
 };
 
