@@ -10,6 +10,7 @@ Actor::Actor()
 Actor::Actor(const Actor& _actor)
 {
 	root = CreateComponent<RootComponent>(*_actor.root);
+	isToDelete = false;
 }
 
 Actor::~Actor()

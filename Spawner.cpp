@@ -37,7 +37,7 @@ void Spawner::Spawn()
 		GetRandomNumberInRange(0.0f, spawnRange),
 		GetRandomNumberInRange(0.0f, spawnRange),
 	};
-	ref->GetObject().SetPosition(_spawnPosition);
+	ref->GetSubclassObject().SetPosition(_spawnPosition);
 
 	Level::SpawnActor<Actor>(*ref);
 }

@@ -20,18 +20,21 @@ void ActorManager::Tick(const float _deltaTime)
 {
 	vector<Actor*> _garbage;
 
-	using Iterator = set<Actor*>::reverse_iterator;
-	for (Iterator _iterator = allActors.rbegin(); _iterator != allActors.rend(); )
+	using Iterator = set<Actor*>::iterator;
+	for (Iterator _iterator = allActors.begin(); _iterator != allActors.end(); )
 	{
 		Actor* _actor = *_iterator;
 
-		_actor->Tick(_deltaTime);
 		++_iterator;
-
 		if (_actor->IsToDelete())
 		{
 			_garbage.push_back(_actor);
+			--_iterator;
+			continue;
 		}
+		_actor->Tick(_deltaTime);
+
+		
 	}
 
 	for (Actor* _actor : _garbage) 

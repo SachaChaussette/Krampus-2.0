@@ -7,6 +7,7 @@
 #include "Level.h"
 #include "Spawner.h"
 #include "SubclassOf.h"
+#include "Duck.h"
 
 
 
@@ -30,10 +31,9 @@ void Game::Start()
     window.create(VideoMode({ 800, 600 }), "SFML works!");
 
     Level::SpawnActor(MeshActor(Vector2f(800.0f, 600.0f), "background.jpg"));
-
-    new Timer([]()
+    new Timer([&]()
     {
-        Level::SpawnActor(MeshActor(Vector2f(50.0f, 50.0f), "duckSpriteSheet.png", IntRect(Vector2i(), Vector2i(110, 110))));
+        Level::SpawnActor(Duck(Vector2f(50.0f, 50.0f), "duckSpriteSheet.png", IntRect(Vector2i(), Vector2i(110, 110))));
     }, seconds(1.0f), true, true);
     
         
