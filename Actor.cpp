@@ -58,7 +58,7 @@ void Actor::BeginDestroy()
 
 void Actor::Destroy()
 {
-	delete this;
+	SetToDelete();
 }
 
 

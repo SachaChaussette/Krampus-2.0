@@ -21,7 +21,7 @@ MeshActor::MeshActor(const MeshActor& _other) : Actor(_other)
 
 MeshActor::~MeshActor()
 {
-
+	Deconstruct();
 }
 
 

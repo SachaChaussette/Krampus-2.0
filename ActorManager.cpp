@@ -29,7 +29,6 @@ void ActorManager::Tick(const float _deltaTime)
 		if (_actor->IsToDelete())
 		{
 			_garbage.push_back(_actor);
-			--_iterator;
 			continue;
 		}
 		_actor->Tick(_deltaTime);
