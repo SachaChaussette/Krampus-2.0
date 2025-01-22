@@ -1,1 +1,14 @@
 Display : coin coin
+Display : coin coin
+Display : coin coin
+[23/1/2025-20:55:11] Warning : Delete Animation (File : Animation::~Animation | Line : 39)
+Display : coin coin
+[23/1/2025-20:55:13] Warning : Delete Animation (File : Animation::~Animation | Line : 39)
+Display : coin coin
+[23/1/2025-20:55:15] Warning : Delete Animation (File : Animation::~Animation | Line : 39)
+Display : coin coin
+[23/1/2025-20:55:17] Warning : Delete Animation (File : Animation::~Animation | Line : 39)
+Display : coin coin
+[23/1/2025-20:55:19] Warning : Delete Animation (File : Animation::~Animation | Line : 39)
+Display : coin coin
+[23/1/2025-20:55:21] Warning : Delete Animation (File : Animation::~Animation | Line : 39)

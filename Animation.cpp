@@ -37,7 +37,7 @@ Animation::Animation(const Animation& _other)
 Animation::~Animation()
 {
 	LOG(Warning, "Delete Animation");
-	//M_TIMER.RemoveTimer(timer);
+	M_TIMER.RemoveTimer(timer);
 }
 
 void Animation::Reset()

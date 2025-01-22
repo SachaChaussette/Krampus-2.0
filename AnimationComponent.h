@@ -21,7 +21,7 @@ public:
 	}
 public:
 	AnimationComponent(Actor* _owner);
-	AnimationComponent(Actor* _owner, const AnimationComponent* _other);
+	AnimationComponent(Actor* _owner, AnimationComponent* _other);
 	~AnimationComponent();
 
 public:

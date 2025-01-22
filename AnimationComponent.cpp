@@ -9,13 +9,20 @@ AnimationComponent::AnimationComponent(Actor* _owner) : Component(_owner)
 	allAnimations = map<string, Animation*>();
 }
 
-AnimationComponent::AnimationComponent(Actor* _owner, const AnimationComponent* _other) : Component(_owner)
+AnimationComponent::AnimationComponent(Actor* _owner, AnimationComponent* _other) : Component(_owner)
 {
 	for (pair<string, Animation*> _animation : _other->allAnimations)
 	{
 		allAnimations[_animation.first] = new Animation(*_animation.second);
 	}
-	current = allAnimations[_other->current->GetName()];
+	if(_other->current)
+	{
+		current = allAnimations[_other->current->GetName()];
+	}
+	else
+	{
+		current = nullptr;
+	}
 }
 
 AnimationComponent::~AnimationComponent()

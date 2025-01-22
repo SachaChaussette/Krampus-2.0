@@ -12,8 +12,8 @@ Duck::Duck(const Vector2f& _size, const string& _path, const IntRect& _rect) : M
 Duck::Duck(const Duck& _other) : MeshActor(_other)
 {
     lifeSpan = _other.lifeSpan;
-    movement = CreateComponent<MovementComponent>(*_other.movement);
-    animation = CreateComponent<AnimationComponent>();
+    movement = CreateComponent<MovementComponent>(_other.movement);
+    animation = CreateComponent<AnimationComponent>(_other.animation);
 }
 
 void Duck::BeginPlay()
@@ -34,6 +34,8 @@ void Duck::Construct()
     animation->AddAnimation(new Animation("Default", GetMesh()->GetShape(), _animationData));
     animation->SetCurrentAnimation("Default");
     animation->StartAnimation();
+
+    BeginPlay();
 }
 
 
