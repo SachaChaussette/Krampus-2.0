@@ -3,59 +3,48 @@
 #include "TextureManager.h"
 #include "Actor.h"
 
-AnimationComponent::AnimationComponent(Actor* _owner, const Vector2i& _spriteSize, const Vector2i& _grid, 
-										const float& _speed, const bool _isLoop) : Component(_owner)
+AnimationComponent::AnimationComponent(Actor* _owner) : Component(_owner)
 {
-	Reset();
-
-	canRun = false;
-	isLoop = _isLoop;
-	speed = _speed;
-	spriteSize = _spriteSize;
-	grid = _grid;
+	current = nullptr;
+	allAnimations = map<string, Animation*>();
 }
 
-void AnimationComponent::ChangeNextFrame()
+AnimationComponent::AnimationComponent(Actor* _owner, const AnimationComponent* _other) : Component(_owner)
 {
-	if (!canRun) return;
-	++currentFrame.x;
-
-	if (currentFrame.x >= grid.x)
+	for (pair<string, Animation*> _animation : _other->allAnimations)
 	{
-		if (isLoop)
-		{
-			currentFrame.x = 0;
-		}
-		else
-		{
-			canRun = false;
-			return;
-		}
+		allAnimations[_animation.first] = new Animation(*_animation.second);
 	}
-	/*M_TEXTURE.Load(shape, shape->GetDrawable().
-	owner->GetComponent<MeshComponent>().GetShape()->SetTextureRect(ComputeFrameRect());*/
+	current = allAnimations[_other->current->GetName()];
 }
 
-IntRect AnimationComponent::ComputeFrameRect()
+AnimationComponent::~AnimationComponent()
 {
-	const Vector2i& _tileSize = Vector2i(spriteSize.x / grid.x, spriteSize.y / grid.y);
-	const Vector2i& _position = Vector2i(currentFrame.x * _tileSize.x, currentFrame.y * _tileSize.y);
-	return IntRect(_position, _tileSize);
+	for (pair<string, Animation*> _animation : allAnimations)
+	{
+		delete _animation.second;
+	}
 }
 
-void AnimationComponent::Reset()
+void AnimationComponent::BeginPlay()
 {
-	currentFrame = Vector2i(0, 0);
+	current->Start();
 }
 
-void AnimationComponent::Tick(const float _deltaTime)
+void AnimationComponent::AddAnimation(Animation* _animation)
 {
-	Super::Tick(_deltaTime);
-	ChangeNextFrame();
+	const string& _animationName = _animation->GetName();
+	if (allAnimations.contains(_animationName)) return;
+
+	allAnimations[_animationName] = _animation;
 }
 
-void AnimationComponent::SetCurrentFrame(const Vector2i& _frame)
+void AnimationComponent::AddAnimations(const vector<Animation*>& _animations)
 {
-	currentFrame = _frame;
-	/*M_TEXTURE.Load()*/
+	const u_int& _animationCount = CAST(u_int, _animations.size());
+	for (u_int _index = 0; _index < _animationCount; _index++)
+	{
+		AddAnimation(_animations[_index]);
+	}
 }
+

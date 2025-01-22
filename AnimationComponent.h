@@ -1,44 +1,35 @@
 #pragma once
 
 #include "Component.h"
+#include "Animation.h"
 
-class AnimationComponent : Component
+class AnimationComponent : public Component
 {
-	bool canRun;
-	bool isLoop;
-	float speed;
-	Vector2i spriteSize;
-	Vector2i grid;
-	Vector2i currentFrame;
-	//ShapeObject* shape;
+	Animation* current;
+	map<string, Animation*> allAnimations;
 
 public:
-	FORCEINLINE void SetCurrentSize(const int _rowIndex)
+	FORCEINLINE void SetCurrentAnimation(const string& _name)
 	{
-		currentFrame.y = _rowIndex;
+		if (!allAnimations.contains(_name)) return;
+		current = allAnimations[_name];
 	}
-	FORCEINLINE void SetRunStatus(const bool _status)
+	FORCEINLINE void StartAnimation()
 	{
-		canRun = _status;
-	}
-	FORCEINLINE void ToggleRunStatus()
-	{
-		canRun = !canRun;
+		if (!current) return;
+		current->Start();
 	}
 public:
-	AnimationComponent(Actor* _owner, const Vector2i& _spriteSize, const Vector2i& _grid, const float& _speed,
-						const bool _isLoop = true);
-
-private:
-	void ChangeNextFrame();
-	IntRect ComputeFrameRect();
-	void Reset();
+	AnimationComponent(Actor* _owner);
+	AnimationComponent(Actor* _owner, const AnimationComponent* _other);
+	~AnimationComponent();
 
 public:
-	virtual void BeginPlay() override {};
-	virtual void Tick(const float _deltaTime) override;
+	virtual void BeginPlay() override;
+	virtual void Tick(const float _deltaTime) override {};
 	virtual void BeginDestroy() override {};
 
-	void SetCurrentFrame(const Vector2i& _frame);
+	void AddAnimation(Animation* _animation);
+	void AddAnimations(const vector<Animation*>& _animations);
 };
 

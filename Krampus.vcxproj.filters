@@ -76,14 +76,8 @@
     <Filter Include="Script\Managers\Font">
       <UniqueIdentifier>{556f5c82-259e-4717-8ca9-bdeb6f660f22}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Script\Managers\Music">
-      <UniqueIdentifier>{440c810c-0e87-43b7-8068-974ca64662d7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Script\Managers\Actor">
       <UniqueIdentifier>{5947e621-10a1-4d82-ab8e-649bbdf35bdd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Script\Managers\Sound">
-      <UniqueIdentifier>{65de0f62-8f21-43c2-857b-a127cec99557}</UniqueIdentifier>
     </Filter>
     <Filter Include="Script\Managers\Texture">
       <UniqueIdentifier>{aeecfe95-8f56-4e61-970e-0fe5e2cde6b9}</UniqueIdentifier>
@@ -108,6 +102,15 @@
     </Filter>
     <Filter Include="DuckHunt">
       <UniqueIdentifier>{c8bdefc1-5cc1-4eed-954e-f0d04872c192}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Managers\Audio">
+      <UniqueIdentifier>{8485746e-487a-4adf-a053-a192dc41ffb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Managers\Audio\Sound">
+      <UniqueIdentifier>{65de0f62-8f21-43c2-857b-a127cec99557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Managers\Audio\Music">
+      <UniqueIdentifier>{440c810c-0e87-43b7-8068-974ca64662d7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -144,11 +147,8 @@
     <ClInclude Include="Logger.h">
       <Filter>Script\Resource Files\Logger</Filter>
     </ClInclude>
-    <ClInclude Include="SoundManager.h">
-      <Filter>Script\Managers\Sound</Filter>
-    </ClInclude>
     <ClInclude Include="MusicManager.h">
-      <Filter>Script\Managers\Music</Filter>
+      <Filter>Script\Managers\Audio\Music</Filter>
     </ClInclude>
     <ClInclude Include="SoundSample.h">
       <Filter>Script\SoundSample</Filter>
@@ -225,6 +225,18 @@
     <ClInclude Include="MovementComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MusicSample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Sample.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Script\Managers\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -261,10 +273,7 @@
       <Filter>Script\Resource Files\Logger</Filter>
     </ClCompile>
     <ClCompile Include="MusicManager.cpp">
-      <Filter>Script\Managers\Music</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundManager.cpp">
-      <Filter>Script\Managers\Sound</Filter>
+      <Filter>Script\Managers\Audio\Music</Filter>
     </ClCompile>
     <ClCompile Include="SoundSample.cpp">
       <Filter>Script\SoundSample</Filter>
@@ -330,6 +339,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MovementComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicSample.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Script\Managers\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Sample.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

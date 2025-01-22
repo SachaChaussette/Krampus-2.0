@@ -1,13 +1,14 @@
 #include "Game.h"
 #include "ActorManager.h"
 #include "TimerManager.h"
-#include "SoundManager.h"
+#include "AudioManager.h"
 #include "MeshActor.h"
 #include "Label.h"
 #include "Level.h"
 #include "Spawner.h"
 #include "SubclassOf.h"
 #include "Duck.h"
+#include "SoundSample.h"
 
 
 
@@ -31,10 +32,13 @@ void Game::Start()
     window.create(VideoMode({ 800, 600 }), "SFML works!");
 
     Level::SpawnActor(MeshActor(Vector2f(800.0f, 600.0f), "background.jpg"));
+   
     new Timer([&]()
     {
-        Level::SpawnActor(Duck(Vector2f(50.0f, 50.0f), "duckSpriteSheet.png", IntRect(Vector2i(), Vector2i(110, 110))));
-    }, seconds(1.0f), true, true);
+        //Level::SpawnActor(*(new Duck(Vector2f(50.0f, 50.0f), "duck.png", IntRect(Vector2i(), Vector2i(110, 110)))));
+        Level::SpawnActor(SubclassOf<Duck>(Duck(Vector2f(50.0f, 50.0f), "duck.png", IntRect(Vector2i(), Vector2i(110, 110)))));
+        M_AUDIO.PlaySample<SoundSample>("yipeeee", WAV);
+    }, seconds(2.0f), true, true);
     
         
 
@@ -70,7 +74,6 @@ void Game::Start()
     }*/
 
 
-    SoundSample* _sample = M_SOUND.PlaySound("yipeeee", WAV);
 
     M_ACTOR.BeginPlay();
 }

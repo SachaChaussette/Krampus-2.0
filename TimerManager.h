@@ -61,6 +61,7 @@ public:
 	FORCEINLINE void RemoveTimer(T* _timer)
 	{
 		if (!allTimers.contains(_timer)) return;
+		_timer->Stop();
 		allTimers.erase(_timer);
 		delete _timer;
 	}
@@ -176,8 +177,8 @@ class Timer
 	bool isRunning;
 	bool isLoop;
 	bool isToDelete;
-	double currentTime;
-	double duration;
+	DurationType currentTime;
+	DurationType duration;
 	function<void()> callback;
 
 public:
@@ -200,6 +201,7 @@ public:
 	}
 
 public:
+	
 	Timer(const function<void()>& _callback, const Time& _time, const bool _startRunning = false,
 		const bool _isLoop = false)
 	{
@@ -212,7 +214,19 @@ public:
 		duration = _manager.GetTime(_time);
 		callback = _callback;
 
-		TimerManager<DurationType>::GetInstance().AddTimer(this);
+		_manager.AddTimer(this);
+		//TimerManager<DurationType>::GetInstance().AddTimer(this);
+	}
+	Timer(const Timer& _other)
+	{
+		isToDelete = _other.isToDelete;
+		isRunning = _other.isRunning;
+		isLoop = _other.isLoop;
+		currentTime = _other.currentTime;
+		duration = _other.duration;
+		callback = _other.callback;
+
+		//TimerManager<DurationType>::GetInstance().AddTimer(this);
 	}
 public:
 	void Update(const DurationType& _deltaTime)
@@ -250,7 +264,7 @@ public:
 	}
 	void Reset()
 	{
-		currentTime = 0.0;
+		currentTime = DurationType();
 	}
 	void Pause()
 	{

@@ -2,48 +2,39 @@
 
 #include "Sample.h"
 
-class SoundSample : public Sample
+class MusicSample : public Sample
 {
-	using SoundStatus = SoundSource::Status;
+	using MusicStatus = Music::Status;
 
-	Sound* sound;
-	SoundBuffer buffer;
+	Music* music;
 
 private:
 	FORCEINLINE virtual void UpdateVolume(const float _volume) override
 	{
-		sound->setVolume(_volume);
+		music->setVolume(_volume);
 	}
 	FORCEINLINE virtual int GetStatus() const override
 	{
-		return static_cast<int>(sound->getStatus());
+		return static_cast<int>(music->getStatus());
 	}
-	FORCEINLINE virtual bool IsSameStatus(const u_int& _statusIndex) const override
-	{
-		if (GetStatus() == _statusIndex) return true;
-		return false;
-	}
-
 public:
-
 	FORCEINLINE virtual bool IsAvailable() const override
 	{
-		return static_cast<SoundStatus>(GetStatus()) != SoundStatus::Playing;
+		return static_cast<MusicStatus>(GetStatus()) != MusicStatus::Playing;
 	}
 	FORCEINLINE virtual void SetLoop(const bool _isLoop) override
 	{
-		sound->setLooping(_isLoop);
+		music->setLooping(_isLoop);
 	}
 	FORCEINLINE virtual void SetPitch(const float _pitch) override
 	{
-		sound->setPitch(_pitch);
+		music->setPitch(_pitch);
 	}
 
 
-
 public:
-	SoundSample(const string& _path);
-	~SoundSample();
+	MusicSample(const string& _path);
+	
 public:
 	virtual void Play(const Time& _time = Time()) override;
 	virtual void Pause()override;

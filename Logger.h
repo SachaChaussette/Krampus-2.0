@@ -43,7 +43,7 @@ private:
         string _prefix = prefix;
         if (_useColor)
         {
-            _prefix = "[" + string(RESET) + color.GradientString(prefix) + string(RESET) + "]";
+            _prefix = "[" + string(RESET) + color.GradientString(prefix) + string(RESET) + "] ";
         }
         else
         {

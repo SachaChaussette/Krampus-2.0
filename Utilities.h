@@ -16,3 +16,10 @@ T GetRandomNumberInRange(const T& _min, const T& _max)
 
 	return _distr(_gen); // Génération du nombre
 }
+
+template <typename BaseType, typename Type, typename = enable_if_t<is_base_of_v<BaseType, Type>>>
+Type* Cast(BaseType* _baseType)
+{
+	if (!_baseType) return nullptr;
+	return dynamic_cast<Type*>(_baseType);
+};

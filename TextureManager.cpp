@@ -34,6 +34,22 @@ void TextureManager::SetTexture(Shape* _shape, const Texture* _texture)
 	_shape->setTexture(_texture);
 }
 
+void TextureManager::SetTextureRect(Shape* _shape, const Vector2i& _start, const Vector2i& _size)
+{
+	_shape->setTextureRect(IntRect(_start,_size));
+}
+
+void TextureManager::SetTextureRect(Shape* _shape, const Vector2f& _start, const Vector2f& _size)
+{
+	_shape->setTextureRect(IntRect(CAST(Vector2i, _start), CAST(Vector2i, _size)));
+}
+
+void TextureManager::SetTextureRect(Shape* _shape, const IntRect& _rect)
+{
+	_shape->setTextureRect(_rect);
+}
+
+
 void TextureManager::Load(ShapeObject* _shapeObject, const string& _path, 
 						const IntRect& _rect,const bool _isRepeated, const bool _smooth)
 {

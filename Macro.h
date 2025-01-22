@@ -52,6 +52,8 @@
 #define DISPLAY(_text, _endl) if(_endl) cout << endl; \
 										cout << _text;
 
+#define CAST(_type, _value) static_cast<_type>(_value)
+
 #define NO_DISCARD _NODISCARD
 
 

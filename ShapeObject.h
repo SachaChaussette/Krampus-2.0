@@ -157,6 +157,7 @@ public:
 	}
 
 public:
+	ShapeObject() = default;
 	ShapeObject(const float _radius, const string& _path = "", const IntRect& _rect = IntRect(),
 		const size_t& _pointCount = 30); // Circle
 	ShapeObject(const Vector2f& _size, const string& _path = "", const IntRect& _rect = IntRect()); // Rectangle
