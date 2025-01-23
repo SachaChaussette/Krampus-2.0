@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Game.h"
 #include "MeshActor.h"
 
@@ -19,6 +18,4 @@ protected:
 
 public:
 	virtual void Launch() override;
-
 };
-

@@ -3,8 +3,8 @@
 AudioManager::AudioManager()
 {
 	isMuted = false;
+	volume = 100.0f;
 	allSamples = multimap<string, Sample*>();
-	prefixPath = "Assets/Sounds/";
 }
 
 AudioManager::~AudioManager()
@@ -13,18 +13,6 @@ AudioManager::~AudioManager()
 	{
 		delete _samplePair.second;
 	}
-}
-
-
-
-void AudioManager::PauseSound(const string& _path)
-{
-	allSamples.extract(_path).mapped()->Stop();
-}
-
-void AudioManager::StopSound(const string& _path)
-{
-	allSamples.extract(_path).mapped()->Pause();
 }
 
 
@@ -37,5 +25,3 @@ void AudioManager::ToggleMute()
 		_samplePair.second->SetMuteStatus(isMuted);
 	}
 }
-
-

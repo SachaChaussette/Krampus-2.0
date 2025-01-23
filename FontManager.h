@@ -1,7 +1,5 @@
 #pragma once
-
 #include "Singleton.h"
-#include "ShapeObject.h"
 #include "TextObject.h"
 
 class FontManager : public Singleton<FontManager>
@@ -10,26 +8,27 @@ class FontManager : public Singleton<FontManager>
 	string defaultFontExtension;
 	Font* defaultFont;
 
-public:
+private:
 	FORCEINLINE Font GetDefaultFont()
 	{
 		if (!defaultFont)
 		{
 			LoadDefaultFont();
 		}
+
 		return *defaultFont;
 	}
+
 public:
 	FontManager();
 	~FontManager();
+
 private:
 	void LoadDefaultFont();
 	void LoadFont(Font& _font, const string& _path);
-	void SetFont(Text* _text, Font* _font);
-	string GetExtensionNameByType(const FontExtensionType& _fontType);
+	void SetFont(Text* _text, const Font* _font);
+	string GetExtensionNameByType(const FontExtensionType& _fontType) const;
+
 public:
-	void Load(TextObject* _textObject, const string& _path, const FontExtensionType& _type);
-
-
+	void Load(TextObject* _textObject, const string& _path, const FontExtensionType& _fontType);
 };
-

@@ -2,9 +2,6 @@
 #include "CoreMinimal.h"
 #include "Actor.h"
 
-// SpawnActor		-> Constructeur + Construct()
-// Instance de ref  -> Constructeur
-
 class Level
 {
 public:
@@ -12,14 +9,13 @@ public:
 	static T* SpawnActor()
 	{
 		const SubclassOf<T>& _ref = SubclassOf(T());
-		_ref->Construct();
 		return SpawnActor(_ref);
 	}
 
 	template <typename T = Actor>
 	static T* SpawnActor(const SubclassOf<T>& _ref)
 	{
-		T* _actor = new T(_ref.GetSubclassObject());
+		T* _actor = new T(_ref.GetObject());
 		_actor->Construct();
 		return _actor;
 	}
@@ -31,4 +27,8 @@ public:
 		_actor->Construct();
 		return _actor;
 	}
+
+
+	// TODO move to PlayerController
+	//static void SetViewTarget()
 };

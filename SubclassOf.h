@@ -1,6 +1,5 @@
 #pragma once
 #include "Macro.h"
-#include "Logger.h"
 
 template <typename T>
 class SubclassOf
@@ -8,7 +7,7 @@ class SubclassOf
 	T* objectRef;
 
 public:
-	FORCEINLINE T GetSubclassObject() const
+	FORCEINLINE T GetObject() const
 	{
 		return *objectRef;
 	}

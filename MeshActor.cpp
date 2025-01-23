@@ -1,15 +1,17 @@
 #include "MeshActor.h"
 #include "Game.h"
 
-MeshActor::MeshActor(const float _radius, const size_t& _pointCount, const string& _path, const IntRect& _rect)
+MeshActor::MeshActor(const float _radius, const size_t& _pointCount, const string& _path,
+					 const IntRect& _rect, const string& _name) : Actor(_name)
 {
 	mesh = CreateComponent<MeshComponent>(_radius, _pointCount, _path, _rect);
 	renderMeshToken = -1;
 }
 
-MeshActor::MeshActor(const Vector2f& _size, const string& _path, const IntRect& _rect)
+MeshActor::MeshActor(const Vector2f& _size, const string& _path, const TextureExtensionType& _textureType,
+					 const IntRect& _rect, const string& _name) : Actor(_name)
 {
-	mesh = CreateComponent<MeshComponent>(_size, _path, _rect);
+	mesh = CreateComponent<MeshComponent>(_size, _path, _textureType, _rect);
 	renderMeshToken = -1;
 }
 
@@ -18,12 +20,6 @@ MeshActor::MeshActor(const MeshActor& _other) : Actor(_other)
 	mesh = CreateComponent<MeshComponent>(_other.mesh);
 	renderMeshToken = _other.renderMeshToken;
 }
-
-MeshActor::~MeshActor()
-{
-	Deconstruct();
-}
-
 
 void MeshActor::Construct()
 {

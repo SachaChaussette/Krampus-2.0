@@ -4,9 +4,11 @@
 bool LinkedAnimation::TryToChange()
 {
 	if (!IsValid()) return false;
-	animation->Start();
+
+	animation->Start(); // TODO implement
 	return true;
 }
+
 
 Animation::Animation(const string& _name, ShapeObject* _shape, const AnimationData& _data)
 {
@@ -14,11 +16,14 @@ Animation::Animation(const string& _name, ShapeObject* _shape, const AnimationDa
 	name = _name;
 	data = _data;
 	shape = _shape;
-	timer = new Timer([&]() 
-	{
-		Update(); 
-	},
-	seconds(data.sprites[currentIndex].timeBetween), true, true);
+
+	timer = new Timer([&]()
+		{
+			Update(); },
+		seconds(data.sprites[currentIndex].timeBetween * data.count / data.duration),
+		false,
+		true
+	); //TODO change
 }
 
 Animation::Animation(const Animation& _other)
@@ -27,23 +32,19 @@ Animation::Animation(const Animation& _other)
 	name = _other.name;
 	data = _other.data;
 	shape = _other.shape;
+	
 	timer = new Timer([&]()
-	{
-		Update();
-	},
-	seconds(data.sprites[currentIndex].timeBetween), true, true);
+		{ 
+			Update(); },
+		seconds(data.sprites[currentIndex].timeBetween * data.count / data.duration),
+		false,
+		true
+	);
 }
 
 Animation::~Animation()
 {
-	LOG(Warning, "Delete Animation");
-	M_TIMER.RemoveTimer(timer);
-}
-
-void Animation::Reset()
-{
-	currentIndex = 0;
-	timer->Reset();
+	timer->Stop();
 }
 
 void Animation::Update()
@@ -60,12 +61,27 @@ void Animation::Update()
 
 		Reset();
 	}
+
 	if (data.isReversed)
 	{
 		shape->SetScale(Vector2f(-1.0f, 1.0f));
 	}
-	const SpriteData& _spriteData = data.sprites[++currentIndex - 1];
+
+	++currentIndex;
+
+	map<u_int, function<void()>> _notifies = data.notifies;
+	if (_notifies.contains(currentIndex))
+	{
+		_notifies[currentIndex]();
+	}
+	const SpriteData& _spriteData = data.sprites[currentIndex - 1];
 	M_TEXTURE.SetTextureRect(shape->GetDrawable(), _spriteData.start, _spriteData.size);
+}
+
+void Animation::Reset()
+{
+	currentIndex = 0;
+	timer->Reset();
 }
 
 
@@ -90,4 +106,3 @@ void Animation::Stop()
 	Pause();
 	Reset();
 }
-

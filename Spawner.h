@@ -1,13 +1,12 @@
 #pragma once
 #include "Actor.h"
 #include "MeshActor.h"
-#include "Label.h"
 
 class Spawner : public Actor
 {
 	float spawnRate;
 	float spawnRange;
-	SubclassOf<Actor>* ref;
+	SubclassOf<MeshActor>* ref;
 
 public:
 	Spawner();
@@ -18,4 +17,3 @@ private:
 	virtual void BeginPlay() override;
 	void Spawn();
 };
-

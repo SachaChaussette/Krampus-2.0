@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Component.h"
 #include "Animation.h"
 
@@ -7,6 +6,9 @@ class AnimationComponent : public Component
 {
 	Animation* current;
 	map<string, Animation*> allAnimations;
+
+	// AnimationPose -> only
+	// StateMachine -> auto switch
 
 public:
 	FORCEINLINE void SetCurrentAnimation(const string& _name)
@@ -19,17 +21,17 @@ public:
 		if (!current) return;
 		current->Start();
 	}
-public:
-	AnimationComponent(Actor* _owner);
-	AnimationComponent(Actor* _owner, AnimationComponent* _other);
-	~AnimationComponent();
+	FORCEINLINE void StopAnimation()
+	{
+		if (!current) return;
+		current->Stop();
+	}
 
 public:
-	virtual void BeginPlay() override;
-	virtual void Tick(const float _deltaTime) override {};
-	virtual void BeginDestroy() override {};
+	AnimationComponent(Actor* _owner);
+	AnimationComponent(Actor* _owner, const AnimationComponent* _other);
+	~AnimationComponent();
 
 	void AddAnimation(Animation* _animation);
 	void AddAnimations(const vector<Animation*>& _animations);
 };
-

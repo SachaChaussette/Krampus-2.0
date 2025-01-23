@@ -8,16 +8,12 @@ class MeshActor : public Actor
 	u_int renderMeshToken;
 
 public:
-	FORCEINLINE virtual bool IsValid(Core* _core) const override
-	{
-		return mesh;
-	}
 	FORCEINLINE MeshComponent* GetMesh() const
 	{
 		return mesh;
 	}
 
-#pragma region Modifier
+	#pragma region Modifier
 
 	FORCEINLINE virtual void SetPosition(const Vector2f& _position) override
 	{
@@ -39,6 +35,10 @@ public:
 		Super::SetOrigin(_origin);
 		mesh->GetShape()->SetOrigin(_origin);
 	}
+	FORCEINLINE void SetOriginAtMiddle()
+	{
+		SetOrigin(mesh->GetShape()->GetDrawable()->getGeometricCenter());
+	}
 	FORCEINLINE virtual void Move(const Vector2f& _offset) override
 	{
 		Super::Move(_offset);
@@ -55,14 +55,13 @@ public:
 		mesh->GetShape()->Scale(_factor);
 	}
 
-#pragma endregion
+	#pragma endregion
 
 public:
 	MeshActor() = default;
-	MeshActor(const float _radius, const size_t& _pointCount = 30, const string& _path = "", const IntRect& _rect = {});
-	MeshActor(const Vector2f& _size, const string& _path = "", const IntRect& _rect = {});
+	MeshActor(const float _radius, const size_t& _pointCount = 30, const string& _path = "", const IntRect& _rect = {}, const string& _name = "MeshActor");
+	MeshActor(const Vector2f& _size, const string& _path = "", const TextureExtensionType& _textureType = PNG, const IntRect& _rect = {}, const string& _name = "MeshActor");
 	MeshActor(const MeshActor& _other);
-	~MeshActor();
 
 	virtual void Construct() override;
 	virtual void Deconstruct() override;

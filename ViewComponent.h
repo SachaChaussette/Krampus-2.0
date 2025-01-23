@@ -11,25 +11,27 @@ class ViewComponent : public Component, public ITransformableModifier, public IT
 	View view;
 
 public:
-	FORCEINLINE void SetSize(const Vector2f& _center)
-	{
-		center = _center;
-	}
-	FORCEINLINE void SetCenter(const Vector2f& _size)
+	FORCEINLINE void SetSize(const Vector2f& _size)
 	{
 		size = _size;
+		view.setSize(_size);
 	}
-	FORCEINLINE virtual void SetRotation(const Angle& _rotation) override
+	FORCEINLINE void SetCenter(const Vector2f& _center)
 	{
-		Super::SetRotation(_rotation);
+		center = _center;
+		view.setCenter(_center);
 	}
-	FORCEINLINE virtual void Move(const Vector2f& _offset) override
+	FORCEINLINE virtual void SetRotation(const Angle& _rotation)
 	{
-		Super::Move(_offset);
+		view.setRotation(_rotation);
 	}
-	FORCEINLINE virtual void Rotate(const Angle& _angle) override 
+	FORCEINLINE virtual void Move(const Vector2f& _offset)
 	{
-		Super::Rotate(_angle);
+		view.move(_offset);
+	}
+	FORCEINLINE virtual void Rotate(const Angle& _angle) 
+	{
+		view.rotate(_angle);
 	}
 	FORCEINLINE Vector2f GetSize() const
 	{

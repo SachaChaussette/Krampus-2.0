@@ -1,16 +1,20 @@
 #pragma once
 #include "Core.h"
-#include "ITransformableModifier.h"
-#include "ITransformableViewer.h"
+#include "TransformableModifier.h"
+#include "TransformableViewer.h"
 #include "Component.h"
 #include "RootComponent.h"
 
-class Actor : public Core, public ITransformableModifier
-	, public ITransformableViewer
+class Actor : public Core, public ITransformableModifier, public ITransformableViewer
 {
+	bool isToDelete;
+	u_int id;
+	string name;
+	string displayName;
 	set<Component*> components;
 	RootComponent* root;
-	bool isToDelete;
+	Actor* parent;
+	set<Actor*> children;
 
 protected:
 	template <typename T, typename ...Args>
@@ -21,24 +25,71 @@ protected:
 
 		return _component;
 	}
+	FORCEINLINE void CreateSocket(const string& _name, const TransformData& _transform = TransformData(),
+								  const AttachmentType& _type = AT_SNAP_TO_TARGET)
+	{
+		Actor* _socket = new Actor(_name, _transform);
+		AddChild(_socket, _type);
+	}
+
+private:
+	FORCEINLINE void SetParent(Actor* _parent)
+	{
+		parent = _parent;
+	}
 
 public:
-	FORCEINLINE virtual bool IsValid(Core* _core) const override
-	{
-		// Overridable
-		return true;
-	}
 	FORCEINLINE void SetToDelete()
 	{
 		isToDelete = true;
+	}
+	FORCEINLINE void AddChild(Actor* _child, const AttachmentType& _type)
+	{
+		if (children.contains(_child)) return;
+
+		_child->SetParent(this);
+		children.insert(_child);
+	}
+	FORCEINLINE void RemoveChild(Actor* _child)
+	{
+		if (!_child || !children.contains(_child)) return;
+
+		_child->SetParent(nullptr);
+		children.erase(_child);
+	}
+	FORCEINLINE Actor* GetParent() const
+	{
+		return parent;
+	}
+	FORCEINLINE set<Actor*> GetChildren() const
+	{
+		return children;
+	}
+	FORCEINLINE Actor* GetChildrenAtIndex(const int _index) const
+	{
+		set<Actor*>::const_iterator _it = children.begin();
+		advance(_it, _index);
+		return *_it;
 	}
 	FORCEINLINE bool IsToDelete() const
 	{
 		return isToDelete;
 	}
-#pragma region Transformable
+	FORCEINLINE u_int GetID() const
+	{
+		return id;
+	}
+	FORCEINLINE string GetName() const
+	{
+		return name;
+	}
+	FORCEINLINE string GetDisplayName() const
+	{
+		return displayName;
+	}
+	#pragma region Transformable
 
-#pragma region Viewer
+	#pragma region Viewer
 
 	FORCEINLINE virtual Vector2f GetOrigin() const override
 	{
@@ -61,9 +112,9 @@ public:
 		return root->GetTransform();
 	}
 
-#pragma endregion
+	#pragma endregion
 
-#pragma region Modifier
+	#pragma region Modifier
 
 	FORCEINLINE virtual void SetPosition(const Vector2f& _position) override
 	{
@@ -94,12 +145,12 @@ public:
 		root->Scale(_factor);
 	}
 
-#pragma endregion
+	#pragma endregion
 
-#pragma endregion
+	#pragma endregion
 
 public:
-	Actor();
+	Actor(const string& _name, const TransformData& _transform = TransformData());
 	Actor(const Actor& _actor);
 	virtual ~Actor();
 
@@ -112,23 +163,23 @@ public:
 
 	void Destroy();
 
-#pragma region Components
+	#pragma region Components
 
 	void AddComponent(Component* _component);
 	void RemoveComponent(Component* _component);
 	template <typename T>
-	T GetComponent()
+	T* GetComponent()
 	{
 		for (Component* _component : components)
 		{
-			if (is_same_v<decltype(_component), T>)
+			if (is_same_v<decltype(_component), T*>)
 			{
-				return dynamic_cast<T>(_component);
+				return dynamic_cast<T*>(_component);
 			}
 		}
 
 		return nullptr;
 	}
 
-#pragma endregion
+	#pragma endregion
 };

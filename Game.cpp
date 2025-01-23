@@ -2,19 +2,23 @@
 #include "ActorManager.h"
 #include "TimerManager.h"
 #include "AudioManager.h"
+
 #include "MeshActor.h"
 #include "Label.h"
-#include "Level.h"
 #include "Spawner.h"
-#include "SubclassOf.h"
+#include "Level.h"
 #include "Duck.h"
-#include "SoundSample.h"
-
-
+#include "MusicSample.h"
+#include "CameraActor.h"
+#include "CircleActor.h"
 
 Game::Game()
 {
-    window = RenderWindow();
+	window = RenderWindow();
+
+    // TODO REMOVE
+    circle = nullptr;
+    angle = 30.0f;
 }
 
 Game::~Game()
@@ -22,88 +26,120 @@ Game::~Game()
 
 }
 
-void Game::Launch()
-{
-    Start();
-    Update();
-}
 void Game::Start()
 {
-    window.create(VideoMode({ 800, 600 }), "SFML works!");
-
-    Level::SpawnActor(MeshActor(Vector2f(800.0f, 600.0f), "background.jpg"));
-    new Timer([&]()
-    {
-        //Level::SpawnActor(*(new Duck(Vector2f(50.0f, 50.0f), "duck.png", IntRect(Vector2i(), Vector2i(110, 110)))));
-        Level::SpawnActor(*(new Duck(Vector2f(50.0f, 50.0f), "duck.png", IntRect(Vector2i(), Vector2i(110, 0)))));
-        M_AUDIO.PlaySample<SoundSample>("yipeeee", WAV);
-    }, seconds(2.0f), true, true);
+    window.create(VideoMode({800, 600}), "SFML works!");
     
-        
+    //Level::SpawnActor(MeshActor(Vector2f(800, 600), "background", JPG));
+    //music = M_AUDIO.PlaySample<MusicSample>("Crab_Rave", MP3, seconds(50.0f));
+    //camera = Level::SpawnActor(CameraActor({}, { 500.0f, 400.0f }));
 
-
-  /*  new Timer([]() 
-    { 
-        static int _index = 0;
-        if (TEST(++_index))
+    new Timer([&]()
         {
-            LOG(Display, "coucou");
-        }
-    }, Time(seconds(1.0f)), true, false);*/
-    //new Label("Aled", "Starjedi", TTF);
-    //MeshActor _mesh = MeshActor(20.0f, 30, "images.jpg");
+            Duck* _duck = Level::SpawnActor(/*SubclassOf(*/Duck(Vector2f(50.0f, 50.0f), "duck")/*)*/);
+            duckList.push_back(_duck);
 
-    //Spawner* _spawner = new Spawner();
-    //Spawner* _spawner = Level::SpawnActor<Spawner>();
+            _duck->SetOriginAtMiddle();
 
-    /*
-    MeshActor _meshActorObject = MeshActor(20.0f, 30, "Charm");
-    SubclassOf<MeshActor> _meshActorRef = SubclassOf<MeshActor>(&_meshActorObject);
-    MeshActor* _meshActor = Level::SpawnActor<MeshActor>(_meshActorRef);
-    */
+            /*for (Actor* _actor : _duck->GetChildren())
+            {
+                LOG(Display, _actor->GetName());
+            }*/
 
-    /*_mesh2->GetMesh()->GetShape()->Move({ 50.0f, 0.0f });
+            if (!camera->HasTarget())
+            {
+                camera->SetTarget(_duck);
+            }
+        },
+        seconds(1.0f),
+        false,
+        true
+    );
 
-    FloatRect _boundingBox1 = _mesh1->GetMesh()->GetShape()->GetDrawable()->getGlobalBounds();
-    FloatRect _boundingBox2 = _mesh2->GetMesh()->GetShape()->GetDrawable()->getGlobalBounds();
+    target = Level::SpawnActor(Actor("Actor"));
+    target->SetPosition(Vector2f(window.getSize().x / 2, window.getSize().y / 2));
 
-    if (const optional<FloatRect>& _intersection = _boundingBox1.findIntersection(_boundingBox2))
+    duck = Level::SpawnActor(Duck(Vector2f(50.0f, 50.0f), "duck"));
+    duck->SetOriginAtMiddle();
+    const float _gap = 10.0f / 100.0f;
+    duck->SetPosition({ target->GetPosition().x + window.getSize().x * _gap,
+                        target->GetPosition().y + window.getSize().y * _gap });
+
+
+    if (MovementComponent* _movement = duck->GetComponent< MovementComponent>())
     {
-        LOG(Display, to_string(_intersection.value().getCenter().x) + " / " + to_string(_intersection.value().getCenter().y));
-    }*/
+        _movement->SetTarget(target);
+    }
+    else if (MovementComponent* _movement = duck->GetMovement())
+    {
+        _movement->SetTarget(target);
+    }
 
 
 
-    M_ACTOR.BeginPlay();
-}
+    
+};
 
 void Game::Update()
 {
-    while (window.isOpen())
-    {
+	while (window.isOpen()) 
+	{
         TM_Seconds& _timer = M_TIMER;
         _timer.Update();
-        while (const std::optional _event = window.pollEvent())
+
+        while (const optional _event = window.pollEvent())
         {
             if (_event->is<Event::Closed>())
             {
                 window.close();
             }
-        }   
+        }
+
         const float _deltaTime = _timer.GetDeltaTime().asSeconds();
-        
         M_ACTOR.Tick(_deltaTime);
-    }
+
+        //const u_int& _ducksCount = CAST(u_int, duckList.size());
+        for (u_int _index = 0; _index < CAST(u_int, duckList.size()); )
+        {
+            Duck* _duck = duckList[_index];
+
+            if (_duck->IsToDelete())
+            {
+                duckList.erase(duckList.begin() + _index);
+                continue;
+            }
+
+            _index++;
+        }
+
+        
+	}
 }
 
 void Game::UpdateWindow()
 {
+    //TODO check to draw after clear
+    //window.setView(*camera->GetView());
+
     window.clear();
+
     for (const pair<u_int, OnRenderWindow>& _renderPair : onRenderWindow)
     {
         _renderPair.second(window);
     }
+
     window.display();
+}
+
+Duck* Game::RetrieveFirstDuck()
+{
+    if (duckList.empty()) return nullptr;
+
+    const vector<Duck*>::iterator& _it = duckList.begin();
+    Duck* _duck = *_it;
+    duckList.erase(_it);
+
+    return _duck;
 }
 
 void Game::Stop()
@@ -111,3 +147,10 @@ void Game::Stop()
     M_ACTOR.BeginDestroy();
 }
 
+
+void Game::Launch()
+{
+	Start();
+	Update();
+	Stop();
+}

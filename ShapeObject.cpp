@@ -2,15 +2,15 @@
 #include "TextureManager.h"
 
 ShapeObject::ShapeObject(const float _radius, const string& _path, const IntRect& _rect,
-	const size_t& _pointCount)
+						 const size_t& _pointCount)
 {
 	objectData = ShapeObjectData(SOT_CIRCLE, CircleShapeData(_radius, _path, _rect, _pointCount));
 	InitCircle(*objectData.data.circleData);
 }
 
-ShapeObject::ShapeObject(const Vector2f& _size, const string& _path, const IntRect& _rect)
+ShapeObject::ShapeObject(const Vector2f& _size, const string& _path, const TextureExtensionType& _textureType, const IntRect& _rect)
 {
-	objectData = ShapeObjectData(SOT_RECTANGLE, RectangleShapeData(_size, _path, _rect));
+	objectData = ShapeObjectData(SOT_RECTANGLE, RectangleShapeData(_size, _path, _textureType, _rect));
 	InitRectangle(*objectData.data.rectangleData);
 }
 
@@ -44,17 +44,5 @@ void ShapeObject::InitCircle(const CircleShapeData& _data)
 void ShapeObject::InitRectangle(const RectangleShapeData& _data)
 {
 	shape = new RectangleShape(_data.size);
-	M_TEXTURE.Load(this, _data.path, _data.rect);
-}
-
-ShapeObjectData::~ShapeObjectData()
-{
-	if (type == SOT_CIRCLE)
-	{
-		delete data.circleData;
-	}
-	else if (type == SOT_RECTANGLE)
-	{
-		delete data.rectangleData;
-	}
+	M_TEXTURE.Load(this, _data.path, _data.rect, _data.textureType);
 }

@@ -8,6 +8,7 @@ ActorManager::~ActorManager()
 	}
 }
 
+
 void ActorManager::BeginPlay()
 {
 	for (Actor* _actor : allActors)
@@ -20,24 +21,19 @@ void ActorManager::Tick(const float _deltaTime)
 {
 	vector<Actor*> _garbage;
 
-	using Iterator = set<Actor*>::iterator;
-	for (Iterator _iterator = allActors.begin(); _iterator != allActors.end(); )
+	for (Actor* _actor : allActors)
 	{
-		Actor* _actor = *_iterator;
+		_actor->Tick(_deltaTime);
 
-		++_iterator;
 		if (_actor->IsToDelete())
 		{
 			_garbage.push_back(_actor);
-			continue;
 		}
-		_actor->Tick(_deltaTime);
-
-		
 	}
 
-	for (Actor* _actor : _garbage) 
+	for (Actor* _actor : _garbage)
 	{
+		_actor->Deconstruct();
 		delete _actor;
 	}
 }
@@ -49,4 +45,3 @@ void ActorManager::BeginDestroy()
 		_actor->BeginDestroy();
 	}
 }
-
