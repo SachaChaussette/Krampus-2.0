@@ -147,7 +147,6 @@ xcopy /y /d "..\SFML-3.0.0\bin\sfml-window-d-3.dll" "$(OutDir)"
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Component.cpp" />
-    <ClCompile Include="Core.cpp" />
     <ClCompile Include="CustomException.cpp" />
     <ClCompile Include="Duck.cpp" />
     <ClCompile Include="DuckHuntGame.cpp" />
@@ -171,12 +170,12 @@ xcopy /y /d "..\SFML-3.0.0\bin\sfml-window-d-3.dll" "$(OutDir)"
     <ClCompile Include="SoundSample.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="Spawner.cpp" />
-    <ClCompile Include="SubclassOf.cpp" />
     <ClCompile Include="TextObject.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TimerManager.cpp" />
     <ClCompile Include="TriangleActor.cpp" />
     <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="ViewComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
@@ -220,6 +219,7 @@ xcopy /y /d "..\SFML-3.0.0\bin\sfml-window-d-3.dll" "$(OutDir)"
     <ClInclude Include="TransformData.h" />
     <ClInclude Include="TriangleActor.h" />
     <ClInclude Include="Utilities.h" />
+    <ClInclude Include="ViewComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

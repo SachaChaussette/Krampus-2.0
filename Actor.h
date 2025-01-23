@@ -5,7 +5,8 @@
 #include "Component.h"
 #include "RootComponent.h"
 
-class Actor : public Core, public ITransformableModifier, public ITransformableViewer
+class Actor : public Core, public ITransformableModifier
+	, public ITransformableViewer
 {
 	set<Component*> components;
 	RootComponent* root;

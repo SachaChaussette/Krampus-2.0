@@ -33,9 +33,6 @@
     <Filter Include="Script\Core\Components">
       <UniqueIdentifier>{ad0643d4-c7e4-4146-aa4a-25846d316ba4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Script\SoundSample">
-      <UniqueIdentifier>{6ffefafe-4734-4e30-9a8d-08fd0bafd127}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Script\Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
@@ -112,6 +109,27 @@
     <Filter Include="Script\Managers\Audio\Music">
       <UniqueIdentifier>{440c810c-0e87-43b7-8068-974ca64662d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Script\DuckHunt">
+      <UniqueIdentifier>{b5871da4-77c3-42b6-a36f-71f3b942f5bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Level">
+      <UniqueIdentifier>{6d206535-ead9-4536-94a2-ea852bcc7e0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Core\Components\Movement">
+      <UniqueIdentifier>{8d7df503-eccd-4703-b032-560b427dbf64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Sample">
+      <UniqueIdentifier>{6ffefafe-4734-4e30-9a8d-08fd0bafd127}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Sample\Music">
+      <UniqueIdentifier>{78df3158-1688-419c-b30f-38d92469c469}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Sample\Sound">
+      <UniqueIdentifier>{1316c2b2-b78b-47cc-93e7-ed31b58c6084}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\Core\Components\View">
+      <UniqueIdentifier>{d989a0a1-845f-41cb-830a-8a0fcd0d124e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TextureManager.h">
@@ -149,9 +167,6 @@
     </ClInclude>
     <ClInclude Include="MusicManager.h">
       <Filter>Script\Managers\Audio\Music</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundSample.h">
-      <Filter>Script\SoundSample</Filter>
     </ClInclude>
     <ClInclude Include="Macro.h">
       <Filter>Script\Resource Files</Filter>
@@ -195,12 +210,6 @@
     <ClInclude Include="TransformData.h">
       <Filter>Script\Core\Components\Root</Filter>
     </ClInclude>
-    <ClInclude Include="SubclassOf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Spawner.h">
       <Filter>Script\ShootingStars</Filter>
     </ClInclude>
@@ -213,29 +222,41 @@
     <ClInclude Include="Label.h">
       <Filter>Script\Core\Actors\Label</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DuckHuntGame.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Duck.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MovementComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MusicSample.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Sample.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="AudioManager.h">
       <Filter>Script\Managers\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="Duck.h">
+      <Filter>Script\DuckHunt</Filter>
+    </ClInclude>
+    <ClInclude Include="DuckHuntGame.h">
+      <Filter>Script\DuckHunt</Filter>
+    </ClInclude>
+    <ClInclude Include="SubclassOf.h">
+      <Filter>Script\Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Script\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationComponent.h">
+      <Filter>Script\Core\Components\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementComponent.h">
+      <Filter>Script\Core\Components\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSample.h">
+      <Filter>Script\Sample\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Sample.h">
+      <Filter>Script\Sample</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicSample.h">
+      <Filter>Script\Sample\Music</Filter>
+    </ClInclude>
     <ClInclude Include="Animation.h">
-      <Filter>Header Files</Filter>
+      <Filter>Script\Core\Components\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewComponent.h">
+      <Filter>Script\Core\Components\View</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -260,9 +281,6 @@
     <ClCompile Include="Actor.cpp">
       <Filter>Script\Core\Actors</Filter>
     </ClCompile>
-    <ClCompile Include="Core.cpp">
-      <Filter>Script\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Script\Core\Components</Filter>
     </ClCompile>
@@ -274,9 +292,6 @@
     </ClCompile>
     <ClCompile Include="MusicManager.cpp">
       <Filter>Script\Managers\Audio\Music</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundSample.cpp">
-      <Filter>Script\SoundSample</Filter>
     </ClCompile>
     <ClCompile Include="TimerManager.cpp">
       <Filter>Script\Managers\Timer</Filter>
@@ -311,12 +326,6 @@
     <ClCompile Include="RootComponent.cpp">
       <Filter>Script\Core\Components\Root</Filter>
     </ClCompile>
-    <ClCompile Include="SubclassOf.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Spawner.cpp">
       <Filter>Script\ShootingStars</Filter>
     </ClCompile>
@@ -329,29 +338,38 @@
     <ClCompile Include="Label.cpp">
       <Filter>Script\Core\Actors\Label</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DuckHuntGame.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Duck.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MovementComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MusicSample.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AudioManager.cpp">
       <Filter>Script\Managers\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Sample.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="DuckHuntGame.cpp">
+      <Filter>Script\DuckHunt</Filter>
+    </ClCompile>
+    <ClCompile Include="Duck.cpp">
+      <Filter>Script\DuckHunt</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Script\Level</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Script\Core\Components\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationComponent.cpp">
+      <Filter>Script\Core\Components\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementComponent.cpp">
+      <Filter>Script\Core\Components\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundSample.cpp">
+      <Filter>Script\Sample\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Sample.cpp">
+      <Filter>Script\Sample</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicSample.cpp">
+      <Filter>Script\Sample\Music</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewComponent.cpp">
+      <Filter>Script\Core\Components\View</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
