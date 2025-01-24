@@ -14,15 +14,15 @@ public:
 	}
 	FORCEINLINE void AddActor(Actor* _actor)
 	{
-		actorsID.insert({ _actor->GetName(), _actor });
 		allActors.insert(_actor);
+		actorsID.insert({ _actor->GetName(), _actor });
 		_actor->BeginPlay();
 	}
 	FORCEINLINE void RemoveActor(Actor* _actor)
 	{
 		allActors.erase(_actor);
 
-		/*const string& _actorName = _actor->GetName();
+		const string& _actorName = _actor->GetName();
 		using Iterator = multimap<string, Actor*>::iterator;
 		const pair<Iterator, Iterator>& _results = actorsID.equal_range(_actorName);
 
@@ -32,22 +32,19 @@ public:
 			{
 				actorsID.erase(_it);
 			}
-		}*/
+		}
 
 		_actor->BeginDestroy();
 	}
 	// duck_1
 	FORCEINLINE string GetAvailableName(const string& _name, const int _index = 1)
 	{
-		if (actorsID.empty()) return _name;
-
 		// Je rajoute "_index" au nom actuel
 		const string& _fullName = _name + "_" + to_string(_index);
 
 		// Je parcours tous les Actors qui possèdent le même nom 
 		using Iterator = multimap<string, Actor*>::iterator;
 		const pair<Iterator, Iterator>& _results = actorsID.equal_range(_name);
-
 
 		for (Iterator _it = _results.first; _it != _results.second; ++_it)
 		{

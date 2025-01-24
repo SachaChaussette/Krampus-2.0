@@ -1,40 +1,23 @@
 #pragma once
-
 #include "Game.h"
 #include "MeshActor.h"
-
-class MusicSample;
-class CircleActor;
-class CameraActor;
-class Duck;
-class Actor;
+#include "MusicSample.h"
+#include "CameraActor.h"
+#include "Duck.h"
+#include "Ball.h"
 
 class DuckHuntGame : public Game
 {
-	//TODO remove
+	MeshActor* background;
+	Duck* duck;
 	MusicSample* music;
 	CameraActor* camera;
-	Duck* duck;
-	Actor* target;
 	vector<Duck*> duckList;
 	Vector2f center;
-	CircleActor* circle;
-	float angle;
 
-public:
-	//TODO REMOVE
-	FORCEINLINE Duck* GetDuck() const
-	{
-		return duck;
-	}
-	FORCEINLINE void SetView(const View& _view)
-	{
-		window.setView(_view);
-	}
-	FORCEINLINE void RemoveView()
-	{
-		window.setView(window.getDefaultView());
-	}
+	//Ball
+	Ball* ball;
+	MeshActor* floor;
 public:
 	DuckHuntGame();
 	~DuckHuntGame();
@@ -44,6 +27,5 @@ public:
 	virtual bool Update() override;
 	virtual void Stop() override;
 
-	//TODO remove
 	Duck* RetrieveFirstDuck();
 };

@@ -1,6 +1,5 @@
 #include "Animation.h"
 #include "TextureManager.h"
-#include "ShapeObject.h"
 
 bool LinkedAnimation::TryToChange()
 {

@@ -1,24 +1,17 @@
 #include "Game.h"
 #include "ActorManager.h"
-#include "TimerManager.h"
-#include "AudioManager.h"
 #include "CameraManager.h"
-
+#include "TimerManager.h"
 
 Game::Game()
 {
 	window = RenderWindow();
-
 }
 
-Game::~Game()
-{
-
-}
 
 void Game::Start()
 {
-    window.create(VideoMode({800, 600}), "SFML works!");   
+    window.create(VideoMode({ 1200, 800 }), "SFML works!");
 };
 
 bool Game::Update()
@@ -31,26 +24,21 @@ bool Game::Update()
         if (_event->is<Event::Closed>())
         {
             window.close();
-            return true;
         }
     }
 
     const float _deltaTime = _timer.GetDeltaTime().asSeconds();
-    M_ACTOR.Tick(_deltaTime);        
-	
+    M_ACTOR.Tick(_deltaTime);
+
     return IsOver();
 }
 
 void Game::UpdateWindow()
 {
     window.clear();
-
     M_CAMERA.RenderAllCameras(window);
-
     window.display();
 }
-
-
 
 void Game::Stop()
 {

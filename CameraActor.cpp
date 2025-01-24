@@ -27,31 +27,30 @@ CameraActor::CameraActor(const CameraActor& _other) : Actor(_other)
 	target = nullptr; //TODO check
 }
 
-void CameraActor::Construct()
-{
-	Super::Construct();
-	dynamic_cast<DuckHuntGame*>(M_GAME.GetCurrent())->SetView(*camera->GetView());
-}
-
-void CameraActor::Deconstruct()
-{
-	Super::Deconstruct();
-	dynamic_cast<DuckHuntGame*>(M_GAME.GetCurrent())->RemoveView();
-}
-
+//TODO check to remove
+//void CameraActor::Construct()
+//{
+//	Super::Construct();
+//	M_GAME.GetCurrent()->SetView(*camera->GetView());
+//}
+//
+//void CameraActor::Deconstruct()
+//{
+//	Super::Deconstruct();
+//	M_GAME.GetCurrent()->RemoveView();
+//}
 
 void CameraActor::Tick(const float _deltaTime)
 {
 	Super::Tick(_deltaTime);
 
-	if (!target) 
-	{
-		LOG(Warning, "No Target Found !!!");
-		return;
-	}
+	if (!target) return;
 	if (target->IsToDelete())
 	{
-		SetTarget(dynamic_cast<DuckHuntGame*>(M_GAME.GetCurrent())->RetrieveFirstDuck());
+		if (Game* _game = M_GAME.GetCurrent())
+		{
+			SetTarget(Cast<DuckHuntGame>(_game)->RetrieveFirstDuck());
+		}
 		if (!target) return;
 	}
 

@@ -3,19 +3,13 @@
 #include "ShapeObject.h"
 #include "TimerManager.h"
 
-namespace ReadDirection
+enum ReadDirection
 {
-    enum DirectionType
-    {
-        ROW,
-        ROW_REVERSE,
-        COLUMN,
-        COLUMN_REVERSE,
-    };
-}
-
-
-
+    RD_ROW ,
+    RD_ROW_REVERSE,
+    RD_COLUMN,
+    RD_COLUMN_REVERSE,
+};
 
 struct SpriteData
 {
@@ -37,7 +31,6 @@ struct LinkedAnimation
     bool TryToChange();
 };
 
-using namespace ReadDirection;
 struct AnimationData
 {
     bool canLoop;
@@ -47,13 +40,13 @@ struct AnimationData
     float duration;
     vector<SpriteData> sprites;
     map<u_int, function<void()>> notifies;
-    DirectionType direction;
+    ReadDirection direction;
     vector<LinkedAnimation> linkedAnimations;
 
     AnimationData() = default;
     AnimationData(const int _count, const float _duration, const SpriteData& _spriteData,
                   const bool _hasExitTime = true, const bool _canLoop = true,
-                  const DirectionType& _direction = ROW, const bool _isReversed = false,
+                  const ReadDirection& _direction = RD_ROW, const bool _isReversed = false,
                   const vector<LinkedAnimation>& _linkedAnimations = {})
     {
         canLoop = _canLoop;
@@ -110,7 +103,7 @@ struct AnimationData
     }
     AnimationData(const float _duration, const vector<SpriteData>& _spritesData,
                   const bool _hasExitTime = true, const bool _canLoop = true,
-                  const DirectionType& _direction = ROW, const bool _isReversed = false,
+                  const ReadDirection& _direction = RD_ROW, const bool _isReversed = false,
                   const vector<LinkedAnimation>& _linkedAnimations = {})
     {
         canLoop = _canLoop;
@@ -123,8 +116,6 @@ struct AnimationData
         linkedAnimations = _linkedAnimations;
     }
 };
-
-using namespace MyTexture;
 
 class Animation
 {

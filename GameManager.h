@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Singleton.h"
 #include "Game.h"
 
@@ -12,8 +11,9 @@ public:
 	{
 		return currentGame;
 	}
+
 public:
 	~GameManager();
-public:
-	void Launch(Game* _currentGame);
+
+	virtual void Launch(Game* _currentGame);
 };

@@ -1,3 +1,4 @@
+#include "Game.h"
 #include "GameManager.h"
 #include "DuckHuntGame.h"
 
@@ -10,11 +11,7 @@ void InitConfig()
 int main()
 {
     InitConfig();
-
-   M_GAME.Launch(new DuckHuntGame());
-
-    /*DuckHuntGame _game;
-    _game.Launch();*/
+    M_GAME.Launch(new DuckHuntGame());
 
 	return EXIT_SUCCESS;
 }

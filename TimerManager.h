@@ -128,7 +128,6 @@ public:
 		deltaTime = elapsedTime * timeScale;
 		framesCount++;
 
-		// && framesCount < maxFrameRate
 		if (lastFrameTime == 0 || time - lastFrameTime <= maxFrameRate)
 		{
 			lastFrameTime = time;

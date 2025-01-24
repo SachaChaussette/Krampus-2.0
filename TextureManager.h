@@ -2,8 +2,6 @@
 #include "Singleton.h"
 #include "ShapeObject.h"
 
-using namespace MyTexture;
-
 class TextureManager : public Singleton<TextureManager>
 {
 	string defaultTexturePath;
@@ -29,13 +27,13 @@ private:
 	void LoadDefaultTexture();
 	void LoadTexture(Texture& _texture, const string& _path, const IntRect& _rect = IntRect());
 	void SetTexture(Shape* _shape, const Texture* _texture);
-	string GetExtensionNameByType(const ExtensionType& _textureType);
+	string GetExtensionNameByType(const TextureExtensionType& _textureType);
 
 public:
-	void Load(ShapeObject* _shapeObject, const string& _path, const ExtensionType& _textureType = PNG,
+	void Load(ShapeObject* _shapeObject, const string& _path, const TextureExtensionType& _textureType = PNG,
 			  const IntRect& _rect = IntRect(), const bool _isRepeated = false, const bool _smooth = true);
 	void Load(ShapeObject* _shapeObject, const string& _path, const IntRect& _rect = IntRect(),
-			  const ExtensionType& _textureType = PNG, const bool _isRepeated = false, const bool _isSmooth = true);
+			  const TextureExtensionType& _textureType = PNG, const bool _isRepeated = false, const bool _isSmooth = true);
 	void SetTextureRect(Shape* _shape, const Vector2i& _start, const Vector2i& _size);
 	void SetTextureRect(Shape* _shape, const IntRect& _rect);
 };

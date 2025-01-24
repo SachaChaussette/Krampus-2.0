@@ -1,7 +1,7 @@
 #pragma once
 #include "Component.h"
-#include "TransformableModifier.h"
-#include "TransformableViewer.h"
+#include "ITransformableModifier.h"
+#include "ITransformableViewer.h"
 
 enum AttachmentType
 {
@@ -15,8 +15,7 @@ class RootComponent : public Component, public ITransformableModifier, public IT
 	TransformData transform;
 
 public:
-
-#pragma region Getters
+	#pragma region Getters
 
 	FORCEINLINE virtual Vector2f GetOrigin() const override
 	{
@@ -39,9 +38,9 @@ public:
 		return transform;
 	}
 
-#pragma endregion
+	#pragma endregion
 
-#pragma region Setters
+	#pragma region Setters
 
 	FORCEINLINE virtual void SetOrigin(const Vector2f& _origin) override
 	{
@@ -76,7 +75,7 @@ public:
 		transform.scale += _factor;
 	}
 
-#pragma endregion
+	#pragma endregion
 
 public:
 	RootComponent(Actor* _owner, const TransformData& _transform = {});

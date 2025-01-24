@@ -3,7 +3,6 @@
 #include "ShapeObject.h"
 
 class Actor;
-using namespace MyTexture;
 
 class MeshComponent : public Component
 {
@@ -21,7 +20,7 @@ public:
 
 public:
 	MeshComponent(Actor* _owner, const float _radius, const size_t& _pointCount = 30, const string& _path = "", const IntRect& _rect = {});
-	MeshComponent(Actor* _owner, const Vector2f& _size, const string& _path = "", const ExtensionType& _textureType = PNG, const IntRect& _rect = {});
+	MeshComponent(Actor* _owner, const Vector2f& _size, const string& _path = "", const TextureExtensionType& _textureType = PNG, const IntRect& _rect = {});
 	MeshComponent(Actor* _owner, const MeshComponent* _other);
 	~MeshComponent();
 };

@@ -8,7 +8,7 @@ MeshActor::MeshActor(const float _radius, const size_t& _pointCount, const strin
 	renderMeshToken = -1;
 }
 
-MeshActor::MeshActor(const Vector2f& _size, const string& _path, const MyTexture::ExtensionType& _textureType,
+MeshActor::MeshActor(const Vector2f& _size, const string& _path, const TextureExtensionType& _textureType,
 					 const IntRect& _rect, const string& _name) : Actor(_name)
 {
 	mesh = CreateComponent<MeshComponent>(_size, _path, _textureType, _rect);

@@ -2,20 +2,21 @@
 #include "ActorManager.h"
 #include "TimerManager.h"
 
-Actor::Actor(const string& _name, const float _lifeSpan, const TransformData& _transform)
+Actor::Actor(const string& _name, const TransformData& _transform)
 {
-	lifeSpan = _lifeSpan;
 	name = _name;
 	displayName = "Unknown";
 	isToDelete = false;
+	lifeSpan = 0.0f;
 	root = CreateComponent<RootComponent>(_transform);
 }
 
 Actor::Actor(const Actor& _actor)
 {
-	lifeSpan = _actor.lifeSpan;
 	name = _actor.name;
-	isToDelete = false;
+	displayName = _actor.displayName;
+	isToDelete = _actor.isToDelete;
+	lifeSpan = _actor.lifeSpan;
 	root = CreateComponent<RootComponent>(_actor.root);
 }
 
@@ -42,7 +43,10 @@ void Actor::Deconstruct()
 
 void Actor::BeginPlay()
 {
-	new Timer([&]() { Destroy(); }, seconds(lifeSpan), true);
+	if (lifeSpan > 0.0f)
+	{
+		new Timer(bind(&Actor::Destroy, this), seconds(lifeSpan), true);
+	}
 
 	for (Component* _component : components)
 	{

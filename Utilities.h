@@ -5,6 +5,13 @@ u_int GetUniqueID();
 int GetRandomNumberInRange(const int _min, const int _max);
 float DegToRad(const float _degrees);
 float RadToDeg(const float _radians);
+float Lerp(const float _start, const float _end, const float _time);
+float Lerp_Constant(const float _start, const float _end, const float _time);
+float DotProduct(const Vector2f& _direction ,const Vector2f& _normal);
+Vector2f ComputeElasticity(const Vector2f& _direction ,const Vector2f& _normal);
+float EaseOutQuart(const float _time);
+float EaseInQuart(const float _time);
+
 
 template <typename T>
 T GetRandomNumberInRange(const T& _min, const T& _max)
@@ -16,7 +23,7 @@ T GetRandomNumberInRange(const T& _min, const T& _max)
     return _distr(_gen); // Génération du nombre
 }
 
-template <typename BaseType, typename Type, typename = enable_if_t<is_base_of_v<BaseType, Type>>>
+template <typename Type, typename BaseType, IS_BASE_OF(BaseType, Type)>
 Type* Cast(BaseType* _baseType)
 {
     if (!_baseType) return nullptr;

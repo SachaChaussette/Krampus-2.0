@@ -1,7 +1,5 @@
 #include "AudioManager.h"
 
-using namespace Audio;
-
 AudioManager::AudioManager()
 {
 	isMuted = false;

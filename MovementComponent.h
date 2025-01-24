@@ -9,14 +9,15 @@ class MovementComponent : public Component
 	Actor* target;
 
 public:
-	FORCEINLINE void SetTarget(Actor* _target)
-	{
-		target = _target;
-	}
 	FORCEINLINE void SetRotateSpeed(const float _rotateSpeed)
 	{
 		rotateSpeed = _rotateSpeed;
 	}
+	FORCEINLINE void SetTarget(Actor* _target)
+	{
+		target = _target;
+	}
+	
 public:
 	MovementComponent(Actor* _owner);
 	MovementComponent(Actor* _owner, const MovementComponent* _other);

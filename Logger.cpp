@@ -11,7 +11,7 @@ string VerbosityData::RetrieveFullText(const bool _useColor, const bool _useTime
         _fullText += "[" + M_TIMER.GetCurrentRealTime() + "]";
     }
 
-    _fullText += " [" + prefix + "] : " + text;
+    _fullText += " " + prefix + ": " + text;
 
     if (USE_DEBUG || useDebug)
     {

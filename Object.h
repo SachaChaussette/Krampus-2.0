@@ -1,5 +1,5 @@
 #pragma once
-#include "TransformableModifier.h"
+#include "ITransformableModifier.h"
 
 class Object : public ITransformableModifier
 {

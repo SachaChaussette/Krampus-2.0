@@ -1,14 +1,14 @@
 #pragma once
 #include "Core.h"
-#include "TransformableModifier.h"
-#include "TransformableViewer.h"
+#include "ITransformableModifier.h"
+#include "ITransformableViewer.h"
 #include "Component.h"
 #include "RootComponent.h"
 
 class Actor : public Core, public ITransformableModifier, public ITransformableViewer
 {
-	float lifeSpan;
 	bool isToDelete;
+	float lifeSpan;
 	u_int id;
 	string name;
 	string displayName;
@@ -18,7 +18,7 @@ class Actor : public Core, public ITransformableModifier, public ITransformableV
 	set<Actor*> children;
 
 protected:
-	template <typename Type, typename ...Args, typename = enable_if_t<is_base_of_v<Component, Type>>>
+	template <typename Type, typename ...Args, IS_BASE_OF(Component, Type)>
 	FORCEINLINE Type* CreateComponent(Args... _args)
 	{
 		Type* _component = new Type(this, _args...);
@@ -26,12 +26,13 @@ protected:
 
 		return _component;
 	}
-	FORCEINLINE void CreateSocket(const string& _name, const float _lifeSpan = 0.0f, const TransformData& _transform = TransformData(),
+	FORCEINLINE void CreateSocket(const string& _name, const TransformData& _transform = TransformData(),
 								  const AttachmentType& _type = AT_SNAP_TO_TARGET)
 	{
-		Actor* _socket = new Actor(_name, _lifeSpan, _transform);
+		Actor* _socket = new Actor(_name, _transform);
 		AddChild(_socket, _type);
 	}
+
 private:
 	FORCEINLINE void SetParent(Actor* _parent)
 	{
@@ -39,17 +40,13 @@ private:
 	}
 
 public:
-	FORCEINLINE void SetLifeSpan(const float _lifeSpan)
-	{
-		lifeSpan = _lifeSpan;
-	}
-	FORCEINLINE float GetLifeSpan() const
-	{
-		return lifeSpan;
-	}
 	FORCEINLINE void SetToDelete()
 	{
 		isToDelete = true;
+	}
+	FORCEINLINE void SetLifeSpan(const float _lifeSpan)
+	{
+		lifeSpan = _lifeSpan;
 	}
 	FORCEINLINE void AddChild(Actor* _child, const AttachmentType& _type)
 	{
@@ -158,7 +155,7 @@ public:
 	#pragma endregion
 
 public:
-	Actor(const string& _name, const float _lifeSpan = 0.0f, const TransformData& _transform = TransformData());
+	Actor(const string& _name = "Actor", const TransformData& _transform = TransformData());
 	Actor(const Actor& _actor);
 	virtual ~Actor();
 
@@ -175,14 +172,14 @@ public:
 
 	void AddComponent(Component* _component);
 	void RemoveComponent(Component* _component);
-	template <typename Type, typename = enable_if_t<is_base_of_v<Component, Type>>>
-	Type* GetComponent()
+	template <typename T>
+	T* GetComponent()
 	{
 		for (Component* _component : components)
 		{
-			if (is_same_v<decltype(_component), Type*>)
+			if (is_same_v<decltype(_component), T*>)
 			{
-				return dynamic_cast<Type*>(_component);
+				return dynamic_cast<T*>(_component);
 			}
 		}
 
