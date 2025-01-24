@@ -1,9 +1,10 @@
 #include "Actor.h"
 #include "ActorManager.h"
+#include "TimerManager.h"
 
-Actor::Actor(const string& _name, const TransformData& _transform)
+Actor::Actor(const string& _name, const float _lifeSpan, const TransformData& _transform)
 {
-	lifeSpan = 60.0f;
+	lifeSpan = _lifeSpan;
 	name = _name;
 	displayName = "Unknown";
 	isToDelete = false;
@@ -41,6 +42,8 @@ void Actor::Deconstruct()
 
 void Actor::BeginPlay()
 {
+	new Timer([&]() { Destroy(); }, seconds(lifeSpan), true);
+
 	for (Component* _component : components)
 	{
 		_component->BeginPlay();

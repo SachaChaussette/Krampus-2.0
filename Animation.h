@@ -124,6 +124,8 @@ struct AnimationData
     }
 };
 
+using namespace MyTexture;
+
 class Animation
 {
     int currentIndex;

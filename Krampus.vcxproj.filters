@@ -109,6 +109,12 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Scripts\Managers\Game">
+      <UniqueIdentifier>{85309cfe-bcb8-478d-8a43-920b4accfffe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Managers\Camera">
+      <UniqueIdentifier>{0500da74-69e4-49a2-aac8-875d84ee16a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TextObject.cpp">
@@ -225,7 +231,13 @@
     <ClCompile Include="CameraComponent.cpp">
       <Filter>Scripts\Core\Components\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Scripts\Managers\Game</Filter>
+    </ClCompile>
     <ClCompile Include="WindEffect.cpp">
+      <Filter>DuckHunt</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -362,7 +374,13 @@
     <ClInclude Include="CameraComponent.h">
       <Filter>Scripts\Core\Components\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Scripts\Managers\Game</Filter>
+    </ClInclude>
     <ClInclude Include="WindEffect.h">
+      <Filter>DuckHunt</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

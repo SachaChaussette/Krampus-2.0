@@ -1,70 +1,30 @@
 #pragma once
-#include "Singleton.h"
-#include "Actor.h"
 
-class MusicSample;
-class CircleActor;
-class CameraActor;
-class Duck;
+#include "CoreMinimal.h"
 
-class Game : public Singleton<Game>
+class Game
 {
+protected:
 	RenderWindow window;
-	using OnRenderWindow = function<void(RenderWindow&)>;
-	map<u_int, OnRenderWindow> onRenderWindow;
 
-	//TODO remove
-	MusicSample* music;
-	CameraActor* camera;
-	Duck* duck;
-	Actor* target;
-	vector<Duck*> duckList;
-
-	Vector2f center;
-	CircleActor* circle;
-	float angle;
 
 public:
-	//TODO REMOVE
-	FORCEINLINE Duck* GetDuck() const
-	{
-		return duck;
-	}
 
-
-
-	FORCEINLINE u_int BindOnRenderWindow(OnRenderWindow _callback)
+	FORCEINLINE virtual bool IsOver()
 	{
-		u_int _id = GetUniqueID();
-		onRenderWindow.insert({ _id, _callback});
-		return _id;
-	}
-	FORCEINLINE void UnbindOnRenderWindow(const u_int& _uniqueId)
-	{
-		onRenderWindow.erase(_uniqueId);
-	}
-	FORCEINLINE void SetView(const View& _view)
-	{
-		window.setView(_view);
-	}
-	FORCEINLINE void RemoveView()
-	{
-		window.setView(window.getDefaultView());
+		return !window.isOpen();
 	}
 
 public:
 	Game();
-	~Game();
+	virtual ~Game();
 
 protected:
+public:
 	virtual void Start();
-	virtual void Update();
+	virtual bool Update();
 	virtual void Stop();
 
-public:
-	virtual void Launch();
 	void UpdateWindow();
 
-	//TODO remove
-	Duck* RetrieveFirstDuck();
 };

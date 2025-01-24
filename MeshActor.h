@@ -2,6 +2,8 @@
 #include "Actor.h"
 #include "MeshComponent.h"
 
+using namespace MyTexture;
+
 class MeshActor : public Actor
 {
 	MeshComponent* mesh;

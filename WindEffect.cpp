@@ -1,8 +1,9 @@
 #include "WindEffect.h"
 #include "ActorManager.h"
 #include "Duck.h"
+#include "GameManager.h"
 
-WindEffect::WindEffect(const Vector2f& _size, const string& _path, const IntRect& _rect) : MeshActor(_size, _path, PNG, _rect, "Duck")
+WindEffect::WindEffect(const Vector2f& _size, const string& _path, const IntRect& _rect) : MeshActor(_size, _path, MyTexture::PNG, _rect, "Duck")
 {
 	animation = CreateComponent<AnimationComponent>();
 }
@@ -39,8 +40,30 @@ void WindEffect::Construct()
 		//{ _timeBetween, Vector2i(0, 700), _spriteSize },
 		//{ _timeBetween, Vector2i(0, 800), _spriteSize },
 	};
-	AnimationData _animationData = AnimationData(2.0f, _spritesData, true, false, RD_COLUMN);
-
+	AnimationData _animationData = AnimationData(2.0f, _spritesData, true, false, COLUMN);
+	/*_animationData.notifies[5] = []()
+	{
+		if (MovementComponent* _movement = M_GAME.GetCurrent()->GetDuck()->GetComponent< MovementComponent>())
+		{
+			M_GAME.GetCurrent()->GetDuck()->GetComponent<MovementComponent>()->SetRotateSpeed(500.0f);
+		}
+		else if (MovementComponent* _movement = M_GAME.GetCurrent()->GetDuck()->GetMovement())
+		{
+			M_GAME.GetCurrent()->GetDuck()->GetComponent<MovementComponent>()->SetRotateSpeed(500.0f);
+		}
+	};
+	
+	_animationData.notifies[15] = []()
+		{
+			if (MovementComponent* _movement = M_GAME.GetCurrent()->GetDuck()->GetComponent< MovementComponent>())
+			{
+				M_GAME.GetCurrent()->GetDuck()->GetComponent<MovementComponent>()->SetRotateSpeed(100.0f);
+			}
+			else if (MovementComponent* _movement = M_GAME.GetCurrent()->GetDuck()->GetMovement())
+			{
+				M_GAME.GetCurrent()->GetDuck()->GetComponent<MovementComponent>()->SetRotateSpeed(100.0f);
+			}
+		};*/
 	animation->AddAnimation(new Animation("WindGust", GetMesh()->GetShape(), _animationData));
 	animation->SetCurrentAnimation("WindGust");
 	animation->StartAnimation();
@@ -56,16 +79,16 @@ void WindEffect::BeginPlay()
 {
 	Super::BeginPlay();
 
-	new Timer([&]() 
+	/*new Timer([&]() 
 	{ 
 		Destroy(); 
-		if (MovementComponent* _movement = M_GAME.GetDuck()->GetComponent< MovementComponent>())
+		if (MovementComponent* _movement = M_GAME.GetCurrent()->GetDuck()->GetComponent< MovementComponent>())
 		{
-			M_GAME.GetDuck()->GetComponent<MovementComponent>()->SetRotateSpeed(100.0f);
+			M_GAME.GetCurrent()->GetDuck()->GetComponent<MovementComponent>()->SetRotateSpeed(100.0f);
 		}
-		else if (MovementComponent* _movement = M_GAME.GetDuck()->GetMovement())
+		else if (MovementComponent* _movement = M_GAME.GetCurrent()->GetDuck()->GetMovement())
 		{
-			M_GAME.GetDuck()->GetComponent<MovementComponent>()->SetRotateSpeed(100.0f);
+			M_GAME.GetCurrent()->GetDuck()->GetComponent<MovementComponent>()->SetRotateSpeed(100.0f);
 		}
-	}, seconds(GetLifeSpan()), true);
+	}, seconds(GetLifeSpan()), true);*/
 }

@@ -1,8 +1,9 @@
 #include "CameraActor.h"
-#include "Game.h"
+#include "GameManager.h"
 #include "Duck.h"
+#include "DuckHuntGame.h"
 
-CameraActor::CameraActor() : Actor("Camera")
+CameraActor::CameraActor(const string& _name) : Actor(_name)
 {
 	camera = CreateComponent<CameraComponent>();
 	target = nullptr;
@@ -29,13 +30,13 @@ CameraActor::CameraActor(const CameraActor& _other) : Actor(_other)
 void CameraActor::Construct()
 {
 	Super::Construct();
-	M_GAME.SetView(*camera->GetView());
+	dynamic_cast<DuckHuntGame*>(M_GAME.GetCurrent())->SetView(*camera->GetView());
 }
 
 void CameraActor::Deconstruct()
 {
 	Super::Deconstruct();
-	M_GAME.RemoveView();
+	dynamic_cast<DuckHuntGame*>(M_GAME.GetCurrent())->RemoveView();
 }
 
 
@@ -43,10 +44,14 @@ void CameraActor::Tick(const float _deltaTime)
 {
 	Super::Tick(_deltaTime);
 
-	if (!target) return;
+	if (!target) 
+	{
+		LOG(Warning, "No Target Found !!!");
+		return;
+	}
 	if (target->IsToDelete())
 	{
-		SetTarget(M_GAME.RetrieveFirstDuck());
+		SetTarget(dynamic_cast<DuckHuntGame*>(M_GAME.GetCurrent())->RetrieveFirstDuck());
 		if (!target) return;
 	}
 

@@ -1,6 +1,8 @@
 #include "ShapeObject.h"
 #include "TextureManager.h"
 
+using namespace MyTexture;
+
 ShapeObject::ShapeObject(const float _radius, const string& _path, const IntRect& _rect,
 						 const size_t& _pointCount)
 {

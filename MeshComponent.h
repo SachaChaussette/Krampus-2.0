@@ -3,6 +3,7 @@
 #include "ShapeObject.h"
 
 class Actor;
+using namespace MyTexture;
 
 class MeshComponent : public Component
 {
