@@ -3,19 +3,13 @@
 #include "MovementComponent.h"
 #include "AnimationComponent.h"
 
-class Duck : public MeshActor
+class WindEffect : public MeshActor
 {
-	MovementComponent* movement;
 	AnimationComponent* animation;
 
 public:
-	FORCEINLINE MovementComponent* GetMovement() const
-	{
-		return movement;
-	}
-public:
-	Duck(const Vector2f& _size, const string& _path = "", const IntRect& _rect = {});
-	Duck(const Duck& _other);
+	WindEffect(const Vector2f& _size, const string& _path = "", const IntRect& _rect = {});
+	WindEffect(const WindEffect& _other);
 
 protected:
 	virtual void BeginPlay() override;

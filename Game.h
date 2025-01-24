@@ -25,6 +25,14 @@ class Game : public Singleton<Game>
 	float angle;
 
 public:
+	//TODO REMOVE
+	FORCEINLINE Duck* GetDuck() const
+	{
+		return duck;
+	}
+
+
+
 	FORCEINLINE u_int BindOnRenderWindow(OnRenderWindow _callback)
 	{
 		u_int _id = GetUniqueID();

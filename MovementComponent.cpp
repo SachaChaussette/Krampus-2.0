@@ -41,6 +41,6 @@ void MovementComponent::RotateAround(const float _deltaTime)
 	const float _newPosX = _relativePos.x * cos(_redAngle) - _relativePos.y * sin(_redAngle);
 	const float _newPosY = _relativePos.x * sin(_redAngle) + _relativePos.y * cos(_redAngle);
 	const Vector2f& _newPosition = _center + Vector2f(_newPosX, _newPosY);
-	owner->Rotate(Angle(degrees(rotateSpeed * _deltaTime)) * -1);
+	owner->Rotate(Angle(degrees(rotateSpeed * _deltaTime)));
 	owner->SetPosition(_newPosition);
 }

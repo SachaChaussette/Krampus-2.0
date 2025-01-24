@@ -5,10 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
     <Filter Include="Scripts">
       <UniqueIdentifier>{625b7062-d7fa-407c-9303-a3913fb51935}</UniqueIdentifier>
     </Filter>
@@ -103,6 +99,16 @@
     <Filter Include="Scripts\Core\Components\Camera">
       <UniqueIdentifier>{e5be5420-9954-4cb1-8b81-0b0a57b15f70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripts\Main">
+      <UniqueIdentifier>{4f5fd9a4-3077-4175-89d9-3121baa485c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Core\Actors\Camera">
+      <UniqueIdentifier>{9c231ff1-7c6a-4eb4-aef8-ee6ecdab40bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TextObject.cpp">
@@ -131,9 +137,6 @@
     </ClCompile>
     <ClCompile Include="ActorManager.cpp">
       <Filter>Scripts\Managers\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Logger.cpp">
       <Filter>Scripts\Resource Files\Logger</Filter>
@@ -213,10 +216,16 @@
     <ClCompile Include="AnimationComponent.cpp">
       <Filter>Scripts\Core\Components\Animation</Filter>
     </ClCompile>
-    <ClCompile Include="CameraComponent.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Main.cpp">
+      <Filter>Scripts\Main</Filter>
     </ClCompile>
     <ClCompile Include="CameraActor.cpp">
+      <Filter>Scripts\Core\Actors\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraComponent.cpp">
+      <Filter>Scripts\Core\Components\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="WindEffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -347,10 +356,13 @@
     <ClInclude Include="TransformData.h">
       <Filter>Scripts\Core\Components\Root\Transform</Filter>
     </ClInclude>
-    <ClInclude Include="CameraComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CameraActor.h">
+      <Filter>Scripts\Core\Actors\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraComponent.h">
+      <Filter>Scripts\Core\Components\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="WindEffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

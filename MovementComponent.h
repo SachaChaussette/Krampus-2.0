@@ -13,6 +13,10 @@ public:
 	{
 		target = _target;
 	}
+	FORCEINLINE void SetRotateSpeed(const float _rotateSpeed)
+	{
+		rotateSpeed = _rotateSpeed;
+	}
 public:
 	MovementComponent(Actor* _owner);
 	MovementComponent(Actor* _owner, const MovementComponent* _other);

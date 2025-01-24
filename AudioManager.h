@@ -3,12 +3,16 @@
 #include "Sample.h"
 #include "SoundSample.h"
 
-enum AudioExtensionType
+namespace Audio
 {
-	MP3,
-	WAV
-};
+	enum ExtensionType
+	{
+		MP3,
+		WAV
+	};
+}
 
+using namespace Audio;
 class AudioManager : public Singleton<AudioManager>
 {
 	bool isMuted;
@@ -20,7 +24,7 @@ public:
 	{
 		allSamples.insert(make_pair(_sample->GetPath(), _sample));
 	}
-	FORCEINLINE string GetExtension(const AudioExtensionType& _type)
+	FORCEINLINE string GetExtension(const ExtensionType& _type)
 	{
 		return vector<string>({ ".mp3", ".wav" })[_type];
 	}
@@ -30,7 +34,7 @@ public:
 	~AudioManager();
 
 	template <typename T, typename = enable_if_t<is_base_of_v<Sample, T>>>
-	T* PlaySample(const string& _path, const AudioExtensionType& _type = MP3, const Time& _time = Time())
+	T* PlaySample(const string& _path, const ExtensionType& _type = MP3, const Time& _time = Time())
 	{
 		//static_assert(is_base_of_v<Sample, T>, "ERREUR CUSTOM !");
 

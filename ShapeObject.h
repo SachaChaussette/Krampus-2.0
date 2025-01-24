@@ -1,20 +1,27 @@
 #pragma once
 #include "Object.h"
 
-enum TextureExtensionType
+namespace TextureEnum
 {
-	PNG,
-	JPG,
-	GIF,
-};
+	enum ExtensionType
+	{
+		PNG,
+		JPG,
+		GIF,
+	};
+}
 
-enum ShapeObjectType
+
+namespace ObjectEnum
 {
-	SOT_CIRCLE,
-	SOT_RECTANGLE,
+	enum ShapeType
+	{
+		CIRCLE,
+		RECTANGLE,
 
-	SOT_COUNT,
-};
+		COUNT,
+	};
+}
 
 struct CircleShapeData
 {
@@ -42,15 +49,15 @@ struct CircleShapeData
 		return *this;
 	}
 };
-
+using namespace TextureEnum;
 struct RectangleShapeData
 {
 	Vector2f size;
 	string path;
 	IntRect rect;
-	TextureExtensionType textureType;
+	ExtensionType textureType;
 
-	RectangleShapeData(const Vector2f& _size, const string& _path, const TextureExtensionType& _textureType, const IntRect& _rect)
+	RectangleShapeData(const Vector2f& _size, const string& _path, const ExtensionType& _textureType, const IntRect& _rect)
 	{
 		size = _size;
 		path = _path;
@@ -68,33 +75,35 @@ union ObjectData
 	~ObjectData() {}
 };
 
+using namespace ObjectEnum;
+
 struct ShapeObjectData
 {
-	ShapeObjectType type;
+	ShapeType type;
 	ObjectData data;
 
 	ShapeObjectData()
 	{
-		type = SOT_COUNT;
+		type = COUNT;
 	}
-	ShapeObjectData(const ShapeObjectType& _type, const CircleShapeData& _circleData)
+	ShapeObjectData(const ShapeType& _type, const CircleShapeData& _circleData)
 	{
 		type = _type;
 		data.circleData = new CircleShapeData(_circleData);
 	}
-	ShapeObjectData(const ShapeObjectType& _type, const RectangleShapeData& _rectangleData)
+	ShapeObjectData(const ShapeType& _type, const RectangleShapeData& _rectangleData)
 	{
 		type = _type;
 		data.rectangleData = new RectangleShapeData(_rectangleData);
 	}
 	~ShapeObjectData()
 	{
-		if (type == SOT_CIRCLE)
+		if (type == CIRCLE)
 		{
 			delete data.circleData;
 		}
 
-		else if (type == SOT_RECTANGLE)
+		else if (type == RECTANGLE)
 		{
 			delete data.rectangleData;
 		}
@@ -104,12 +113,12 @@ struct ShapeObjectData
 	{
 		type = _other.type;
 
-		if (type == SOT_CIRCLE)
+		if (type == CIRCLE)
 		{
 			data.circleData = new CircleShapeData(*_other.data.circleData);
 		}
 
-		else if (type == SOT_RECTANGLE)
+		else if (type == RECTANGLE)
 		{
 			data.rectangleData = new RectangleShapeData(*_other.data.rectangleData);
 		}
@@ -120,6 +129,8 @@ struct ShapeObjectData
 
 class ShapeObject : public Object
 {
+	
+
 	Texture texture;
 	Shape* shape;
 	ShapeObjectData objectData;
@@ -172,7 +183,7 @@ public:
 public:
 	ShapeObject(const float _radius, const string& _path = "", const IntRect& _rect = IntRect(),
 				const size_t& _pointCount = 30); // Circle
-	ShapeObject(const Vector2f& _size, const string& _path = "", const TextureExtensionType& _textureType = PNG, const IntRect& _rect = IntRect()); // Rectangle
+	ShapeObject(const Vector2f& _size, const string& _path = "", const ExtensionType& _textureType = PNG, const IntRect& _rect = IntRect()); // Rectangle
 	ShapeObject(const ShapeObject& _other);
 	~ShapeObject();
 

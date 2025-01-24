@@ -8,7 +8,7 @@ MeshComponent::MeshComponent(Actor* _owner, const float _radius, const size_t& _
 }
 
 MeshComponent::MeshComponent(Actor* _owner, const Vector2f& _size, const string& _path,
-							 const TextureExtensionType& _textureType, const IntRect& _rect)
+							 const ExtensionType& _textureType, const IntRect& _rect)
 						   : Component(_owner)
 {
 	shape = new ShapeObject(_size, _path, _textureType, _rect);

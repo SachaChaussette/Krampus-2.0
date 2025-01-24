@@ -7,6 +7,7 @@
 
 class Actor : public Core, public ITransformableModifier, public ITransformableViewer
 {
+	float lifeSpan;
 	bool isToDelete;
 	u_int id;
 	string name;
@@ -31,7 +32,6 @@ protected:
 		Actor* _socket = new Actor(_name, _transform);
 		AddChild(_socket, _type);
 	}
-
 private:
 	FORCEINLINE void SetParent(Actor* _parent)
 	{
@@ -39,6 +39,10 @@ private:
 	}
 
 public:
+	FORCEINLINE float GetLifeSpan() const
+	{
+		return lifeSpan;
+	}
 	FORCEINLINE void SetToDelete()
 	{
 		isToDelete = true;
@@ -172,10 +176,14 @@ public:
 	{
 		for (Component* _component : components)
 		{
-			if (is_same_v<decltype(_component), T*>)
+			if (T* _componentT = dynamic_cast<T*>(_component))
+			{
+				return _componentT;
+			}
+			/*if (is_same_v<decltype(_component), T*>)
 			{
 				return dynamic_cast<T*>(_component);
-			}
+			}*/
 		}
 
 		return nullptr;

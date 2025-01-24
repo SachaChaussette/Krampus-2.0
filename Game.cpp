@@ -11,6 +11,7 @@
 #include "MusicSample.h"
 #include "CameraActor.h"
 #include "CircleActor.h"
+#include "WindEffect.h"
 
 Game::Game()
 {
@@ -30,8 +31,8 @@ void Game::Start()
 {
     window.create(VideoMode({800, 600}), "SFML works!");
     
-    //Level::SpawnActor(MeshActor(Vector2f(800, 600), "background", JPG));
-    //music = M_AUDIO.PlaySample<MusicSample>("Crab_Rave", MP3, seconds(50.0f));
+    Level::SpawnActor(MeshActor(Vector2f(800, 600), "background", PNG));
+    music = M_AUDIO.PlaySample<MusicSample>("spongebob", MP3);
     //camera = Level::SpawnActor(CameraActor({}, { 500.0f, 400.0f }));
 
     new Timer([&]()
@@ -55,6 +56,8 @@ void Game::Start()
         false,
         true
     );
+    
+
 
     target = Level::SpawnActor(Actor("Actor"));
     target->SetPosition(Vector2f(window.getSize().x / 2, window.getSize().y / 2));
@@ -76,6 +79,33 @@ void Game::Start()
     }
 
 
+    new Timer([&]()
+        {
+            WindEffect* _wind = Level::SpawnActor(WindEffect({ 500.0f, 200.0f }, "windEffect"));
+            _wind->SetPosition({ -100.0f , 0.0f });
+            WindEffect* _wind1 = Level::SpawnActor(WindEffect({ 300.0f, 150.0f }, "windEffect"));
+            _wind1->SetPosition({ -100.0f , 100.0f });
+            WindEffect* _wind2 = Level::SpawnActor(WindEffect({ 500.0f, 200.0f }, "windEffect"));
+            _wind2->SetPosition({ -100.0f , 200.0f });
+            WindEffect* _wind3 = Level::SpawnActor(WindEffect({ 300.0f, 150.0f }, "windEffect"));
+            _wind3->SetPosition({ -100.0f , 300.0f });
+            WindEffect* _wind4 = Level::SpawnActor(WindEffect({ 500.0f, 200.0f }, "windEffect"));
+            _wind4->SetPosition({ -100.0f , 400.0f });
+
+            if (MovementComponent* _movement = duck->GetComponent< MovementComponent>())
+            {
+                duck->GetComponent<MovementComponent>()->SetRotateSpeed(500.0f);
+            }
+            else if (MovementComponent* _movement = duck->GetMovement())
+            {
+                duck->GetComponent<MovementComponent>()->SetRotateSpeed(500.0f);
+            }
+            
+        },
+        seconds(10.0f),
+        true,
+        true
+    );
 
     
 };

@@ -3,6 +3,7 @@
 
 Actor::Actor(const string& _name, const TransformData& _transform)
 {
+	lifeSpan = 60.0f;
 	name = _name;
 	displayName = "Unknown";
 	isToDelete = false;
@@ -11,6 +12,7 @@ Actor::Actor(const string& _name, const TransformData& _transform)
 
 Actor::Actor(const Actor& _actor)
 {
+	lifeSpan = _actor.lifeSpan;
 	name = _actor.name;
 	isToDelete = false;
 	root = CreateComponent<RootComponent>(_actor.root);
