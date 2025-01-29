@@ -6,41 +6,36 @@
 
 namespace Camera
 {
-	
-
 	struct RenderData
 	{
 		RenderType type;
 		using RenderCallback = function<void(RenderWindow&)>;
 		RenderCallback callback;
+		int zOrder;
 
-	public:
 		RenderData(const RenderCallback& _callback, const RenderType& _type = World)
 		{
 			callback = _callback;
 			type = _type;
+			zOrder = 0;
 		}
 	};
 
 	class CameraManager : public Singleton<CameraManager>
 	{
 		multimap<int, u_int> allElements;
-
 		map<u_int, RenderData> allRendersData;
 		map<string, CameraActor*> allCameras;
 		CameraActor* current;
 
 	public:
-		FORCEINLINE u_int BindOnRenderWindow(const RenderData& _data)
+		FORCEINLINE u_int BindOnRenderWindow(RenderData _data, const int _zOrder = 0)
 		{
-			u_int _id = GetUniqueID();
+			const u_int& _id = GetUniqueID();
+			_data.zOrder = _zOrder;
 			allRendersData.insert({ _id, _data });
+			allElements.insert({ _zOrder, _id });
 			return _id;
-		}
-		FORCEINLINE void UnbindOnRenderWindow(const u_int& _uniqueId)
-		{
-			if (!allRendersData.contains(_uniqueId)) return;
-			allRendersData.erase(_uniqueId);
 		}
 		FORCEINLINE void SetCurrent(CameraActor* _camera)
 		{
@@ -68,6 +63,8 @@ namespace Camera
 		CameraManager();
 
 		void RenderAllCameras(RenderWindow& _window);
+
+		void UnbindOnRenderWindow(const u_int& _uniqueId);
 
 		template <typename Type = CameraActor, typename ...Args, IS_BASE_OF(CameraActor, Type)>
 		Type* CreateCamera(Args... _args)

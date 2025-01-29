@@ -26,10 +26,10 @@ protected:
 
 		return _component;
 	}
-	FORCEINLINE void CreateSocket(const string& _name, const TransformData& _transform = TransformData(),
-								  const AttachmentType& _type = AT_SNAP_TO_TARGET)
+	template <typename Type = Actor, typename ...Args, IS_BASE_OF(Actor, Type)>
+	FORCEINLINE void CreateSocket(const AttachmentType& _type = AT_SNAP_TO_TARGET, Args... _args)
 	{
-		Actor* _socket = new Actor(_name, _transform);
+		Type* _socket = new Type(_args...);
 		AddChild(_socket, _type);
 	}
 

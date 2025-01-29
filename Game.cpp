@@ -2,11 +2,13 @@
 #include "ActorManager.h"
 #include "CameraManager.h"
 #include "TimerManager.h"
+#include "InputManager.h"
 #include "HUD.h"
 #include "Label.h"
 
 using namespace Camera;
 using namespace UI;
+using namespace Input;
 
 Game::Game()
 {
@@ -24,19 +26,13 @@ void Game::Start()
 
 bool Game::Update()
 {
+    M_INPUT.Update(window);
+
     TM_Seconds& _timer = M_TIMER;
     _timer.Update();
 
-    while (const optional _event = window.pollEvent())
-    {
-        if (_event->is<Event::Closed>())
-        {
-            window.close();
-        }
-    }
-
     const float _deltaTime = _timer.GetDeltaTime().asSeconds();
-    M_ACTOR.Tick(_deltaTime);
+    M_ACTOR.Update(_deltaTime);
 
     return IsOver();
 }

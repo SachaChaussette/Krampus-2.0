@@ -17,7 +17,7 @@ void ActorManager::BeginPlay()
 	}
 }
 
-void ActorManager::Tick(const float _deltaTime)
+void ActorManager::Update(const float _deltaTime)
 {
 	vector<Actor*> _garbage;
 

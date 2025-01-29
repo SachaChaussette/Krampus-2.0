@@ -13,35 +13,66 @@ void Camera::CameraManager::RenderAllCameras(RenderWindow& _window)
 	vector<RenderData> _renderWidgets;
 	bool _isFirst = true;
 
-	/*for (u_int _index = 0; _index < allElements.size(); _index++)
+	int _index = -1;
+	for (const pair<int, u_int>& _element : allElements)
 	{
-		
-		for (const pair<multimap<int, u_int>>& _pair : allElements.equal_range(_index))
-	}*/
-	
+		if (_element.first == _index) continue;
 
-	// pour chaque caméra
-	for (const pair<string, CameraActor*> _pair : allCameras)
-	{
-		_window.setView(*_pair.second->GetView());
+		_index = _element.first;
+		using Iterator = multimap<int, u_int>::iterator;
+		const pair<Iterator, Iterator>& _results = allElements.equal_range(_index);
 
-		// je draw tous les éléments que je veux
-		for (const pair<u_int, RenderData>& _renderPair : allRendersData)
+		// Pour chaque caméra
+		for (const pair<string, CameraActor*>& _pair : allCameras)
 		{
-			if (_isFirst && _renderPair.second.type == Screen)
+			// Je définis la vue
+			_window.setView(*_pair.second->GetView());
+
+			// Je draw tous les éléments
+			for (Iterator _it = _results.first; _it != _results.second; ++_it)
 			{
-				_renderWidgets.push_back(_renderPair.second);
-				continue;
+				const RenderData& _data = allRendersData.at(_it->second);
+
+				// Si il s'agit d'un widget
+				if (_isFirst && _data.type == Screen)
+				{
+					// Je l'ajoute comme à afficher plus tard
+					_renderWidgets.push_back(_data);
+					continue;
+				}
+
+				// Je draw l'élément
+				_data.callback(_window);
 			}
-			// je draw l'élément
-			_renderPair.second.callback(_window);
-		}		
-		_isFirst = false;
+
+			_isFirst = false;
+		}
 	}
+
+	// Je définis la vue
 	_window.setView(_window.getDefaultView());
 
 	for (const RenderData& _data : _renderWidgets)
 	{
+		// Je draw l'élément
 		_data.callback(_window);
 	}
+}
+
+void Camera::CameraManager::UnbindOnRenderWindow(const u_int& _uniqueId)
+{
+	if (!allRendersData.contains(_uniqueId)) return;
+
+	const int _zOrder = allRendersData.at(_uniqueId).zOrder;
+	using Iterator = multimap<int, u_int>::iterator;
+	const pair<Iterator, Iterator>& _results = allElements.equal_range(_zOrder);
+
+	for (Iterator _it = _results.first; _it != _results.second; ++_it)
+	{
+		if (_it->second != _uniqueId) continue;
+		allElements.erase(_it);
+		break;
+	}
+
+	allRendersData.erase(_uniqueId);
 }
