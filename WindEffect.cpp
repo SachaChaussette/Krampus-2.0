@@ -3,7 +3,7 @@
 #include "Duck.h"
 #include "GameManager.h"
 
-WindEffect::WindEffect(const Vector2f& _size, const string& _path, const IntRect& _rect) : MeshActor(_size, _path, PNG, _rect, "Duck")
+WindEffect::WindEffect(const Vector2f& _size, const string& _path, const IntRect& _rect) : MeshActor(RectangleShapeData(_size, _path, PNG, false, _rect), "Duck")
 {
 	animation = CreateComponent<AnimationComponent>();
 }
@@ -92,3 +92,4 @@ void WindEffect::BeginPlay()
 		}
 	}, seconds(GetLifeSpan()), true);*/
 }
+

@@ -1,38 +1,47 @@
 #include "CameraManager.h"
 
-CameraManager::CameraManager()
+Camera::CameraManager::CameraManager()
 {
-	onRenderWindow = map<u_int, OnRenderWindow>();
+	allRendersData = map<u_int, RenderData>();
 	allCameras = map<string, CameraActor*>();
 	current = nullptr;
 }
 
 
-void CameraManager::RenderAllCameras(RenderWindow& _window)
+void Camera::CameraManager::RenderAllCameras(RenderWindow& _window)
 {
+	vector<RenderData> _renderWidgets;
+	bool _isFirst = true;
+
+	/*for (u_int _index = 0; _index < allElements.size(); _index++)
+	{
+		
+		for (const pair<multimap<int, u_int>>& _pair : allElements.equal_range(_index))
+	}*/
+	
+
 	// pour chaque caméra
 	for (const pair<string, CameraActor*> _pair : allCameras)
 	{
-		// je set sa view
 		_window.setView(*_pair.second->GetView());
 
 		// je draw tous les éléments que je veux
-		for (const pair<u_int, OnRenderWindow>& _renderPair : onRenderWindow)
+		for (const pair<u_int, RenderData>& _renderPair : allRendersData)
 		{
-			_renderPair.second(_window);
-		}
+			if (_isFirst && _renderPair.second.type == Screen)
+			{
+				_renderWidgets.push_back(_renderPair.second);
+				continue;
+			}
+			// je draw l'élément
+			_renderPair.second.callback(_window);
+		}		
+		_isFirst = false;
 	}
-
-	// Je reset la view
 	_window.setView(_window.getDefaultView());
 
-	// Si je n'ai pas de caméra
-	if (allCameras.empty())
+	for (const RenderData& _data : _renderWidgets)
 	{
-		// je draw tous les éléments que je veux
-		for (const pair<u_int, OnRenderWindow>& _renderPair : onRenderWindow)
-		{
-			_renderPair.second(_window);
-		}
+		_data.callback(_window);
 	}
 }

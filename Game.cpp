@@ -2,6 +2,11 @@
 #include "ActorManager.h"
 #include "CameraManager.h"
 #include "TimerManager.h"
+#include "HUD.h"
+#include "Label.h"
+
+using namespace Camera;
+using namespace UI;
 
 Game::Game()
 {
@@ -12,6 +17,9 @@ Game::Game()
 void Game::Start()
 {
     window.create(VideoMode({ 1200, 800 }), "SFML works!");
+    M_CAMERA.CreateCamera("DefaultCamera");
+    M_HUD.CreateWidget<Label>("Coucou", World);
+    //M_CAMERA.CreateCamera(Vector2f(), Vector2f(800.0f, 600.0f));
 };
 
 bool Game::Update()

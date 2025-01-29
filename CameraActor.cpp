@@ -45,14 +45,5 @@ void CameraActor::Tick(const float _deltaTime)
 	Super::Tick(_deltaTime);
 
 	if (!target) return;
-	if (target->IsToDelete())
-	{
-		if (Game* _game = M_GAME.GetCurrent())
-		{
-			SetTarget(Cast<DuckHuntGame>(_game)->RetrieveFirstDuck());
-		}
-		if (!target) return;
-	}
-
 	SetPosition(target->GetPosition());
 }

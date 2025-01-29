@@ -2,7 +2,7 @@
 
 TextureManager::TextureManager()
 {
-	defaultTexturePath = "MissingTexture";
+	defaultTexturePath = "Default";
 	defaultTextureExtension = "png";
 	defaultTexture = nullptr;
 }
@@ -33,16 +33,6 @@ void TextureManager::LoadTexture(Texture& _texture, const string& _path, const I
 void TextureManager::SetTexture(Shape* _shape, const Texture* _texture)
 {
 	_shape->setTexture(_texture);
-}
-
-void TextureManager::SetTextureRect(Shape* _shape, const Vector2i& _start, const Vector2i& _size)
-{
-	_shape->setTextureRect(Rect(_start, _size));
-}
-
-void TextureManager::SetTextureRect(Shape* _shape, const IntRect& _rect)
-{
-	_shape->setTextureRect(_rect);
 }
 
 string TextureManager::GetExtensionNameByType(const TextureExtensionType& _textureType)
@@ -83,4 +73,14 @@ void TextureManager::Load(ShapeObject* _shapeObject, const string& _path, const 
 						  const TextureExtensionType& _textureType, const bool _isRepeated, const bool _isSmooth)
 {
 	Load(_shapeObject, _path, _textureType, _rect, _isRepeated, _isSmooth);
+}
+
+void TextureManager::SetTextureRect(Shape* _shape, const Vector2i& _start, const Vector2i& _size)
+{
+	SetTextureRect(_shape, Rect(_start, _size));
+}
+
+void TextureManager::SetTextureRect(Shape* _shape, const IntRect& _rect)
+{
+	_shape->setTextureRect(_rect);
 }

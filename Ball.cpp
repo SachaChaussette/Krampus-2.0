@@ -1,58 +1,74 @@
 #include "Ball.h"
+#include "TimerManager.h"
 
 Ball::Ball(const float _radius) : MeshActor(_radius)
 {
-	// Movement
-	canMove = true;
-	moveSpeed = 5.0f;
-	direction = Vector2f();
-	// Bounce
-	bounceDuration = 1.0f;
-	elasticity = 0.0f;
-	bounceDirection = Vector2f();
-	// Fall
-	mass = 20.0f;
-	gravity = 9.81f;
+    canMove = false;
+	startPosition = Vector2f();
+    velocity = Vector2f();
+    mass = 80.0f;
+    gravity = 9.81f;
+    restitution = 0.85f;
+    friction = 0.95f;
+    groundLevel = 550.0f;
+
+    SetOriginAtMiddle();
 }
 
+void Ball::BeginPlay()
+{
+    Super::BeginPlay();
+
+    startPosition = GetPosition();
+    new Timer([&]() { canMove = true; }, seconds(2.0f), true);
+}
 
 void Ball::Tick(const float _deltaTime)
 {
-	Super::Tick(_deltaTime);
+    Super::Tick(_deltaTime);
 
+    if (!canMove) return;
 
-	// Calcule des surfaces touchées
+    // Appliquer la gravité
+    velocity.y += gravity * mass * _deltaTime;
 
-	if (canMove)
-	{
-		// Direction
-		const Vector2f& _directionOffset = direction * moveSpeed * 100.0f;
+    // Calculer le déplacement
+    const Vector2f& _displacement = velocity * _deltaTime;
 
-		// Fall
-		const Vector2f& _downVector = Vector2f(0.0f, 1.0f);
-		const Vector2f& _fallOffset = _downVector * gravity * mass;
-
-		if (bounceDuration > 0.0f)
-		{
-			bounceDuration -= _deltaTime; // < 0
-			bounceDuration = bounceDuration < 0.0f ? 0.0f : bounceDuration;
-			bounceDirection *= EaseOutQuart(0.5f);
-		}
-		
-
-		// Result
-		const Vector2f& _offset = (_directionOffset + _fallOffset + bounceDirection) * _deltaTime;
-		movement += _fallOffset * _deltaTime;
-		Move(_offset);
-	}
+    // Mettre à jour la position
+    Move(_displacement);
 }
 
-
-
-
-Vector2f Ball::ComputeRebound(const Vector2f& _direction, const Vector2f& _normal, const float _restitution)
+void Ball::ApplyBounce(const Vector2f& _normal)
 {
-	Vector2f _normalizedNormal = _normal.normalized();
-	float _dotProduct = _direction.dot(_normalizedNormal);
-	return _direction - _normalizedNormal * ((1 + _restitution) * _dotProduct);
+    Move(_normal * 0.1f);
+
+    // Calculer la projection de la vitesse sur la normale
+    float _dotProduct = velocity.x * _normal.x + velocity.y * _normal.y;
+
+    // Appliquer le rebond : inverser la composante normale de la vitesse
+    velocity -= 2.0f * _dotProduct * _normal;
+
+    // Réduire la vitesse en fonction du facteur de restitution
+    velocity *= restitution;
+
+    // Appliquer la friction à la composante tangentielle
+    velocity.x *= friction;
+
+    // Éviter de petites oscillations en annulant de faibles valeurs
+    if (abs(velocity.x) < 1.0f)
+    {
+        velocity.x = 0.0f;
+    }
+
+    if (abs(velocity.y) < 1.0f)
+    {
+        velocity.y = 0.0f;
+    }
+    LOG(Warning, velocity);
+}
+
+void Ball::AddForce(const Vector2f& _force)
+{
+    velocity += _force;
 }

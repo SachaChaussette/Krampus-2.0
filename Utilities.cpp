@@ -37,13 +37,12 @@ float Lerp_Constant(const float _start, const float _end, const float _time)
 
 float DotProduct(const Vector2f& _direction, const Vector2f& _normal)
 {
-
     return _direction.x * _normal.x + _direction.y * _normal.y;
 }
 
 float EaseOutQuart(const float _time)
 {
-    return 1.0f - powf(1.0f - _time, 4.0f);
+    return 1 - powf(1 - _time, 4.0f);
 }
 
 float EaseInQuart(const float _time)

@@ -11,6 +11,10 @@ public:
 	{
 		return !window.isOpen();
 	}
+	FORCEINLINE virtual Vector2f GetWindowSize() const
+	{
+		return CAST(Vector2f, window.getSize());
+	}
 
 public:
 	Game();
