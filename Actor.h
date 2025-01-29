@@ -27,10 +27,11 @@ protected:
 		return _component;
 	}
 	template <typename Type = Actor, typename ...Args, IS_BASE_OF(Actor, Type)>
-	FORCEINLINE void CreateSocket(const AttachmentType& _type = AT_SNAP_TO_TARGET, Args... _args)
+	FORCEINLINE Type* CreateSocket(const AttachmentType& _type = AT_SNAP_TO_TARGET, Args... _args)
 	{
 		Type* _socket = new Type(_args...);
 		AddChild(_socket, _type);
+		return _socket;
 	}
 
 private:

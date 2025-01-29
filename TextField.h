@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Image.h"
 #include "Label.h"
 
 namespace UI
@@ -50,12 +50,37 @@ namespace UI
 	class TextField : public Widget
 	{
 		//// Textes
-		//Label* title;
-		//Label* placeholder;
-		//Label* description;
-
+		map<string, Label*> labelsByName;
+		Image* background;
 		TextFieledData data;
 	public:
+		FORCEINLINE void CreateLabel(const string& _labelName)
+		{
+			if (!labelsByName.contains(_labelName) || labelsByName[_labelName]) return;
+			labelsByName[_labelName] = CreateSocket<Label>();
+		}
+		FORCEINLINE void SetLabelText(const string& _labelName, const string& _string)
+		{
+			if (!labelsByName.contains(_labelName)) return;
+			if (!labelsByName[_labelName]) CreateLabel(_labelName);
+			labelsByName[_labelName]->SetString(_string);
+		}
+		FORCEINLINE void SetLabelColor(const string& _labelName, const Color& _color)
+		{
+			if (!labelsByName.contains(_labelName)) return;
+			if (!labelsByName[_labelName]) CreateLabel(_labelName);
+			labelsByName[_labelName]->SetFillColor(_color);
+		}
+		/// <summary>
+		/// Changer l'opcité de la fenetre
+		/// </summary>
+		/// <param name="_opavity">choisi l'oppacité entre 0 et 1 c'est le pourcentage</param>
+		FORCEINLINE void SetBackgroundOpacity(const float& _opacity)
+		{
+			const Color& _color = background->GetFillColor();
+			const uint8_t& _alpha = CAST(uint8_t, 255 * _opacity);
+			background->SetFillColor(Color(_color.r, _color.g, _color.b));
+		}
 		FORCEINLINE virtual void SetPosition(const Vector2f& _position) override
 		{
 			Super::SetPosition(_position);
@@ -73,6 +98,7 @@ namespace UI
 		virtual void Construct() override;
 		virtual void Deconstruct() override;
 		virtual void Render(RenderWindow& _window) override;
+		FORCEINLINE void SetLabelFont(const string& _font, const FontExtensionType& _extension);
 	};
 }
 

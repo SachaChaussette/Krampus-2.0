@@ -273,6 +273,9 @@
     <ClCompile Include="TextField.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>DuckHunt</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -442,6 +445,9 @@
     </ClInclude>
     <ClInclude Include="TextField.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>DuckHunt</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

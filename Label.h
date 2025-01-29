@@ -12,7 +12,14 @@ namespace UI
 
 	public:
 #pragma region Modifier
-
+		FORCEINLINE void SetString(const string& _string)
+		{
+			text->GetDrawable()->setString(_string);
+		}
+		FORCEINLINE void SetFillColor(const Color& _color)
+		{
+			text->GetDrawable()->setFillColor(_color);
+		}
 		FORCEINLINE virtual void SetPosition(const Vector2f& _position) override
 		{
 			Super::SetPosition(_position);
@@ -57,6 +64,8 @@ namespace UI
 		Label(const string& _text = "", const RenderType& _type = Screen, const string& _path = "", const FontExtensionType& _fontType = OTF);
 		~Label();
 
+	public:
 		virtual void Render(RenderWindow& _window) override;
+		void SetFont(const string& _font, const FontExtensionType& _extensionFont = OTF);
 	};
 }

@@ -18,8 +18,9 @@ namespace UI
 	class Widget : public Actor
 	{
 		RenderType type;
-		VisibilityType visibility;
 		u_int renderToken;
+	protected:
+		VisibilityType visibility;
 
 	public:
 		FORCEINLINE void SetVisibility(const VisibilityType _visibility)
