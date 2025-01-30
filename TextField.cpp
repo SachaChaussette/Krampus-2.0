@@ -8,6 +8,7 @@ UI::TextField::TextField(const string& _name, const RenderType& _renderType)
 	CreateLabel("PlaceHolder");
 	CreateLabel("Description");
 	data = TextFieledData();
+	background = CreateSocket<Image>(AT_SNAP_TO_TARGET, "Background", RectangleShapeData(data.size));
 }
 
 UI::TextField::TextField(Label* _title, Label* _placeholder, Label* _description, 
@@ -19,6 +20,7 @@ UI::TextField::TextField(Label* _title, Label* _placeholder, Label* _description
 	labelsByName["PlaceHolder"] = _placeholder;
 	labelsByName["Description"] = _description;
 	data = _data;
+	background = CreateSocket<Image>(AT_SNAP_TO_TARGET, "Background", RectangleShapeData(data.size));
 }
 
 UI::TextField::TextField(TextField* _other) : Widget(_other->GetName(), Screen)
@@ -31,8 +33,18 @@ UI::TextField::TextField(TextField* _other) : Widget(_other->GetName(), Screen)
 void UI::TextField::Construct()
 {
 	Super::Construct();
-	background = CreateSocket<Image>(AT_SNAP_TO_TARGET, "Background", RectangleShapeData(data.size));
-	SetBackgroundOpacity(0.5f); //TODO change and tweak value
+
+	// Preset 1
+	labelsByName["Title"]->SetPosition(GetPosition());
+	labelsByName["Title"]->SetScale({ 0.4f, 0.4f });
+	labelsByName["PlaceHolder"]->SetPosition({5.0f, 25.0f});
+	labelsByName["PlaceHolder"]->SetScale({ 0.5f, 0.5f });
+	labelsByName["Description"]->SetPosition({0.0f, 55.0f});
+	labelsByName["Description"]->SetScale({ 0.3f, 0.3f });
+	background->SetVisibility(Visible);
+	SetBackgroundOpacity(0.5f); 
+
+	
 	
 }
 
@@ -48,6 +60,7 @@ void UI::TextField::Render(RenderWindow& _window)
 	{
 		_label.second->Render(_window);
 	}
+	background->Render(_window);
 }
 
 void UI::TextField::SetLabelFont(const string& _font, const FontExtensionType& _extensionFont)

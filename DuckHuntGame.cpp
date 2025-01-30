@@ -50,7 +50,10 @@ void DuckHuntGame::Start()
     //    _movement->SetTarget(_target);
     //}
 
-    M_HUD.CreateWidget<TextField>();
+    TextField* _textField = M_HUD.CreateWidget<TextField>();
+    _textField->SetLabelText("Title", "Aled");
+    _textField->SetLabelText("PlaceHolder", "Oskour");
+    _textField->SetLabelText("Description", "Envie de Crever");
 }
 
 bool DuckHuntGame::Update()

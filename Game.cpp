@@ -20,7 +20,7 @@ void Game::Start()
 {
     window.create(VideoMode({ 1200, 800 }), "SFML works!");
     M_CAMERA.CreateCamera("DefaultCamera");
-    M_HUD.CreateWidget<Label>("Coucou", World);
+    //M_HUD.CreateWidget<Label>("Coucou", World);
     //M_CAMERA.CreateCamera(Vector2f(), Vector2f(800.0f, 600.0f));
 };
 
