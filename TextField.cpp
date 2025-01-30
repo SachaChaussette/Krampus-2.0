@@ -4,9 +4,9 @@ UI::TextField::TextField(const string& _name, const RenderType& _renderType)
 						: Widget(_name, _renderType)
 {
 	background = nullptr;
-	labelsByName["Title"] = nullptr;
-	labelsByName["PlaceHolder"] = nullptr;
-	labelsByName["Description"] = nullptr;
+	CreateLabel("Title");
+	CreateLabel("PlaceHolder");
+	CreateLabel("Description");
 	data = TextFieledData();
 }
 
@@ -21,15 +21,19 @@ UI::TextField::TextField(Label* _title, Label* _placeholder, Label* _description
 	data = _data;
 }
 
+UI::TextField::TextField(TextField* _other) : Widget(_other->GetName(), Screen)
+{
+	background = _other->background;
+	labelsByName = _other->labelsByName;
+	data = _other->data;
+}
+
 void UI::TextField::Construct()
 {
 	Super::Construct();
 	background = CreateSocket<Image>(AT_SNAP_TO_TARGET, "Background", RectangleShapeData(data.size));
 	SetBackgroundOpacity(0.5f); //TODO change and tweak value
-	// TODO pouvoir différencier le titre, le placeolder et la description
 	
-
-	// TODO placer les Sockets à leur offset par raport au texte field
 }
 
 void UI::TextField::Deconstruct()
@@ -40,11 +44,9 @@ void UI::TextField::Deconstruct()
 
 void UI::TextField::Render(RenderWindow& _window)
 {
-	const u_int& _childrensCount = CAST(u_int,GetChildren().size());
-	for (u_int _index = 0; _index < _childrensCount; _index++)
+	for (pair<string, Label*> _label : labelsByName)
 	{
-		Label* _label = dynamic_cast<Label*>(GetChildrenAtIndex(_index));
-		_label->Render(_window);
+		_label.second->Render(_window);
 	}
 }
 

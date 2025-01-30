@@ -56,7 +56,7 @@ namespace UI
 	public:
 		FORCEINLINE void CreateLabel(const string& _labelName)
 		{
-			if (!labelsByName.contains(_labelName) || labelsByName[_labelName]) return;
+			if (labelsByName[_labelName]) return;
 			labelsByName[_labelName] = CreateSocket<Label>();
 		}
 		FORCEINLINE void SetLabelText(const string& _labelName, const string& _string)
@@ -92,6 +92,8 @@ namespace UI
 		TextField(const string& _name = "TextField", const RenderType& _renderType = Screen);
 		TextField(Label* _title, Label* _placeholder, Label* _description, const TextFieledData& _data,
 			const string& _name = "TextField", const RenderType& _renderType = Screen);
+		TextField(TextField* _other);
+	
 	public:
 
 

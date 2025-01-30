@@ -11,6 +11,7 @@ void InitConfig()
 int main()
 {
     InitConfig();
+
     M_GAME.Launch(new DuckHuntGame());
 
 	return EXIT_SUCCESS;

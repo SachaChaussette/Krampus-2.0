@@ -3,6 +3,11 @@
 #include "TimerManager.h"
 #include "AudioManager.h"
 #include "CameraManager.h"
+#include "TextField.h"
+#include "Widget.h"
+#include "HUD.h"
+
+using namespace UI;
 
 DuckHuntGame::DuckHuntGame() : Game()
 {
@@ -17,7 +22,7 @@ void DuckHuntGame::Start()
 {
 	Super::Start();
 
-    Level::SpawnActor(MeshActor(RectangleShapeData(Vector2f(463.0f, 260.0f) * 2.0f, "background", JPG)));
+    /*Level::SpawnActor(MeshActor(RectangleShapeData(Vector2f(463.0f, 260.0f) * 2.0f, "background", JPG)));
     music = M_AUDIO.PlaySample<MusicSample>("Crab_Rave", MP3, seconds(50.0f));
 
     const Vector2f& _floorSize = Vector2f(window.getSize().x, window.getSize().y * 0.2f);
@@ -37,20 +42,22 @@ void DuckHuntGame::Start()
     ball = Level::SpawnActor(Ball(50.0f));
     ball->SetOriginAtMiddle();
     ball->SetPosition(Vector2f(window.getSize().x * 0.5f, window.getSize().y * 0.2f));
-    ball->AddForce({200.0f, 0.0f});
+    ball->AddForce({200.0f, 0.0f});*/
 
     ////TODO check
     //if (MovementComponent* _movement = duck->GetComponent<MovementComponent>())
     //{
     //    _movement->SetTarget(_target);
     //}
+
+    M_HUD.CreateWidget<TextField>();
 }
 
 bool DuckHuntGame::Update()
 {
 	Super::Update();
 
-    Shape* _ballShape = ball->GetMesh()->GetShape()->GetDrawable();
+    /*Shape* _ballShape = ball->GetMesh()->GetShape()->GetDrawable();
     const FloatRect& _ballRect = _ballShape->getGlobalBounds();
 
     Shape* _floorShape = floor->GetMesh()->GetShape()->GetDrawable();
@@ -71,9 +78,9 @@ bool DuckHuntGame::Update()
             const Vector2f& _normal = ComputeNormal(*_intersectRect);
             ball->ApplyBounce(_normal);
         }
-    }
+    }*/
     
-
+    
     return IsOver();
 }
 
