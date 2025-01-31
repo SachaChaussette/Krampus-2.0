@@ -6,6 +6,7 @@
 #include "TextField.h"
 #include "Widget.h"
 #include "HUD.h"
+#include "Button.h"
 
 using namespace UI;
 
@@ -54,6 +55,8 @@ void DuckHuntGame::Start()
     _textField->SetLabelText("Title", "Aled");
     _textField->SetLabelText("PlaceHolder", "Oskour");
     _textField->SetLabelText("Description", "Envie de Crever");
+    Button _button = Button("pd", { {200.0f,200.0f}, "image" });
+    Level::SpawnActor<Button>(_button);
 }
 
 bool DuckHuntGame::Update()

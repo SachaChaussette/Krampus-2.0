@@ -276,6 +276,9 @@
     <ClCompile Include="Image.cpp">
       <Filter>DuckHunt</Filter>
     </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -448,6 +451,9 @@
     </ClInclude>
     <ClInclude Include="Image.h">
       <Filter>DuckHunt</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
